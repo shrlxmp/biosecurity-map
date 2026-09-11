@@ -41,7 +41,7 @@ publishes it openly ([entries.csv](https://biosecurity.world/data/entries.csv),
 maintained, authoritative version of this landscape and is updated weekly; this repo is a
 visualisation layer over it, not a replacement or a fork of the dataset.
 
-Snapshot in this repo: `build/entries.csv`, taken **2026-09-09**.
+Snapshot in this repo: `build/entries.csv`, refreshed weekly by the workflow below.
 
 Logos are each organisation's own favicon, fetched once and inlined, used for
 identification only.
@@ -57,12 +57,25 @@ identification only.
   mean a genuine gap, a gap in the dataset's coverage, or a layer where a few very large
   institutions do most of the work.
 
-## Rebuilding
+## Staying current
+
+The map **refreshes itself weekly**. A scheduled GitHub Actions workflow
+(`.github/workflows/refresh.yml`) runs every Monday: it pulls the latest `entries.csv` from
+biosecurity.world, fetches logos for any newly listed organisations, rebuilds `index.html`,
+and commits only if something actually changed. GitHub Pages redeploys automatically.
+
+It can also be run on demand from the **Actions** tab → *Refresh map from biosecurity.world*
+→ *Run workflow*.
+
+Downloads are validated for schema and row count before `entries.csv` is overwritten, so a
+moved URL or an error page fails the run loudly rather than quietly publishing an empty map.
+
+## Rebuilding by hand
 
 The published page is a single self-contained `index.html` (~390 KB) with the data and all
 logos inlined. No build step is needed to host it; GitHub Pages serves the file directly.
 
-To regenerate it:
+To regenerate it locally:
 
 ```bash
 python build/fetch_logos.py          # refresh cached favicons -> build/logos.json
