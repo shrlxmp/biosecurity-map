@@ -34,13 +34,48 @@ def domain_of(url):
     return host[4:] if host.startswith("www.") else host
 
 
+REQUIRED_COLUMNS = {"id", "label", "link", "organization_type", "domains",
+                    "activities", "intervention_focuses", "location_hints",
+                    "focuses_on_gcbrs", "category_trail", "description"}
+MIN_ROWS = 50
+
+
+def validate(text):
+    """Reject anything that isn't recognisably the entries dataset.
+
+    Without this, a moved URL or an interstitial error page would be written
+    straight over entries.csv and the next build would publish an empty map.
+    """
+    rows = list(csv.DictReader(io.StringIO(text)))
+    if not rows:
+        raise SystemExit("refusing to use download: parsed 0 rows")
+    missing = REQUIRED_COLUMNS - set(rows[0].keys())
+    if missing:
+        raise SystemExit("refusing to use download: missing columns %s"
+                         % ", ".join(sorted(missing)))
+    if len(rows) < MIN_ROWS:
+        raise SystemExit("refusing to use download: only %d rows, expected >= %d"
+                         % (len(rows), MIN_ROWS))
+    return rows
+
+
 def load_entries(refresh=False):
     path = os.path.join(HERE, "entries.csv")
     if refresh:
         print("downloading", CSV_URL)
-        with urllib.request.urlopen(CSV_URL, timeout=60) as response:
+        # an explicit User-Agent is required: the default urllib one is
+        # rejected with HTTP 403 by the host's bot protection
+        request = urllib.request.Request(CSV_URL, headers={
+            "User-Agent": "biosecurity-map build script "
+                          "(+https://github.com/shrlxmp/biosecurity-map)",
+            "Accept": "text/csv,*/*",
+        })
+        with urllib.request.urlopen(request, timeout=60) as response:
             data = response.read().decode("utf-8")
+        rows = validate(data)          # only overwrite once it looks sane
         io.open(path, "w", encoding="utf-8", newline="").write(data)
+        print("  %d rows" % len(rows))
+        return rows
     with io.open(path, encoding="utf-8") as handle:
         return list(csv.DictReader(handle))
 
