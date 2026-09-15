@@ -11,23 +11,33 @@ misplaced or missing.
 ## What it is
 
 Biosecurity is built as *defence in depth*: a series of barriers, each catching what the
-last one missed. The map draws that literally. A threat arrives at the outer edge and has
-to cross three barriers to reach the people at the centre:
+last one missed. The map draws the whole field as **one island**, and the coastline is
+generated rather than drawn — every organisation contributes to a scalar field whose
+waterline becomes the shore. So the land takes its shape from where the organisations
+actually are: a crowded part of the field is a genuinely wider province, a neglected one a
+genuinely narrower spit.
 
-| Ring | | Orgs |
+The island reads **west to east**, in the order a threat is met:
+
+| Province group | | Orgs |
 |---|---|---:|
-| **Prevention** | outer — stop a dangerous agent being made or released at all | 29 |
-| **Detection** | middle — spot an outbreak while containing it is still cheap | 14 |
-| **Response** | inner — blunt an outbreak already spreading | 51 |
-| **Foundation** | not a barrier: the funders, educators, coordinators and reporters the other three stand on | 74 |
+| **Prevention** | the western shore, where a threat makes landfall — stop an agent being made or released at all | 29 |
+| **Detection** | the narrows — spot an outbreak while containing it is still cheap | 14 |
+| **Response** | the eastern interior — blunt an outbreak already spreading | 51 |
+| **Foundation** | the southern plain — funders, teachers, coordinators and reporters; not a stage, but what the rest stands on | 74 |
 
-Radius carries meaning: the further out an organisation sits, the earlier in the chain it
-acts. Ring occupancy carries meaning too — **Detection is visibly the thinnest and most
-widely spaced barrier**, which is the map's main finding rather than a rendering artefact.
+Thirteen named places sit inside those four, one per sub-category: Containment Coast,
+Infohazard Bluff, Sentinel Watch, Assay Point, The Narrows, Countermeasure Basin, Clean Air
+Commons, Readiness Plain, Treaty Cape, Fellows' Field, Signal Shore, Funders' Harbour and
+Concord Table.
+
+Because area is generated from the data, **Detection is visibly a narrow isthmus** — 14
+organisations against 51 in the Response interior. The cheapest place to stop a pandemic is
+the thinnest stretch of the map.
 
 Four views:
 
-- **The map** — the rings, with every organisation as a clickable logo
+- **The map** — the island, with every organisation as a clickable logo
 - **Chain view** — the same four groups as labelled columns, easier to read down a list
 - **Where the gaps are** — organisations per topic, plus the full 19 × 7 topic-by-work-type
   grid where empty cells show combinations nobody covers
@@ -48,14 +58,15 @@ identification only.
 
 ### Reading caveats
 
-- The rings are a **diagram, not geography**. Where a dot sits *within* a ring means
-  nothing — only which ring it is in.
+- The island is a **diagram, not geography**. Where an organisation sits *within* its
+  province means nothing — only which province it is in. The provinces are arranged to
+  follow the defence chain, not to describe anywhere real.
 - Each organisation is placed **once**, at its primary classification in the dataset, so
-  ring counts here run lower than the counts on biosecurity.world, which lists an
+  province counts here run lower than the counts on biosecurity.world, which lists an
   organisation under every stage it touches.
-- Counts reflect who is **catalogued** — not budget, headcount or output. A sparse ring may
-  mean a genuine gap, a gap in the dataset's coverage, or a layer where a few very large
-  institutions do most of the work.
+- Counts reflect who is **catalogued** — not budget, headcount or output. A narrow province
+  may mean a genuine gap, a gap in the dataset's coverage, or a stage where a few very
+  large institutions do most of the work.
 
 ## Staying current
 
