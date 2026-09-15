@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Biosecurity Defence Chain</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -8,7 +10,7 @@
   --ink:#131720; --ink-2:#48536a; --ink-3:#79859a; --line:#dce2ea; --line-2:#c3ccd9;
   --prev:#B45309; --det:#0284C7; --resp:#BE123C; --trans:#6D28D9;
   --seq:#0284C7; --accent:#0284C7; --accent-ink:#ffffff;
-  --map-bg:#eaeff4; --map-core:#dde5ed;
+  --sea:#d7e6ee; --sea-2:#c3d9e4; --land:#f4f1e8; --land-hi:#eee8d8; --coast:#9fb8c6;
   --shadow:0 1px 2px rgba(19,23,32,.05),0 10px 28px -14px rgba(19,23,32,.16);
   --f-disp:"Archivo",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --f-body:"Source Serif 4",Georgia,"Times New Roman",serif;
@@ -20,7 +22,7 @@
     --ink:#e9edf4; --ink-2:#a6b1c2; --ink-3:#727f92; --line:#29313c; --line-2:#3b4552;
     --prev:#C8821A; --det:#2F9FDB; --resp:#E24A68; --trans:#9270F0;
     --seq:#2F9FDB; --accent:#2F9FDB; --accent-ink:#0e1116;
-    --map-bg:#11151b; --map-core:#1b212a;
+    --sea:#0c141a; --sea-2:#13202a; --land:#1a212a; --land-hi:#222b36; --coast:#39505e;
     --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.72);
   }
 }
@@ -29,7 +31,7 @@
   --ink:#e9edf4; --ink-2:#a6b1c2; --ink-3:#727f92; --line:#29313c; --line-2:#3b4552;
   --prev:#C8821A; --det:#2F9FDB; --resp:#E24A68; --trans:#9270F0;
   --seq:#2F9FDB; --accent:#2F9FDB; --accent-ink:#0e1116;
-  --map-bg:#11151b; --map-core:#1b212a;
+  --sea:#0c141a; --sea-2:#13202a; --land:#1a212a; --land-hi:#222b36; --coast:#39505e;
   --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.72);
 }
 *{box-sizing:border-box}
@@ -88,8 +90,8 @@ select.fsel{font-family:var(--f-disp);font-size:13px;padding:7px 9px;border:1px 
 .status{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-left:auto}
 .status b{color:var(--ink);font-weight:500}
 
-/* ---------- ATLAS ---------- */
-.atlas-shell{margin-top:20px;background:var(--map-bg);border:1px solid var(--line);
+/* ---------- ISLAND MAP ---------- */
+.atlas-shell{margin-top:20px;background:var(--sea);border:1px solid var(--line);
   border-radius:16px;position:relative;overflow:hidden}
 .atlas-shell .tools{position:absolute;top:12px;right:12px;z-index:5;display:flex;
   flex-direction:column;gap:5px}
@@ -103,28 +105,38 @@ select.fsel{font-family:var(--f-disp);font-size:13px;padding:7px 9px;border:1px 
 svg#atlas{display:block;width:100%;height:auto;max-height:82vh;margin:0 auto;
   touch-action:none;cursor:grab}
 svg#atlas.drag{cursor:grabbing}
-#atlas .div{stroke:var(--line-2);stroke-width:.7;opacity:.45}
-#atlas .grid{fill:none;stroke:var(--line-2);stroke-width:.5;opacity:.3}
-#atlas .ringlab{font-family:var(--f-disp);font-weight:700;font-size:15px;
-  letter-spacing:.26em;text-transform:uppercase}
-#atlas .ringnum{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;fill:var(--ink-3)}
-#atlas .seclab{font-family:var(--f-mono);font-size:8.5px;letter-spacing:.11em;
-  text-transform:uppercase;fill:var(--ink-2);paint-order:stroke fill;
-  stroke:var(--map-bg);stroke-width:3.2px;stroke-linejoin:round}
-#atlas .corelab{font-family:var(--f-disp);font-weight:800;font-size:15px;letter-spacing:.13em;
-  fill:var(--ink);text-transform:uppercase}
-#atlas .coresub{font-family:var(--f-mono);font-size:8.6px;fill:var(--ink-3);letter-spacing:.03em}
-#atlas .threat{font-family:var(--f-mono);font-size:9px;letter-spacing:.14em;
-  text-transform:uppercase;fill:var(--ink-3);paint-order:stroke fill;
-  stroke:var(--map-bg);stroke-width:3.2px;stroke-linejoin:round}
-#atlas .threat-line{stroke:var(--ink-3);stroke-width:1.1;stroke-dasharray:4 3;opacity:.7;fill:none}
+
+#atlas .sea-c{fill:none;stroke:var(--sea-2);stroke-width:1.4}
+#atlas .land{fill:var(--land);stroke:var(--coast);stroke-width:2}
+#atlas .beach{fill:none;stroke:var(--coast);stroke-width:1;opacity:.5}
+#atlas .high{fill:var(--land-hi);stroke:none}
+#atlas .terr{opacity:.5}
+#atlas .glyph{fill:var(--coast);opacity:.55}
+#atlas .catlab{font-family:var(--f-disp);font-weight:800;letter-spacing:.34em;
+  text-transform:uppercase;opacity:.19}
+#atlas .catsub{font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;opacity:.4}
+#atlas .plab{font-family:var(--f-disp);font-weight:700;font-size:13px;letter-spacing:.07em;
+  fill:var(--ink);paint-order:stroke fill;stroke:var(--land);stroke-width:3.4px;
+  stroke-linejoin:round;text-anchor:middle}
+#atlas .pnum{font-family:var(--f-mono);font-size:9px;letter-spacing:.1em;fill:var(--ink-3);
+  paint-order:stroke fill;stroke:var(--land);stroke-width:3px;stroke-linejoin:round;
+  text-anchor:middle}
+#atlas .sealab{font-family:var(--f-disp);font-style:italic;font-size:15px;letter-spacing:.22em;
+  fill:var(--coast);text-anchor:middle;opacity:.9}
+#atlas .threat{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;fill:var(--coast)}
+#atlas .threat-line{stroke:var(--coast);stroke-width:1.4;stroke-dasharray:5 4;fill:none}
+#atlas .rose{fill:none;stroke:var(--coast);stroke-width:1.2;opacity:.75}
+#atlas .rose-n{font-family:var(--f-disp);font-weight:700;font-size:11px;fill:var(--coast);
+  text-anchor:middle;opacity:.9}
 #atlas .node{cursor:pointer}
-#atlas .node .halo{fill:var(--surface);stroke:var(--nc);stroke-width:1.4}
+#atlas .node .halo{fill:var(--surface);stroke:var(--nc);stroke-width:1.5}
 #atlas .node .mono{font-family:var(--f-disp);font-weight:800;font-size:9px;fill:#fff;
   text-anchor:middle}
 #atlas .node .gdot{fill:var(--nc)}
-#atlas .node:hover .halo{stroke-width:2.8}
-#atlas .node.dim{opacity:.15}
+#atlas .node:hover .halo{stroke-width:3}
+#atlas .node.dim{opacity:.13}
 #atlas .node.dim:hover{opacity:.6}
 
 .atlas-key{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-start;
@@ -138,6 +150,7 @@ svg#atlas.drag{cursor:grabbing}
 .keynote{width:100%;border-top:1px solid var(--line);padding-top:12px;font-size:13px;
   color:var(--ink-2);line-height:1.55}
 .keynote b{color:var(--ink);font-weight:600}
+
 
 /* ---------- jargon ---------- */
 details.jargon{margin:22px 0 0;max-width:78ch}
@@ -387,12 +400,16 @@ footer .cav{margin-top:11px}
 <!-- ============ THE MAP ============ -->
 <section id="view-atlas">
   <div class="lede">
-    <h2>Every layer a pandemic has to get through</h2>
-    <p>Biosecurity is built as <strong>defence in depth</strong>: a series of barriers, each one
-      catching what the last one missed. A threat arrives at the outside edge of this map and has
-      to cross <strong>three</strong> of them to reach the people at the centre.</p>
-    <p>Every dot is one of the 168 organisations in the field, sitting on the barrier it works on.
-      The further out a dot sits, the earlier it acts.</p>
+    <h2>The biosecurity field, drawn as one island</h2>
+    <p>Every organisation working on biosecurity, placed on a single landmass. The coastline
+      is not decoration: it is drawn around where the organisations actually are, so a
+      crowded part of the field becomes a wide province and a neglected one becomes a
+      narrow spit of land.</p>
+    <p>The island reads <strong>west to east</strong>, in the order a threat is met. It makes
+      landfall on the <strong>Prevention</strong> shore, crosses the <strong>Detection</strong>
+      narrows, and reaches the <strong>Response</strong> interior. The southern plain is the
+      <strong>Foundation</strong> — the funders, teachers and coordinators everything else
+      stands on.</p>
   </div>
 
   <div class="atlas-shell">
@@ -401,9 +418,9 @@ footer .cav{margin-top:11px}
       <button id="zOut" aria-label="Zoom out">&minus;</button>
       <button id="zRe" class="wide" aria-label="Reset view">RST</button>
     </div>
-    <svg id="atlas" viewBox="0 0 880 880" role="img"
-      aria-label="Concentric map of 168 biosecurity organisations arranged as four defensive layers around the population at the centre"></svg>
-    <div class="atlas-hint">Scroll to zoom &middot; drag to pan &middot; click a dot</div>
+    <svg id="atlas" viewBox="0 0 1520 1060" role="img"
+      aria-label="An island map of 168 biosecurity organisations. Provinces run west to east: Prevention on the western shore, a narrow Detection isthmus, the Response interior to the east, and the Foundation plain to the south."></svg>
+    <div class="atlas-hint">Scroll to zoom &middot; drag to pan &middot; click any organisation</div>
   </div>
 
   <div class="atlas-key" id="atlasKey"></div>
@@ -604,157 +621,276 @@ opts($("fFoc"),FOCI,tally(ORGS.flatMap(o=>o.foci)));
 opts($("fType"),TYPES,tally(ORGS.map(o=>o.type)));
 opts($("fLoc"),LOCS,tally(ORGS.flatMap(o=>o.loc)));
 
-/* ================= ATLAS ================= */
+/* ================= ISLAND MAP =================
+   The coastline is generated, not drawn. Every organisation contributes a
+   smooth bump to a scalar field; marching squares traces the contour where
+   that field crosses a threshold. So the land takes its shape from where the
+   organisations actually are - a crowded province is genuinely wider, and a
+   thinly-staffed one is genuinely a narrow spit.                            */
 const SVGNS="http://www.w3.org/2000/svg";
-const CX=440, CY=440, CORE=80, GAP=7, LBAND=10, PITCH=30, BR=12, LABEL_ARC=64;
+const VW=1520, VH=1060;
+const SPACING=30;   // distance between neighbouring organisations
+const INF=66;       // how far one organisation's influence reaches
+const SEA=0.40;     // field value at the waterline
+const BR=13;        // organisation marker radius
+
 const mk=(n,a)=>{const e=document.createElementNS(SVGNS,n);
   for(const k in a) e.setAttribute(k,a[k]); return e};
-const pol=(r,deg)=>{const a=deg*Math.PI/180; return [CX+r*Math.cos(a), CY+r*Math.sin(a)]};
-function arcPath(r,a0,a1,sweep){
-  const p0=pol(r,a0), p1=pol(r,a1);
-  const large=Math.abs(a1-a0)>180?1:0;
-  return "M"+p0[0].toFixed(2)+" "+p0[1].toFixed(2)+" A"+r+" "+r+" 0 "+large+" "+
-    (sweep===0?0:1)+" "+p1[0].toFixed(2)+" "+p1[1].toFixed(2);
-}
-/* deterministic jitter so the map looks identical on every load */
 const rnd=s=>{const x=Math.sin(s*12.9898)*43758.5453; return x-Math.floor(x)};
 
-let atlasBuilt=false, cam={k:1,x:0,y:0}, camG=null;
+/* Provinces: one per sub-category. `at` is hand-placed so the island reads
+   west-to-east along the defence chain; `lab` is the direction the place name
+   sits from the centre of its cluster. */
+const PROV=[
+ {cat:"Prevention", sub:"",                              name:"Treaty Cape",          at:[280,260], lab:[0,-1]},
+ {cat:"Prevention", sub:"Preventing production & release",name:"Containment Coast",   at:[460,390], lab:[-1,0]},
+ {cat:"Prevention", sub:"Controlling knowledge",          name:"Infohazard Bluff",    at:[255,500], lab:[-0.7,0.7]},
+ {cat:"Detection",  sub:"Early warning",                  name:"Sentinel Watch",      at:[620,268], lab:[0,-1]},
+ {cat:"Detection",  sub:"Diagnostics",                    name:"Assay Point",         at:[726,330], lab:[1,-0.4]},
+ {cat:"Detection",  sub:"",                               name:"The Narrows",         at:[641,410], lab:[0,1]},
+ {cat:"Response",   sub:"",                               name:"Readiness Plain",     at:[1180,240],lab:[0,-1]},
+ {cat:"Response",   sub:"Medical countermeasures",        name:"Countermeasure Basin",at:[1010,460],lab:[1,0]},
+ {cat:"Response",   sub:"Non-medical countermeasures",    name:"Clean Air Commons",   at:[820,478], lab:[-0.6,-0.8]},
+ {cat:"Transversal",sub:"Education",                      name:"Fellows' Field",      at:[400,680], lab:[-1,0]},
+ {cat:"Transversal",sub:"Information",                    name:"Signal Shore",        at:[680,790], lab:[0,1]},
+ {cat:"Transversal",sub:"Financing",                      name:"Funders' Harbour",    at:[950,770], lab:[0,1]},
+ {cat:"Transversal",sub:"Coordination",                   name:"Concord Table",       at:[1180,720],lab:[1,0.3]}
+];
+const CATMETA={
+  Prevention:{v:"--prev", label:"PREVENTION", gloss:"stop it being made",      at:[360,180], size:38},
+  Detection:{ v:"--det",  label:"DETECTION",  gloss:"catch it early",          at:[660,196], size:26},
+  Response:{  v:"--resp", label:"RESPONSE",   gloss:"blunt it once it spreads",at:[1080,352],size:44},
+  Transversal:{v:"--trans",label:"FOUNDATION",gloss:"what holds the rest up",  at:[740,930], size:40}
+};
 
-function buildAtlas(){
+let islandBuilt=false, cam={k:1,x:0,y:0}, camG=null, PLACED=[];
+
+/* ---- scalar field ---------------------------------------------------- */
+function buildField(points, cell){
+  const gw=Math.ceil(VW/cell)+1, gh=Math.ceil(VH/cell)+1;
+  const val=new Float32Array(gw*gh);
+  const r2=INF*INF;
+  points.forEach(p=>{
+    const i0=Math.max(0,Math.floor((p[0]-INF)/cell)), i1=Math.min(gw-1,Math.ceil((p[0]+INF)/cell));
+    const j0=Math.max(0,Math.floor((p[1]-INF)/cell)), j1=Math.min(gh-1,Math.ceil((p[1]+INF)/cell));
+    for(let j=j0;j<=j1;j++) for(let i=i0;i<=i1;i++){
+      const dx=i*cell-p[0], dy=j*cell-p[1], d2=dx*dx+dy*dy;
+      if(d2>=r2) continue;
+      const t=1-d2/r2;            // smooth bump, 1 at the centre, 0 at INF
+      val[j*gw+i]+=t*t;
+    }
+  });
+  return {val:val, gw:gw, gh:gh, cell:cell};
+}
+function sample(F,x,y){
+  const i=Math.round(x/F.cell), j=Math.round(y/F.cell);
+  if(i<0||j<0||i>=F.gw||j>=F.gh) return 0;
+  return F.val[j*F.gw+i];
+}
+
+/* ---- marching squares ------------------------------------------------ */
+function contour(F,T){
+  const segs=[], c=F.cell, gw=F.gw, v=F.val;
+  const lerp=(p,q,a,b)=>{const t=(T-a)/(b-a); return [p[0]+(q[0]-p[0])*t, p[1]+(q[1]-p[1])*t]};
+  for(let j=0;j<F.gh-1;j++) for(let i=0;i<gw-1;i++){
+    const a=v[j*gw+i], b=v[j*gw+i+1], d=v[(j+1)*gw+i+1], e=v[(j+1)*gw+i];
+    const idx=(a>T?8:0)|(b>T?4:0)|(d>T?2:0)|(e>T?1:0);
+    if(idx===0||idx===15) continue;
+    const x0=i*c, y0=j*c, x1=x0+c, y1=y0+c;
+    const TL=[x0,y0], TR=[x1,y0], BR_=[x1,y1], BL=[x0,y1];
+    const top=()=>lerp(TL,TR,a,b), right=()=>lerp(TR,BR_,b,d),
+          bot=()=>lerp(BL,BR_,e,d), left=()=>lerp(TL,BL,a,e);
+    switch(idx){
+      case 1:  segs.push([left(),bot()]); break;
+      case 2:  segs.push([bot(),right()]); break;
+      case 3:  segs.push([left(),right()]); break;
+      case 4:  segs.push([right(),top()]); break;
+      case 5:  segs.push([left(),top()]); segs.push([bot(),right()]); break;
+      case 6:  segs.push([bot(),top()]); break;
+      case 7:  segs.push([left(),top()]); break;
+      case 8:  segs.push([top(),left()]); break;
+      case 9:  segs.push([top(),bot()]); break;
+      case 10: segs.push([top(),right()]); segs.push([left(),bot()]); break;
+      case 11: segs.push([top(),right()]); break;
+      case 12: segs.push([right(),left()]); break;
+      case 13: segs.push([right(),bot()]); break;
+      case 14: segs.push([bot(),left()]); break;
+    }
+  }
+  // join the loose segments into closed rings
+  const K=p=>Math.round(p[0]*2)+","+Math.round(p[1]*2);
+  const byStart=new Map();
+  segs.forEach((s,i)=>{
+    const k=K(s[0]);
+    if(!byStart.has(k)) byStart.set(k,[]);
+    byStart.get(k).push(i);
+  });
+  const used=new Array(segs.length).fill(false), rings=[];
+  for(let i=0;i<segs.length;i++){
+    if(used[i]) continue;
+    used[i]=true;
+    const pts=[segs[i][0],segs[i][1]];
+    for(let guard=0; guard<60000; guard++){
+      const cand=(byStart.get(K(pts[pts.length-1]))||[]).filter(j=>!used[j]);
+      if(!cand.length) break;
+      const j=cand[0]; used[j]=true;
+      pts.push(segs[j][1]);
+      if(K(pts[pts.length-1])===K(pts[0])) break;
+    }
+    if(pts.length>8) rings.push(pts);
+  }
+  return rings;
+}
+function chaikin(pts,iters){
+  for(let n=0;n<iters;n++){
+    const out=[];
+    for(let i=0;i<pts.length;i++){
+      const p=pts[i], q=pts[(i+1)%pts.length];
+      out.push([p[0]*.75+q[0]*.25, p[1]*.75+q[1]*.25]);
+      out.push([p[0]*.25+q[0]*.75, p[1]*.25+q[1]*.75]);
+    }
+    pts=out;
+  }
+  return pts;
+}
+const ringPath=r=>"M"+chaikin(r,2).map(p=>p[0].toFixed(1)+" "+p[1].toFixed(1)).join("L")+"Z";
+const ringsPath=rs=>rs.map(ringPath).join(" ");
+
+/* ---- layout ---------------------------------------------------------- */
+function layout(){
+  PLACED=[];
+  PROV.forEach((pv,pi)=>{
+    const members=ORGS.filter(o=>o.cat===pv.cat && (o.sub||"")===pv.sub);
+    pv.n=members.length;
+    // phyllotaxis: even, organic-looking packing with no overlaps
+    members.forEach((o,i)=>{
+      const r=SPACING*Math.sqrt(i+0.55), th=i*2.399963;
+      const x=pv.at[0]+r*Math.cos(th)+(rnd(o.id)-0.5)*4.5;
+      const y=pv.at[1]+r*Math.sin(th)+(rnd(o.id+31)-0.5)*4.5;
+      PLACED.push({o:o,x:x,y:y,prov:pi});
+    });
+    pv.r=SPACING*Math.sqrt(Math.max(members.length,1))+10;
+  });
+}
+
+/* ---- draw ------------------------------------------------------------ */
+function buildIsland(){
   const svg=$("atlas");
   svg.textContent="";
   const defs=mk("defs",{}); svg.appendChild(defs);
   camG=mk("g",{id:"cam"}); svg.appendChild(camG);
 
-  let r=CORE;
-  const geo=LAYERS.map(L=>{
-    const inner=r+GAP, outer=inner+LBAND+L.rows*PITCH, radii=[];
-    for(let i=0;i<L.rows;i++) radii.push(inner+LBAND+PITCH/2+i*PITCH);
-    r=outer;
-    return {L:L,inner:inner,outer:outer,radii:radii};
-  });
-  const RMAX=r;
+  layout();
+  const pts=PLACED.map(p=>[p.x,p.y]);
+  const F=buildField(pts,6);
 
-  /* bands: outermost first so inner ones layer on top */
-  for(let i=geo.length-1;i>=0;i--){
-    const g=geo[i], L=g.L;
-    camG.appendChild(mk("circle",{cx:CX,cy:CY,r:g.outer,
-      fill:"color-mix(in oklab,var("+L.v+") 7%,var(--map-bg))",
-      stroke:"color-mix(in oklab,var("+L.v+") 34%,var(--map-bg))","stroke-width":1,
-      "stroke-dasharray":L.key==="Transversal"?"5 4":"none"}));
+  svg.appendChild(mk("rect",{x:0,y:0,width:VW,height:VH,fill:"var(--sea)"}));
+  svg.insertBefore(svg.lastChild,camG);   // sea sits behind the camera group
+
+  // bathymetric rings out to sea, then the coast, then the highlands
+  [0.12,0.20,0.30].forEach(t=>{
+    camG.appendChild(mk("path",{d:ringsPath(contour(F,SEA*t)),class:"sea-c"}));
+  });
+  const coast=contour(F,SEA);
+  const landD=ringsPath(coast);
+  camG.appendChild(mk("path",{d:landD,class:"land"}));
+  camG.appendChild(mk("path",{d:ringsPath(contour(F,SEA*1.55)),class:"beach"}));
+  camG.appendChild(mk("path",{d:ringsPath(contour(F,SEA*3.2)),class:"high"}));
+
+  // clip everything that follows to the land itself
+  const clip=mk("clipPath",{id:"landclip"});
+  clip.appendChild(mk("path",{d:landD}));
+  defs.appendChild(clip);
+  const onLand=mk("g",{"clip-path":"url(#landclip)",class:"terr"});
+  camG.appendChild(onLand);
+
+  // province tint: a soft wash of the category colour over its own territory
+  PROV.forEach((pv,i)=>{
+    if(!pv.n) return;
+    const gid="g"+i, v=CATMETA[pv.cat].v;
+    const g=mk("radialGradient",{id:gid});
+    g.appendChild(mk("stop",{offset:"0%","stop-color":"var("+v+")","stop-opacity":".55"}));
+    g.appendChild(mk("stop",{offset:"100%","stop-color":"var("+v+")","stop-opacity":"0"}));
+    defs.appendChild(g);
+    onLand.appendChild(mk("circle",{cx:pv.at[0],cy:pv.at[1],r:pv.r+70,fill:"url(#"+gid+")"}));
+  });
+
+  // terrain glyphs, only where there is land and no organisation nearby
+  const glyphs=mk("g",{class:"glyph"});
+  let seed=0;
+  for(let y=80;y<VH-60;y+=29) for(let x=80;x<VW-60;x+=29){
+    seed++;
+    if(sample(F,x,y)<SEA*1.12) continue;
+    if(rnd(seed*7.3)>0.55) continue;
+    let near=false;
+    for(let i=0;i<pts.length;i++){
+      const dx=pts[i][0]-x, dy=pts[i][1]-y;
+      if(dx*dx+dy*dy < 31*31){ near=true; break }
+    }
+    if(near) continue;
+    const jx=x+(rnd(seed)-0.5)*14, jy=y+(rnd(seed+5)-0.5)*14;
+    if(rnd(seed*3.1)<0.5){          // hill
+      glyphs.appendChild(mk("path",{d:"M"+(jx-9)+" "+(jy+5)+"L"+jx+" "+(jy-7)+
+        "L"+(jx+9)+" "+(jy+5)+"Z"}));
+    }else{                          // conifer
+      glyphs.appendChild(mk("path",{d:"M"+jx+" "+(jy-8)+"L"+(jx+5)+" "+(jy+4)+
+        "L"+(jx-5)+" "+(jy+4)+"Z"}));
+      glyphs.appendChild(mk("rect",{x:jx-1,y:jy+4,width:2,height:3}));
+    }
   }
-  geo.forEach(g=>g.radii.forEach(rr=>
-    camG.appendChild(mk("circle",{cx:CX,cy:CY,r:rr,class:"grid"}))));
+  onLand.appendChild(glyphs);
 
-  /* core */
-  camG.appendChild(mk("circle",{cx:CX,cy:CY,r:CORE,fill:"var(--map-core)",
-    stroke:"var(--line-2)","stroke-width":1}));
-  const c1=mk("text",{x:CX,y:CY-3,class:"corelab","text-anchor":"middle"});
-  c1.textContent="People"; camG.appendChild(c1);
-  [["what every layer",13],["is protecting",24]].forEach(p=>{
-    const t=mk("text",{x:CX,y:CY+p[1],class:"coresub","text-anchor":"middle"});
-    t.textContent=p[0]; camG.appendChild(t);
+  // large, faint province-group names, sitting under everything else
+  Object.keys(CATMETA).forEach(k=>{
+    const m=CATMETA[k];
+    const t=mk("text",{x:m.at[0],y:m.at[1],class:"catlab","text-anchor":"middle",
+      "font-size":m.size,fill:"var("+m.v+")"});
+    t.textContent=m.label; camG.appendChild(t);
+    const s=mk("text",{x:m.at[0],y:m.at[1]+m.size*0.62,class:"catsub","text-anchor":"middle",
+      fill:"var("+m.v+")"});
+    s.textContent=m.gloss; camG.appendChild(s);
   });
 
-  /* threat arrow entering from outside */
-  const ta=214;
-  const a0=pol(RMAX+64,ta), a1=pol(RMAX+6,ta);
-  camG.appendChild(mk("path",{class:"threat-line",
-    d:"M"+a0[0].toFixed(1)+" "+a0[1].toFixed(1)+"L"+a1[0].toFixed(1)+" "+a1[1].toFixed(1)}));
-  const hb=pol(RMAX+19,ta), pp=pol(1,ta+90), ux=pp[0]-CX, uy=pp[1]-CY;
+  // the open sea to the north-west, and the threat arriving from it
+  const sl=mk("text",{x:170,y:830,class:"sealab",transform:"rotate(-24 170 830)"});
+  sl.textContent="THE OPEN SEA"; camG.appendChild(sl);
+  camG.appendChild(mk("path",{class:"threat-line",d:"M96 168 L232 286"}));
   camG.appendChild(mk("path",{class:"threat-line","stroke-dasharray":"none",
-    d:"M"+(hb[0]+ux*5).toFixed(1)+" "+(hb[1]+uy*5).toFixed(1)+
-      "L"+a1[0].toFixed(1)+" "+a1[1].toFixed(1)+
-      "L"+(hb[0]-ux*5).toFixed(1)+" "+(hb[1]-uy*5).toFixed(1)}));
-  const lp=pol(RMAX+80,ta);
-  const tl=mk("text",{class:"threat","text-anchor":"middle",
-    transform:"translate("+lp[0].toFixed(1)+","+lp[1].toFixed(1)+") rotate("+(ta-180)+")"});
-  tl.textContent="A threat arrives"; camG.appendChild(tl);
+    d:"M210 268 L236 290 L206 296"}));
+  const tl=mk("text",{class:"threat",transform:"translate(104,150) rotate(41)"});
+  tl.textContent="A threat makes landfall"; camG.appendChild(tl);
 
+  // compass rose
+  const rx=1400, ry=940;
+  camG.appendChild(mk("circle",{cx:rx,cy:ry,r:26,class:"rose"}));
+  camG.appendChild(mk("path",{class:"rose",d:"M"+rx+" "+(ry-34)+"L"+(rx+8)+" "+ry+
+    "L"+rx+" "+(ry+34)+"L"+(rx-8)+" "+ry+"Z"}));
+  camG.appendChild(mk("path",{class:"rose",d:"M"+(rx-34)+" "+ry+"L"+rx+" "+(ry-8)+
+    "L"+(rx+34)+" "+ry+"L"+rx+" "+(ry+8)+"Z"}));
+  const nn=mk("text",{x:rx,y:ry-40,class:"rose-n"}); nn.textContent="N";
+  camG.appendChild(nn);
+
+  // organisation markers
   const nodesG=mk("g",{});
-  geo.forEach((g,gi)=>{
-    const L=g.L;
-    const members=ORGS.filter(o=>o.cat===L.key);
-    const buckets=L.subs.map(s=>({short:s[1],
-      list:members.filter(o=>(o.sub||"")===s[0])})).filter(b=>b.list.length);
-    const total=buckets.reduce((n,b)=>n+b.list.length,0)||1;
-    const start=-90+LABEL_ARC/2, span=360-LABEL_ARC;
-    const SGAP=Math.min(4,span/(buckets.length*6));
-    const arcR=(g.inner+g.outer)/2;
-
-    /* layer name, arced across the reserved zone at the top */
-    const pid="lab"+gi;
-    defs.appendChild(mk("path",{id:pid,fill:"none",
-      d:arcPath(arcR+(L.rows>1?7:0),-90-LABEL_ARC/2+1.5,-90+LABEL_ARC/2-1.5)}));
-    const t=mk("text",{class:"ringlab",
-      fill:"color-mix(in oklab,var("+L.v+") 74%,var(--ink))"});
-    const tp=mk("textPath",{href:"#"+pid,startOffset:"50%","text-anchor":"middle"});
-    tp.textContent=(L.short||L.key).toUpperCase();
-    t.appendChild(tp); camG.appendChild(t);
-    const cid="cnt"+gi;
-    defs.appendChild(mk("path",{id:cid,fill:"none",
-      d:arcPath(arcR+(L.rows>1?7:0)-14,-90-LABEL_ARC/2+1.5,-90+LABEL_ARC/2-1.5)}));
-    const t2=mk("text",{class:"ringnum"});
-    const tp2=mk("textPath",{href:"#"+cid,startOffset:"50%","text-anchor":"middle"});
-    tp2.textContent=members.length+" ORGS";
-    t2.appendChild(tp2); camG.appendChild(t2);
-
-    let a=start;
-    buckets.forEach((b,bi)=>{
-      const w=span*(b.list.length/total);
-      const s0=a+SGAP/2, s1=a+w-SGAP/2;
-      if(bi>0){
-        const d0=pol(g.inner+2,a), d1=pol(g.outer-2,a);
-        camG.appendChild(mk("line",{x1:d0[0].toFixed(1),y1:d0[1].toFixed(1),
-          x2:d1[0].toFixed(1),y2:d1[1].toFixed(1),class:"div"}));
-      }
-      a+=w;
-      const mid=(s0+s1)/2;
-      const bottom=Math.sin(mid*Math.PI/180)>0;
-      const slR=g.inner+(bottom?15:7);
-      const arcLen=Math.abs(s1-s0)*Math.PI/180*slR;
-      if(b.short.length*6.0 < arcLen*0.9){
-        const sid="sec"+gi+"_"+bi;
-        defs.appendChild(mk("path",{id:sid,fill:"none",
-          d:bottom?arcPath(slR,s1,s0,0):arcPath(slR,s0,s1,1)}));
-        const sl=mk("text",{class:"seclab"});
-        const stp=mk("textPath",{href:"#"+sid,startOffset:"50%","text-anchor":"middle"});
-        stp.textContent=b.short;
-        sl.appendChild(stp); camG.appendChild(sl);
-      }
-
-      /* spread this sector's orgs across the band's rows, by arc length */
-      const arcs=g.radii.map(rr=>rr*(s1-s0));
-      const sum=arcs.reduce((x,y)=>x+y,0)||1;
-      const alloc=g.radii.map((rr,i)=>
-        i===g.radii.length-1?0:Math.round(b.list.length*arcs[i]/sum));
-      let used=0; alloc.forEach((n,i)=>{if(i<alloc.length-1) used+=n});
-      alloc[alloc.length-1]=Math.max(0,b.list.length-used);
-
-      let idx=0;
-      g.radii.forEach((rr,ri)=>{
-        const n=alloc[ri];
-        for(let i=0;i<n && idx<b.list.length;i++){
-          const o=b.list[idx++];
-          const ang=s0+(s1-s0)*((i+0.5)/n)+(rnd(o.id)-0.5)*1.5;
-          nodesG.appendChild(node(o,rr+(rnd(o.id+7)-0.5)*4,ang));
-        }
-      });
-      while(idx<b.list.length){
-        const o=b.list[idx++];
-        nodesG.appendChild(node(o,g.radii[g.radii.length-1],
-          s0+(s1-s0)*(idx/(b.list.length+1))));
-      }
-    });
-  });
+  PLACED.forEach(p=>nodesG.appendChild(node(p.o,p.x,p.y)));
   camG.appendChild(nodesG);
-  atlasBuilt=true;
+
+  // province names, offset clear of their own cluster
+  PROV.forEach(pv=>{
+    if(!pv.n) return;
+    const d=Math.hypot(pv.lab[0],pv.lab[1])||1;
+    const lx=pv.at[0]+pv.lab[0]/d*(pv.r+26), ly=pv.at[1]+pv.lab[1]/d*(pv.r+26);
+    const t=mk("text",{x:lx.toFixed(0),y:ly.toFixed(0),class:"plab"});
+    t.textContent=pv.name; camG.appendChild(t);
+    const c=mk("text",{x:lx.toFixed(0),y:(ly+13).toFixed(0),class:"pnum"});
+    c.textContent=pv.n+(pv.n===1?" ORG":" ORGS"); camG.appendChild(c);
+  });
+
+  islandBuilt=true;
   applyCam();
 }
 
-function node(o,rad,ang){
-  const p=pol(rad,ang), x=p[0], y=p[1];
+function node(o,x,y){
   const g=mk("g",{class:"node","data-id":o.id,tabindex:"0",role:"button",
     style:"--nc:"+colorOf(o.cat),
     "data-tip":"<b>"+esc(o.name)+"</b><br>"+esc(layerName(o.cat))+
@@ -763,20 +899,20 @@ function node(o,rad,ang){
   g.appendChild(mk("circle",{cx:x.toFixed(1),cy:y.toFixed(1),r:BR,class:"halo"}));
   const src=LOGOS[o.dom];
   if(src){
-    g.appendChild(mk("image",{href:src,x:(x-8.5).toFixed(1),y:(y-8.5).toFixed(1),
-      width:17,height:17,preserveAspectRatio:"xMidYMid meet"}));
+    g.appendChild(mk("image",{href:src,x:(x-9).toFixed(1),y:(y-9).toFixed(1),
+      width:18,height:18,preserveAspectRatio:"xMidYMid meet"}));
   }else{
     g.appendChild(mk("circle",{cx:x.toFixed(1),cy:y.toFixed(1),r:BR-1.3,
       fill:colorOf(o.cat),opacity:".92"}));
     const t=mk("text",{x:x.toFixed(1),y:(y+3.2).toFixed(1),class:"mono"});
     t.textContent=initials(o.name); g.appendChild(t);
   }
-  if(o.gcbr) g.appendChild(mk("circle",{cx:(x+BR-2.5).toFixed(1),
-    cy:(y-BR+2.5).toFixed(1),r:2.6,class:"gdot"}));
+  if(o.gcbr) g.appendChild(mk("circle",{cx:(x+BR-3).toFixed(1),cy:(y-BR+3).toFixed(1),
+    r:2.8,class:"gdot"}));
   return g;
 }
-function paintAtlas(){
-  if(!atlasBuilt) return;
+function paintIsland(){
+  if(!islandBuilt) return;
   const f=filtering();
   $("atlas").querySelectorAll(".node").forEach(n=>{
     n.classList.toggle("dim", f && !match(byId[+n.getAttribute("data-id")]));
@@ -823,8 +959,8 @@ function wireAtlas(){
   };
   svg.addEventListener("pointerup",stop);
   svg.addEventListener("pointercancel",stop);
-  $("zIn").onclick=()=>zoomAt(1.3,CX,CY);
-  $("zOut").onclick=()=>zoomAt(1/1.3,CX,CY);
+  $("zIn").onclick=()=>zoomAt(1.3,VW/2,VH/2);
+  $("zOut").onclick=()=>zoomAt(1/1.3,VW/2,VH/2);
   $("zRe").onclick=()=>{cam={k:1,x:0,y:0}; applyCam()};
   svg.addEventListener("keydown",e=>{
     const n=e.target.closest && e.target.closest(".node");
@@ -832,19 +968,31 @@ function wireAtlas(){
   });
 }
 function renderKey(){
-  const html=LAYERS.map(L=>{
-    const n=ORGS.filter(o=>o.cat===L.key).length;
-    return '<div class="kitem"><span class="sw" style="background:'+L.c+'"></span><div>'+
-      '<div class="kt">'+esc(L.name||L.key)+'</div>'+
-      '<div class="kd"><b>'+n+' orgs</b> &middot; '+esc(L.blurb)+'</div></div></div>';
+  const order=["Prevention","Detection","Response","Transversal"];
+  const blurb={
+    Prevention:"The western shore, where a threat makes landfall. Stopping an agent being made or released at all.",
+    Detection:"The narrows. Spotting an outbreak while containing it is still cheap.",
+    Response:"The eastern interior. Blunting an outbreak already spreading.",
+    Transversal:"The southern plain. Funders, teachers, coordinators and reporters — not a stage, but what the rest stands on."
+  };
+  const html=order.map(k=>{
+    const n=ORGS.filter(o=>o.cat===k).length;
+    const provs=PROV.filter(p=>p.cat===k && p.n).map(p=>p.name).join(" · ");
+    return '<div class="kitem"><span class="sw" style="background:var('+CATMETA[k].v+
+      ')"></span><div><div class="kt">'+esc(CATMETA[k].label.charAt(0)+
+      CATMETA[k].label.slice(1).toLowerCase())+'</div>'+
+      '<div class="kd"><b>'+n+' orgs</b> &middot; '+esc(blurb[k])+
+      '<br><span style="opacity:.8">'+esc(provs)+'</span></div></div></div>';
   }).join("");
   const det=ORGS.filter(o=>o.cat==="Detection").length;
   const res=ORGS.filter(o=>o.cat==="Response").length;
   $("atlasKey").innerHTML=html+
-    '<div class="keynote">How to read the rings: <b>Detection</b> is visibly the thinnest and '+
-    'most widely spaced of the three barriers &mdash; <b>'+det+'</b> organisations against <b>'+
-    res+'</b> on Response. It is the cheapest point at which to stop a pandemic and the least '+
-    'occupied. A small coloured dot on a logo marks work on worst-case pandemic risk.</div>';
+    '<div class="keynote">The coastline is generated from the organisations themselves, so '+
+    'area means something: <b>Detection</b> is a narrow isthmus because only <b>'+det+
+    '</b> organisations hold it, against <b>'+res+'</b> in the Response interior. It is the '+
+    'cheapest place to stop a pandemic and the thinnest stretch of the map. A small coloured '+
+    'dot marks work on worst-case pandemic risk. Position <em>within</em> a province carries '+
+    'no meaning.</div>';
 }
 
 /* ---------- chain (alt view) ---------- */
@@ -1141,7 +1289,7 @@ function render(){
     ? "<b>"+shown+"</b> of "+ORGS.length+" match"
     : "<b>"+ORGS.length+"</b> organisations";
   $("clearBtn").hidden=!filtering();
-  if(state.view==="atlas"){paintAtlas();renderFindings()}
+  if(state.view==="atlas"){paintIsland();renderFindings()}
   else if(state.view==="chain"){renderChain()}
   else if(state.view==="gaps"){renderGapsSimple();renderGapsGrid()}
   else {renderLinksSimple();renderLinksGrid()}
@@ -1180,5 +1328,5 @@ $("themeBtn").onclick=()=>{
   document.documentElement.setAttribute("data-theme",dark?"light":"dark");
 };
 
-buildAtlas(); wireAtlas(); renderKey(); render();
+buildIsland(); wireAtlas(); renderKey(); render();
 </script>
