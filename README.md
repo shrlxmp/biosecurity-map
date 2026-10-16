@@ -83,7 +83,7 @@ python build/build.py                # rebuild index.html from build/entries.csv
 python build/build.py --refresh      # re-download entries.csv from biosecurity.world first
 ```
 
-`build/template.html` is the page with `__ORGS__` / `__LOGOS__` placeholders where the data
+`build/template.html` is the page with `__ORGS__` / `__LOGOS__` / `__COUNT__` placeholders where the data
 is injected. Edit the template, not `index.html` — `index.html` is generated and will be
 overwritten.
 

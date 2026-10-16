@@ -345,6 +345,8 @@ footer .cav{margin-top:11px}
   .brow,.axis{grid-template-columns:130px 1fr 32px}
   .pair{grid-template-columns:1fr 70px 28px}
   .mast-in .src{display:none}
+  .mast-right{margin-left:0;min-width:0;max-width:100%}
+  .tabs{min-width:0;overflow-x:auto}
   svg#atlas{max-height:none}
 }
 </style>
@@ -806,13 +808,17 @@ function wireAtlas(){
   svg.addEventListener("pointerdown",e=>{
     drag={x:e.clientX,y:e.clientY,cx:cam.x,cy:cam.y,moved:false};
     svg.classList.add("drag");
-    try{svg.setPointerCapture(e.pointerId)}catch(_){}
   });
   svg.addEventListener("pointermove",e=>{
     if(!drag) return;
     const r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
     const dx=e.clientX-drag.x, dy=e.clientY-drag.y;
-    if(Math.abs(dx)+Math.abs(dy)>3) drag.moved=true;
+    /* capture only once it is a real drag: capturing on pointerdown retargets
+       the click to the svg in current browsers, so dots stop opening */
+    if(!drag.moved && Math.abs(dx)+Math.abs(dy)>3){
+      drag.moved=true;
+      try{svg.setPointerCapture(e.pointerId)}catch(_){}
+    }
     cam.x=drag.cx+dx/r.width*vb.width;
     cam.y=drag.cy+dy/r.height*vb.height;
     applyCam();

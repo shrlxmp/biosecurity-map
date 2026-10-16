@@ -345,6 +345,8 @@ footer .cav{margin-top:11px}
   .brow,.axis{grid-template-columns:130px 1fr 32px}
   .pair{grid-template-columns:1fr 70px 28px}
   .mast-in .src{display:none}
+  .mast-right{margin-left:0;min-width:0;max-width:100%}
+  .tabs{min-width:0;overflow-x:auto}
   svg#atlas{max-height:none}
 }
 </style>
@@ -352,7 +354,7 @@ footer .cav{margin-top:11px}
 <header class="mast">
   <div class="mast-in">
     <h1>The Biosecurity Defence Chain</h1>
-    <p class="src">168 organisations, from the open dataset at
+    <p class="src">__COUNT__ organisations, from the open dataset at
       <a href="https://biosecurity.world/" target="_blank" rel="noopener">biosecurity.world</a></p>
     <div class="mast-right">
       <div class="tabs" role="tablist" aria-label="View">
@@ -391,7 +393,7 @@ footer .cav{margin-top:11px}
     <p>Biosecurity is built as <strong>defence in depth</strong>: a series of barriers, each one
       catching what the last one missed. A threat arrives at the outside edge of this map and has
       to cross <strong>three</strong> of them to reach the people at the centre.</p>
-    <p>Every dot is one of the 168 organisations in the field, sitting on the barrier it works on.
+    <p>Every dot is one of the __COUNT__ organisations in the field, sitting on the barrier it works on.
       The further out a dot sits, the earlier it acts.</p>
   </div>
 
@@ -402,7 +404,7 @@ footer .cav{margin-top:11px}
       <button id="zRe" class="wide" aria-label="Reset view">RST</button>
     </div>
     <svg id="atlas" viewBox="0 0 880 880" role="img"
-      aria-label="Concentric map of 168 biosecurity organisations arranged as four defensive layers around the population at the centre"></svg>
+      aria-label="Concentric map of __COUNT__ biosecurity organisations arranged as four defensive layers around the population at the centre"></svg>
     <div class="atlas-hint">Scroll to zoom &middot; drag to pan &middot; click a dot</div>
   </div>
 
@@ -454,7 +456,7 @@ footer .cav{margin-top:11px}
   </div>
   <div class="panel">
     <h4>Organisations per topic</h4>
-    <p class="cap">Each organisation can work on several topics, so these add up to more than 168.</p>
+    <p class="cap">Each organisation can work on several topics, so these add up to more than __COUNT__.</p>
     <div class="rows" id="topicBars"></div>
     <div class="axis"><div class="sc" id="topicAxis"></div></div>
   </div>
@@ -806,13 +808,17 @@ function wireAtlas(){
   svg.addEventListener("pointerdown",e=>{
     drag={x:e.clientX,y:e.clientY,cx:cam.x,cy:cam.y,moved:false};
     svg.classList.add("drag");
-    try{svg.setPointerCapture(e.pointerId)}catch(_){}
   });
   svg.addEventListener("pointermove",e=>{
     if(!drag) return;
     const r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
     const dx=e.clientX-drag.x, dy=e.clientY-drag.y;
-    if(Math.abs(dx)+Math.abs(dy)>3) drag.moved=true;
+    /* capture only once it is a real drag: capturing on pointerdown retargets
+       the click to the svg in current browsers, so dots stop opening */
+    if(!drag.moved && Math.abs(dx)+Math.abs(dy)>3){
+      drag.moved=true;
+      try{svg.setPointerCapture(e.pointerId)}catch(_){}
+    }
     cam.x=drag.cx+dx/r.width*vb.width;
     cam.y=drag.cy+dy/r.height*vb.height;
     applyCam();

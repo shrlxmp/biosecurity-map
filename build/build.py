@@ -130,8 +130,10 @@ def main():
                                                separators=(",", ":")), 1)
     page = page.replace("__LOGOS__", json.dumps(logos, ensure_ascii=True,
                                                 separators=(",", ":")), 1)
-    if "__ORGS__" in page or "__LOGOS__" in page:
-        raise SystemExit("template placeholders were not both substituted")
+    # the count also appears in static copy, so it tracks the weekly refresh
+    page = page.replace("__COUNT__", str(len(orgs)))
+    if "__ORGS__" in page or "__LOGOS__" in page or "__COUNT__" in page:
+        raise SystemExit("template placeholders were not all substituted")
 
     out = os.path.join(ROOT, "index.html")
     io.open(out, "w", encoding="utf-8", newline="").write(page)
