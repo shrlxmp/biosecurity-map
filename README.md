@@ -81,6 +81,7 @@ To regenerate it locally:
 python build/fetch_logos.py          # refresh cached favicons -> build/logos.json
 python build/build.py                # rebuild index.html from build/entries.csv
 python build/build.py --refresh      # re-download entries.csv from biosecurity.world first
+python build/dev.py                  # preview at localhost:8409, rebuilding and reloading on every save
 ```
 
 `build/template.html` is the page with `__ORGS__` / `__LOGOS__` placeholders where the data
