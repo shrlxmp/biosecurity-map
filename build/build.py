@@ -16,6 +16,7 @@ import csv
 import io
 import json
 import os
+import re
 import urllib.parse
 import urllib.request
 
@@ -80,6 +81,11 @@ def load_entries(refresh=False):
         return list(csv.DictReader(handle))
 
 
+# biosecurity.world also lists newsletters and podcasts. They are publications,
+# not organisations, and most repeat an organisation already on the map.
+PUBLICATION = re.compile(r"^(Newsletter|Podcast)\s*-\s*", re.I)
+
+
 def to_org(row):
     # category_trail looks like "Response > Medical countermeasures"
     trail = [part.strip() for part in (row["category_trail"] or "").split(">")]
@@ -106,8 +112,10 @@ def main():
                         help="re-download entries.csv from biosecurity.world")
     args = parser.parse_args()
 
-    orgs = [to_org(row) for row in load_entries(args.refresh)]
+    rows = load_entries(args.refresh)
+    orgs = [to_org(row) for row in rows if not PUBLICATION.match(row["label"])]
     orgs.sort(key=lambda org: org["name"].lower())
+    skipped = len(rows) - len(orgs)
 
     logos_path = os.path.join(HERE, "logos.json")
     logos = {}
@@ -142,6 +150,7 @@ def main():
     print("wrote %s" % out)
     print("  %d organisations, %d with a logo, %d KB"
           % (len(orgs), with_logo, len(page.encode("utf-8")) // 1024))
+    print("  %d newsletters and podcasts left out" % skipped)
 
 
 if __name__ == "__main__":
