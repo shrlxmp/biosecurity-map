@@ -53,6 +53,6 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Refresh map from biosecurity.world ($orgs organisations)" \
+          git commit -m "Refresh map from biosecurity.world ($orgs entries)" \
                      -m "Automated weekly rebuild. Source: https://biosecurity.world/data/entries.csv"
           git push

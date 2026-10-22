@@ -1,3 +1,7 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Biosecurity Defence Chain</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -100,6 +104,8 @@ select.fsel{font-family:var(--f-disp);font-size:13px;padding:7px 9px;border:1px 
 .atlas-shell .tools button.wide{font-size:8.5px;letter-spacing:.02em}
 .atlas-hint{position:absolute;bottom:12px;left:16px;z-index:5;font-family:var(--f-mono);
   font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.atlas-hint .h-coarse{display:none}
+@media (pointer:coarse){.atlas-hint .h-fine{display:none}.atlas-hint .h-coarse{display:inline}}
 svg#atlas{display:block;width:100%;height:auto;max-height:82vh;margin:0 auto;
   touch-action:none;cursor:grab}
 svg#atlas.drag{cursor:grabbing}
@@ -345,6 +351,8 @@ footer .cav{margin-top:11px}
   .brow,.axis{grid-template-columns:130px 1fr 32px}
   .pair{grid-template-columns:1fr 70px 28px}
   .mast-in .src{display:none}
+  .mast-right{margin-left:0;min-width:0;max-width:100%}
+  .tabs{min-width:0;overflow-x:auto}
   svg#atlas{max-height:none}
 }
 </style>
@@ -352,7 +360,7 @@ footer .cav{margin-top:11px}
 <header class="mast">
   <div class="mast-in">
     <h1>The Biosecurity Defence Chain</h1>
-    <p class="src">168 organisations, from the open dataset at
+    <p class="src">__COUNT__ organisations, from the open dataset at
       <a href="https://biosecurity.world/" target="_blank" rel="noopener">biosecurity.world</a></p>
     <div class="mast-right">
       <div class="tabs" role="tablist" aria-label="View">
@@ -389,10 +397,13 @@ footer .cav{margin-top:11px}
   <div class="lede">
     <h2>Every layer a pandemic has to get through</h2>
     <p>Biosecurity is built as <strong>defence in depth</strong>: a series of barriers, each one
-      catching what the last one missed. A threat arrives at the outside edge of this map and has
-      to cross <strong>three</strong> of them to reach the people at the centre.</p>
-    <p>Every dot is one of the 168 organisations in the field, sitting on the barrier it works on.
-      The further out a dot sits, the earlier it acts.</p>
+      catching what the last one missed. A threat has to cross <strong>three</strong> of them to
+      reach the people at the centre: Prevention, then Detection, then Response. The further out a
+      barrier sits, the earlier it acts.</p>
+    <p>The dashed outer ring is not a barrier. It is the <strong>shared foundation</strong> the
+      three stand on: funders, educators, coordinators and reporters.</p>
+    <p>Every dot is one of the __COUNT__ organisations in the field, placed once, on the ring of
+      its main mission.</p>
   </div>
 
   <div class="atlas-shell">
@@ -402,8 +413,8 @@ footer .cav{margin-top:11px}
       <button id="zRe" class="wide" aria-label="Reset view">RST</button>
     </div>
     <svg id="atlas" viewBox="0 0 880 880" role="img"
-      aria-label="Concentric map of 168 biosecurity organisations arranged as four defensive layers around the population at the centre"></svg>
-    <div class="atlas-hint">Scroll to zoom &middot; drag to pan &middot; click a dot</div>
+      aria-label="Concentric map of __COUNT__ biosecurity organisations: three defensive barriers around the population at the centre, inside an outer ring for the foundation they stand on"></svg>
+    <div class="atlas-hint"><span class="h-fine">Ctrl or &#8984; + scroll to zoom &middot; drag to pan &middot; click a dot</span><span class="h-coarse">+ and &minus; to zoom &middot; tap a dot</span></div>
   </div>
 
   <div class="atlas-key" id="atlasKey"></div>
@@ -454,7 +465,7 @@ footer .cav{margin-top:11px}
   </div>
   <div class="panel">
     <h4>Organisations per topic</h4>
-    <p class="cap">Each organisation can work on several topics, so these add up to more than 168.</p>
+    <p class="cap">Each organisation can work on several topics, so these add up to more than __COUNT__.</p>
     <div class="rows" id="topicBars"></div>
     <div class="axis"><div class="sc" id="topicAxis"></div></div>
   </div>
@@ -506,8 +517,10 @@ footer .cav{margin-top:11px}
   <a href="https://biosecurity.world/" target="_blank" rel="noopener">biosecurity.world</a>
   (<a href="https://biosecurity.world/data/entries.csv" target="_blank" rel="noopener">entries.csv</a>,
   <a href="https://github.com/biosecurity-world/biosecurity.world" target="_blank" rel="noopener">source</a>),
-  which is the maintained and authoritative version of this landscape. Logos are each
-  organisation's own favicon, shown for identification.
+  which is the maintained and authoritative version of this landscape. Newsletters and podcasts
+  listed there are left out: they are publications rather than organisations, and most repeat an
+  organisation already on the map. Logos are each organisation's own favicon, shown for
+  identification.
   <div class="cav"><strong>Reading caveats.</strong> The rings are a diagram, not geography &mdash;
   where a dot sits <em>within</em> a ring carries no meaning, only which ring it is in. Each
   organisation is placed once, at its primary classification in the dataset, so layer counts here
@@ -520,7 +533,7 @@ footer .cav{margin-top:11px}
 
 <div id="tip" role="status" aria-live="polite"></div>
 <div class="scrim" id="scrim"></div>
-<aside class="drawer" id="drawer" aria-label="Organisation detail" aria-hidden="true">
+<aside class="drawer" id="drawer" aria-label="Organisation detail" aria-hidden="true" inert>
   <div class="dr-top" id="drTop">
     <div class="dr-id"><span id="drLogo"></span><h2 id="drName"></h2></div>
     <span class="eyebrow" id="drTrail"></span>
@@ -542,6 +555,8 @@ const LAYERS=[
         ["","Across the layer"]]},
  {key:"Detection",rows:1,c:"var(--det)",v:"--det",
   blurb:"The middle barrier. Spotting an outbreak while containing it is still cheap.",
+  /* topics that are detection work wherever the organisation sits */
+  topics:["Pathogen surveillance","Rapid diagnostics","Digital detection"],
   subs:[["Early warning","Watching"],["Diagnostics","Testing"],["","Across the layer"]]},
  {key:"Prevention",rows:1,c:"var(--prev)",v:"--prev",
   blurb:"The outer barrier. Stopping a dangerous agent from ever being made or released.",
@@ -566,6 +581,19 @@ const colorOf=k=>k==="Prevention"?"var(--prev)":k==="Detection"?"var(--det)":
   k==="Response"?"var(--resp)":"var(--trans)";
 const layerName=k=>k==="Transversal"?"The shared foundation":k;
 const byId={}; ORGS.forEach(o=>{byId[o.id]=o});
+
+/* which barrier has the fewest organisations by main mission, and how many
+   more work on its topics from other rings; computed so the copy stays true
+   after a refresh */
+function barrierStats(){
+  const bars=LAYERS.filter(L=>L.key!=="Transversal")
+    .map(L=>({key:L.key,topics:L.topics,n:ORGS.filter(o=>o.cat===L.key).length}))
+    .sort((a,b)=>a.n-b.n);
+  const thin=bars[0], big=bars[bars.length-1];
+  thin.elsewhere=thin.topics?ORGS.filter(o=>o.cat!==thin.key &&
+    o.foci.some(f=>thin.topics.indexOf(f)>-1)).length:0;
+  return {thin:thin,big:big};
+}
 
 function match(o){
   if(state.act && o.act.indexOf(state.act)<0) return false;
@@ -657,19 +685,21 @@ function buildAtlas(){
     t.textContent=p[0]; camG.appendChild(t);
   });
 
-  /* threat arrow entering from outside */
-  const ta=214;
-  const a0=pol(RMAX+64,ta), a1=pol(RMAX+6,ta);
+  /* threat arrow entering from outside. It passes over the foundation, which
+     is not a barrier, and stops at the first real one; the angle sits in the
+     dot-free gap left for the ring labels, clear of the foundation's label */
+  const ta=-112, tip=geo.find(g=>g.L.key==="Prevention").outer+3;
+  const a0=pol(RMAX+46,ta), a1=pol(tip,ta);
   camG.appendChild(mk("path",{class:"threat-line",
     d:"M"+a0[0].toFixed(1)+" "+a0[1].toFixed(1)+"L"+a1[0].toFixed(1)+" "+a1[1].toFixed(1)}));
-  const hb=pol(RMAX+19,ta), pp=pol(1,ta+90), ux=pp[0]-CX, uy=pp[1]-CY;
+  const hb=pol(tip+13,ta), pp=pol(1,ta+90), ux=pp[0]-CX, uy=pp[1]-CY;
   camG.appendChild(mk("path",{class:"threat-line","stroke-dasharray":"none",
     d:"M"+(hb[0]+ux*5).toFixed(1)+" "+(hb[1]+uy*5).toFixed(1)+
       "L"+a1[0].toFixed(1)+" "+a1[1].toFixed(1)+
       "L"+(hb[0]-ux*5).toFixed(1)+" "+(hb[1]-uy*5).toFixed(1)}));
-  const lp=pol(RMAX+80,ta);
-  const tl=mk("text",{class:"threat","text-anchor":"middle",
-    transform:"translate("+lp[0].toFixed(1)+","+lp[1].toFixed(1)+") rotate("+(ta-180)+")"});
+  /* level, just left of where the arrow starts, so it stays inside the viewBox */
+  const tl=mk("text",{class:"threat","text-anchor":"end",
+    x:(a0[0]-8).toFixed(1),y:(a0[1]+3).toFixed(1)});
   tl.textContent="A threat arrives"; camG.appendChild(tl);
 
   const nodesG=mk("g",{});
@@ -785,6 +815,9 @@ function paintAtlas(){
 function applyCam(){
   if(camG) camG.setAttribute("transform",
     "translate("+cam.x.toFixed(2)+","+cam.y.toFixed(2)+") scale("+cam.k.toFixed(3)+")");
+  /* on touch, a vertical swipe scrolls the page until the map is zoomed in;
+     after that, every swipe pans the map */
+  $("atlas").style.touchAction=cam.k>1?"none":"pan-y";
 }
 function zoomAt(factor,px,py){
   const k=Math.max(.6,Math.min(6,cam.k*factor)), s=k/cam.k;
@@ -797,7 +830,10 @@ function svgPoint(ev){
 }
 function wireAtlas(){
   const svg=$("atlas");
+  /* plain scrolling moves the page; ctrl/cmd + scroll (and trackpad pinch,
+     which browsers report as ctrl + wheel) zooms the map */
   svg.addEventListener("wheel",e=>{
+    if(!e.ctrlKey && !e.metaKey) return;
     e.preventDefault();
     const p=svgPoint(e);
     zoomAt(e.deltaY<0?1.14:1/1.14,p[0],p[1]);
@@ -806,13 +842,17 @@ function wireAtlas(){
   svg.addEventListener("pointerdown",e=>{
     drag={x:e.clientX,y:e.clientY,cx:cam.x,cy:cam.y,moved:false};
     svg.classList.add("drag");
-    try{svg.setPointerCapture(e.pointerId)}catch(_){}
   });
   svg.addEventListener("pointermove",e=>{
     if(!drag) return;
     const r=svg.getBoundingClientRect(), vb=svg.viewBox.baseVal;
     const dx=e.clientX-drag.x, dy=e.clientY-drag.y;
-    if(Math.abs(dx)+Math.abs(dy)>3) drag.moved=true;
+    /* capture only once it is a real drag: capturing on pointerdown retargets
+       the click to the svg in current browsers, so dots stop opening */
+    if(!drag.moved && Math.abs(dx)+Math.abs(dy)>3){
+      drag.moved=true;
+      try{svg.setPointerCapture(e.pointerId)}catch(_){}
+    }
     cam.x=drag.cx+dx/r.width*vb.width;
     cam.y=drag.cy+dy/r.height*vb.height;
     applyCam();
@@ -838,13 +878,14 @@ function renderKey(){
       '<div class="kt">'+esc(L.name||L.key)+'</div>'+
       '<div class="kd"><b>'+n+' orgs</b> &middot; '+esc(L.blurb)+'</div></div></div>';
   }).join("");
-  const det=ORGS.filter(o=>o.cat==="Detection").length;
-  const res=ORGS.filter(o=>o.cat==="Response").length;
+  const s=barrierStats(), t=s.thin;
   $("atlasKey").innerHTML=html+
-    '<div class="keynote">How to read the rings: <b>Detection</b> is visibly the thinnest and '+
-    'most widely spaced of the three barriers &mdash; <b>'+det+'</b> organisations against <b>'+
-    res+'</b> on Response. It is the cheapest point at which to stop a pandemic and the least '+
-    'occupied. A small coloured dot on a logo marks work on worst-case pandemic risk.</div>';
+    '<div class="keynote">How to read the rings: each organisation sits on one ring, the one for '+
+    'its main mission. <b>'+t.key+'</b> has the fewest of the three barriers, <b>'+t.n+
+    '</b> against <b>'+s.big.n+'</b> on '+s.big.key+'.'+
+    (t.elsewhere?' That undercounts the work: another <b>'+t.elsewhere+'</b> organisations on '+
+      'other rings list a '+t.key.toLowerCase()+' topic such as '+t.topics[0].toLowerCase()+'.':'')+
+    ' A small coloured dot on a logo marks work on worst-case pandemic risk.</div>';
 }
 
 /* ---------- chain (alt view) ---------- */
@@ -897,8 +938,9 @@ function renderChain(){
       '<p class="gloss">'+st.gloss+'</p>'+
       '<div class="bar"><i style="width:'+(all.length/mx*100).toFixed(1)+'%"></i></div></div>'+
       '<div class="blocks">'+subBlocks(all,st.subs)+
-      (tot[i]===thinnest?'<p class="thin-note">The thinnest of the three stages. The empty '+
-        'space below is the finding, not a rendering gap.</p>':'')+
+      (tot[i]===thinnest?'<p class="thin-note">The fewest organisations of the three stages, '+
+        'counting each only by its main mission. Others work on this stage from elsewhere in '+
+        'the chain: try the topic filter.</p>':'')+
       '</div></div>';
   }).join(ARROW);
   $("tie").innerHTML='<svg viewBox="0 0 1000 20" preserveAspectRatio="none" fill="none"'+
@@ -924,12 +966,17 @@ function renderFindings(){
   const n=ORGS.length, at=k=>ORGS.filter(o=>o.cat===k).length;
   const top=Object.entries(tally(ORGS.flatMap(o=>o.foci))).sort((a,b)=>b[1]-a[1])[0];
   const gcbr=ORGS.filter(o=>o.gcbr).length;
+  const s=barrierStats(), t=s.thin;
+  const largest=at("Transversal")>s.big.n;
   const items=[
     [Math.round(at("Transversal")/n*100)+"%",
-     "of the field is not a barrier at all. It <b>funds, teaches, coordinates or reports on</b> the other three &mdash; the largest single group."],
-    [at("Detection"),
-     "organisations hold the <b>middle barrier</b>, against "+at("Response")+
-     " on the last one. The cheapest place to stop a pandemic is the least crowded."],
+     "of the field is not a barrier at all. It <b>funds, teaches, coordinates or reports on</b> the other three"+
+     (largest?" &mdash; the largest single group.":".")],
+    [t.n,
+     "organisations have <b>"+t.key+"</b> as their main mission, the fewest of the three barriers."+
+     (t.elsewhere?" Another <b>"+t.elsewhere+"</b> work on "+t.key.toLowerCase()+
+       " topics from other rings."
+      :" There are "+s.big.n+" on "+s.big.key+".")],
     [top[1],"work on <b>"+esc(top[0])+"</b>, the most crowded of "+FOCI.length+
      " topics &mdash; the clearest centre of gravity in the field."],
     [Math.round(gcbr/n*100)+"%",
@@ -1110,15 +1157,25 @@ function openOrg(id){
     f("Worst-case pandemic risk",'<p>'+(o.gcbr
       ?"Yes &mdash; works explicitly on global catastrophic biological risk."
       :"Not recorded as working on worst-case risk.")+'</p>')+
-    '<a class="visit" href="'+esc(o.url)+'" target="_blank" rel="noopener">Visit '+esc(o.name)+
-    ' <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor"'+
-    ' stroke-width="1.8"><path d="M4 10 10 4M5.4 3.6H10.4V8.6"></path></svg></a>';
+    /* the url comes from upstream data, so only link out over http(s) */
+    (/^https?:\/\//i.test(o.url)
+      ?'<a class="visit" href="'+esc(o.url)+'" target="_blank" rel="noopener">Visit '+esc(o.name)+
+       ' <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor"'+
+       ' stroke-width="1.8"><path d="M4 10 10 4M5.4 3.6H10.4V8.6"></path></svg></a>':"");
+  if(!$("drawer").classList.contains("on")) lastFocus=document.activeElement;
   $("drawer").classList.add("on"); $("drawer").setAttribute("aria-hidden","false");
+  $("drawer").inert=false;
   $("scrim").classList.add("on"); $("drClose").focus();
 }
+let lastFocus=null;
 function closeDrawer(){
+  if(!$("drawer").classList.contains("on")) return;
   $("drawer").classList.remove("on"); $("drawer").setAttribute("aria-hidden","true");
+  $("drawer").inert=true;
   $("scrim").classList.remove("on");
+  /* hand focus back to the dot or tile that opened it */
+  if(lastFocus && lastFocus.isConnected && lastFocus.focus) lastFocus.focus();
+  lastFocus=null;
 }
 
 /* ---------- tooltip ---------- */
@@ -1182,3 +1239,4 @@ $("themeBtn").onclick=()=>{
 
 buildAtlas(); wireAtlas(); renderKey(); render();
 </script>
+</html>
