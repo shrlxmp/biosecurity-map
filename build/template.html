@@ -5,390 +5,311 @@
 <title>The Biosecurity Defence Chain</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&display=swap">
 <style>
+/* Editorial print look: one serif for reading, one plain sans for labels,
+   hairline rules instead of boxes, no shadows or rounded cards. */
 :root{
-  --bg:#f5f7f9; --surface:#ffffff; --surface-2:#eef1f5; --surface-3:#e3e8ef;
-  --ink:#131720; --ink-2:#48536a; --ink-3:#79859a; --line:#dce2ea; --line-2:#c3ccd9;
-  --prev:#B45309; --det:#0284C7; --resp:#BE123C; --trans:#6D28D9;
-  --seq:#0284C7; --accent:#0284C7; --accent-ink:#ffffff;
-  --map-bg:#eaeff4; --map-core:#dde5ed;
-  --shadow:0 1px 2px rgba(19,23,32,.05),0 10px 28px -14px rgba(19,23,32,.16);
-  --f-disp:"Archivo",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  --f-body:"Source Serif 4",Georgia,"Times New Roman",serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+  --paper:#fbfaf7; --ink:#161616; --ink-2:#474643; --ink-3:#7a7873;
+  --hair:#dedbd3; --hair-2:#bfbbb2; --tint:#f0eee8; --halo:#ffffff;
+  --prev:#b4621c; --det:#1f5f8b; --resp:#a8322d; --trans:#8a857c;
+  --seq:#1f5f8b;
+  --f-text:"Newsreader",Georgia,"Times New Roman",serif;
+  --f-label:"Libre Franklin","Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --bg:#0e1116; --surface:#161a21; --surface-2:#1c222b; --surface-3:#252c37;
-    --ink:#e9edf4; --ink-2:#a6b1c2; --ink-3:#727f92; --line:#29313c; --line-2:#3b4552;
-    --prev:#C8821A; --det:#2F9FDB; --resp:#E24A68; --trans:#9270F0;
-    --seq:#2F9FDB; --accent:#2F9FDB; --accent-ink:#0e1116;
-    --map-bg:#11151b; --map-core:#1b212a;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.72);
+    --paper:#151514; --ink:#ecebe6; --ink-2:#b8b5ad; --ink-3:#8b8880;
+    --hair:#32312e; --hair-2:#4a4844; --tint:#1f1e1c; --halo:#e9e7e1;
+    --prev:#d98a3d; --det:#5b9ccc; --resp:#d9574d; --trans:#9a958b;
+    --seq:#5b9ccc;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0e1116; --surface:#161a21; --surface-2:#1c222b; --surface-3:#252c37;
-  --ink:#e9edf4; --ink-2:#a6b1c2; --ink-3:#727f92; --line:#29313c; --line-2:#3b4552;
-  --prev:#C8821A; --det:#2F9FDB; --resp:#E24A68; --trans:#9270F0;
-  --seq:#2F9FDB; --accent:#2F9FDB; --accent-ink:#0e1116;
-  --map-bg:#11151b; --map-core:#1b212a;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.72);
+  --paper:#151514; --ink:#ecebe6; --ink-2:#b8b5ad; --ink-3:#8b8880;
+  --hair:#32312e; --hair-2:#4a4844; --tint:#1f1e1c; --halo:#e9e7e1;
+  --prev:#d98a3d; --det:#5b9ccc; --resp:#d9574d; --trans:#9a958b;
+  --seq:#5b9ccc;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);
-  font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1340px;margin:0 auto;padding:0 26px 80px}
-h1,h2,h3,h4{font-family:var(--f-disp);text-wrap:balance;margin:0}
-a{color:var(--accent)}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.eyebrow{font-family:var(--f-mono);font-size:10px;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--ink-3)}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-text);
+  font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;font-optical-sizing:auto}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;
+  text-underline-offset:2px;text-decoration-color:var(--hair-2)}
+a:hover{text-decoration-color:currentColor}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-text);font-weight:700;margin:0;letter-spacing:-.01em;text-wrap:balance}
+button,input,select{font:inherit;color:inherit}
 
 /* ---------- masthead ---------- */
-header.mast{background:var(--surface);border-bottom:1px solid var(--line);
-  position:sticky;top:0;z-index:40;box-shadow:var(--shadow)}
-.mast-in{max-width:1340px;margin:0 auto;padding:13px 26px;display:flex;gap:20px;
-  align-items:center;flex-wrap:wrap}
-.mast-in h1{font-size:18.5px;font-weight:800;letter-spacing:-.022em;line-height:1.1}
-.mast-in .src{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3);
-  padding-left:14px;border-left:1px solid var(--line);line-height:1.35;max-width:26ch}
-.mast-in .src a{color:var(--ink-2)}
-.mast-right{margin-left:auto;display:flex;gap:8px;align-items:center}
-.tabs{display:flex;gap:2px;background:var(--surface-2);padding:3px;border-radius:10px;
-  border:1px solid var(--line)}
-.tab{font-family:var(--f-disp);font-size:12.5px;font-weight:600;padding:7px 13px;border:0;
-  border-radius:7px;background:transparent;color:var(--ink-2);cursor:pointer;white-space:nowrap}
-.tab[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
-.tab:hover:not([aria-selected="true"]){color:var(--ink)}
-.icon-btn{width:33px;height:33px;border-radius:9px;border:1px solid var(--line);
-  background:var(--surface-2);color:var(--ink-2);cursor:pointer;font-size:14px;
-  display:grid;place-items:center;line-height:1}
-.icon-btn:hover{color:var(--ink);border-color:var(--line-2)}
-
-/* ---------- lede ---------- */
-.lede{max-width:76ch;padding:30px 0 0}
-.lede h2{font-size:25px;font-weight:700;letter-spacing:-.025em;line-height:1.2;
-  margin-bottom:11px}
-.lede p{font-size:16px;line-height:1.6;color:var(--ink-2);margin:0 0 11px}
-.lede p strong{color:var(--ink);font-weight:600}
+.mast{border-top:4px solid var(--ink);padding-top:26px}
+.mast h1{font-size:44px;line-height:1.05;letter-spacing:-.02em}
+.dek{font-size:19px;color:var(--ink-2);margin:10px 0 22px;max-width:60ch}
+.navrow{display:flex;align-items:flex-end;gap:16px;border-top:1px solid var(--hair);
+  border-bottom:1px solid var(--ink)}
+.tabs{display:flex;gap:26px;overflow-x:auto;min-width:0}
+.tab{font-family:var(--f-label);font-size:14px;font-weight:500;background:none;border:0;
+  padding:12px 0 9px;color:var(--ink-2);cursor:pointer;white-space:nowrap;
+  border-bottom:3px solid transparent}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
+.tab:hover{color:var(--ink)}
+.mast .wrap{position:relative}
+/* sits in the band above the title, clear of the tabs */
+.theme{position:absolute;top:-20px;right:28px;font-family:var(--f-label);font-size:12.5px;
+  background:none;border:0;padding:2px 0;color:var(--ink-3);cursor:pointer;white-space:nowrap}
+.theme:hover{color:var(--ink)}
 
 /* ---------- filters ---------- */
-.fbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:20px 0 0;
-  padding:11px 14px;background:var(--surface);border:1px solid var(--line);border-radius:11px}
-.search{position:relative}
-.search input{font-family:var(--f-disp);font-size:13px;padding:7px 11px 7px 30px;width:180px;
-  border:1px solid var(--line-2);border-radius:8px;background:var(--surface);color:var(--ink)}
-.search input::placeholder{color:var(--ink-3)}
-.search svg{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--ink-3)}
-select.fsel{font-family:var(--f-disp);font-size:13px;padding:7px 9px;border:1px solid var(--line-2);
-  border-radius:8px;background:var(--surface);color:var(--ink);max-width:200px}
-.toggle{font-family:var(--f-disp);font-size:13px;padding:7px 12px;border:1px solid var(--line-2);
-  border-radius:8px;background:var(--surface);color:var(--ink-2);cursor:pointer}
-.toggle[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.clear{font-family:var(--f-disp);font-size:12.5px;font-weight:600;background:none;border:0;
-  color:var(--accent);cursor:pointer;padding:7px 4px}
-.status{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-left:auto}
-.status b{color:var(--ink);font-weight:500}
+.fbar{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 20px;padding:14px 0;
+  border-bottom:1px solid var(--hair);font-family:var(--f-label);font-size:13.5px}
+.flabel{font-weight:600}
+.fbar input,.fbar select{font-family:var(--f-label);font-size:13.5px;border:0;
+  border-bottom:1px solid var(--hair-2);background:transparent;padding:4px 0;border-radius:0;
+  max-width:165px}
+.fbar select option{background:var(--paper);color:var(--ink)}
+.fbar input{width:170px}
+.fbar input::placeholder{color:var(--ink-3)}
+.toggle{background:none;border:0;padding:4px 0;cursor:pointer;display:inline-flex;gap:7px;
+  align-items:center;color:var(--ink-2)}
+.toggle::before{content:"";width:11px;height:11px;border:1px solid var(--ink-2);flex:none}
+.toggle[aria-pressed="true"]{color:var(--ink);font-weight:600}
+.toggle[aria-pressed="true"]::before{background:var(--ink);box-shadow:inset 0 0 0 2px var(--paper)}
+.clear{background:none;border:0;padding:4px 0;cursor:pointer;text-decoration:underline;
+  text-underline-offset:2px}
+.status{margin-left:auto;color:var(--ink-3);font-variant-numeric:tabular-nums}
 
-/* ---------- ATLAS ---------- */
-.atlas-shell{margin-top:20px;background:var(--map-bg);border:1px solid var(--line);
-  border-radius:16px;position:relative;overflow:hidden}
-.atlas-shell .tools{position:absolute;top:12px;right:12px;z-index:5;display:flex;
-  flex-direction:column;gap:5px}
-.atlas-shell .tools button{width:29px;height:29px;border-radius:8px;border:1px solid var(--line);
-  background:var(--surface);color:var(--ink-2);cursor:pointer;font-family:var(--f-mono);
-  font-size:13px;display:grid;place-items:center;line-height:1;padding:0}
-.atlas-shell .tools button:hover{color:var(--ink)}
-.atlas-shell .tools button.wide{font-size:8.5px;letter-spacing:.02em}
-.atlas-hint{position:absolute;bottom:12px;left:16px;z-index:5;font-family:var(--f-mono);
-  font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
-.atlas-hint .h-coarse{display:none}
-@media (pointer:coarse){.atlas-hint .h-fine{display:none}.atlas-hint .h-coarse{display:inline}}
+/* ---------- section heads ---------- */
+.lede,.sec-head{max-width:64ch;padding:34px 0 6px}
+.lede h2,.sec-head h2{font-size:30px;line-height:1.15;margin-bottom:12px}
+.lede p,.sec-head p{margin:0 0 12px;color:var(--ink-2)}
+.lede strong,.sec-head strong{color:var(--ink);font-weight:600}
+h3.sh{font-size:20px;line-height:1.25}
+.cap{font-size:15px;color:var(--ink-3);font-style:italic;margin:2px 0 16px}
+
+/* ---------- the map ---------- */
+figure.atlas{margin:18px 0 0;position:relative;border-top:1px solid var(--hair);
+  border-bottom:1px solid var(--hair);padding:10px 0 8px}
+.atlas .tools{position:absolute;top:16px;right:0;display:flex;flex-direction:column;gap:4px;z-index:5}
+.atlas .tools button{font-family:var(--f-label);font-size:13px;min-width:30px;height:28px;
+  border:1px solid var(--hair-2);background:var(--paper);cursor:pointer;padding:0 7px;
+  color:var(--ink-2)}
+.atlas .tools button:hover{color:var(--ink);border-color:var(--ink)}
 svg#atlas{display:block;width:100%;height:auto;max-height:82vh;margin:0 auto;
   touch-action:none;cursor:grab}
 svg#atlas.drag{cursor:grabbing}
-#atlas .div{stroke:var(--line-2);stroke-width:.7;opacity:.45}
-#atlas .grid{fill:none;stroke:var(--line-2);stroke-width:.5;opacity:.3}
-#atlas .ringlab{font-family:var(--f-disp);font-weight:700;font-size:15px;
-  letter-spacing:.26em;text-transform:uppercase}
-#atlas .ringnum{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;fill:var(--ink-3)}
-#atlas .seclab{font-family:var(--f-mono);font-size:8.5px;letter-spacing:.11em;
-  text-transform:uppercase;fill:var(--ink-2);paint-order:stroke fill;
-  stroke:var(--map-bg);stroke-width:3.2px;stroke-linejoin:round}
-#atlas .corelab{font-family:var(--f-disp);font-weight:800;font-size:15px;letter-spacing:.13em;
-  fill:var(--ink);text-transform:uppercase}
-#atlas .coresub{font-family:var(--f-mono);font-size:8.6px;fill:var(--ink-3);letter-spacing:.03em}
-#atlas .threat{font-family:var(--f-mono);font-size:9px;letter-spacing:.14em;
-  text-transform:uppercase;fill:var(--ink-3);paint-order:stroke fill;
-  stroke:var(--map-bg);stroke-width:3.2px;stroke-linejoin:round}
-#atlas .threat-line{stroke:var(--ink-3);stroke-width:1.1;stroke-dasharray:4 3;opacity:.7;fill:none}
+.hint{font-family:var(--f-label);font-size:12px;color:var(--ink-3)}
+.hint .h-coarse{display:none}
+@media (pointer:coarse){.hint .h-fine{display:none}.hint .h-coarse{display:inline}}
+#atlas .div{stroke:var(--ink-3);stroke-width:.6;opacity:.35}
+#atlas .ringlab{font-family:var(--f-label);font-weight:600;font-size:13px}
+#atlas .ringlab .n{font-weight:400;fill:var(--ink-3)}
+#atlas .seclab{font-family:var(--f-label);font-size:9px;fill:var(--ink-2)}
+#atlas .corelab{font-family:var(--f-text);font-weight:700;font-size:18px;fill:var(--ink)}
+#atlas .coresub{font-family:var(--f-text);font-style:italic;font-size:11px;fill:var(--ink-3)}
+#atlas .threat{font-family:var(--f-text);font-style:italic;font-size:13px;fill:var(--ink-2)}
+#atlas .threat-line{stroke:var(--ink-2);stroke-width:1;stroke-dasharray:3 3;fill:none}
 #atlas .node{cursor:pointer}
-#atlas .node .halo{fill:var(--surface);stroke:var(--nc);stroke-width:1.4}
-#atlas .node .mono{font-family:var(--f-disp);font-weight:800;font-size:9px;fill:#fff;
+#atlas .node .halo{fill:var(--halo);stroke:var(--nc);stroke-width:1.2}
+#atlas .node .mono{font-family:var(--f-label);font-weight:700;font-size:8.5px;fill:#fff;
   text-anchor:middle}
-#atlas .node .gdot{fill:var(--nc)}
-#atlas .node:hover .halo{stroke-width:2.8}
-#atlas .node.dim{opacity:.15}
+#atlas .node .gdot{fill:var(--ink);stroke:var(--paper);stroke-width:1}
+#atlas .node:hover .halo{stroke-width:2.4}
+#atlas .node.dim{opacity:.13}
 #atlas .node.dim:hover{opacity:.6}
 
-.atlas-key{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-start;
-  margin-top:14px;padding:15px 17px;background:var(--surface);border:1px solid var(--line);
-  border-radius:11px}
-.kitem{display:flex;gap:9px;align-items:flex-start;min-width:184px;flex:1}
-.kitem .sw{width:11px;height:11px;border-radius:3px;flex:none;margin-top:3px}
-.kitem .kt{font-family:var(--f-disp);font-size:12.5px;font-weight:700;line-height:1.3}
-.kitem .kd{font-size:11.5px;color:var(--ink-3);line-height:1.45;margin-top:3px}
-.kitem .kd b{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-2);font-weight:500}
-.keynote{width:100%;border-top:1px solid var(--line);padding-top:12px;font-size:13px;
-  color:var(--ink-2);line-height:1.55}
-.keynote b{color:var(--ink);font-weight:600}
+.key{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:22px}
+.kitem{border-top:3px solid var(--kc);padding-top:9px}
+.kitem .kt{font-family:var(--f-label);font-weight:600;font-size:14px}
+.kitem .kt span{font-weight:400;color:var(--ink-3);margin-left:6px;font-variant-numeric:tabular-nums}
+.kitem .kd{font-size:15px;color:var(--ink-2);line-height:1.45;margin-top:4px}
+.keynote{grid-column:1/-1;margin:0;padding-top:14px;border-top:1px solid var(--hair);
+  font-size:16px;color:var(--ink-2);max-width:80ch}
+.keynote b{color:var(--ink)}
 
-/* ---------- jargon ---------- */
-details.jargon{margin:22px 0 0;max-width:78ch}
-details.jargon summary{font-family:var(--f-disp);font-size:13px;font-weight:600;
-  color:var(--accent);cursor:pointer;padding:5px 0;list-style:none;display:inline-flex;
-  align-items:center;gap:7px}
-details.jargon summary::-webkit-details-marker{display:none}
-details.jargon summary::before{content:"+";font-family:var(--f-mono);font-size:14px;
-  width:16px;height:16px;display:grid;place-items:center;border:1px solid var(--line-2);
-  border-radius:4px;color:var(--ink-2)}
-details.jargon[open] summary::before{content:"\2212"}
-.gl{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px 26px;
-  padding:10px 0 4px}
-.gl div{padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--ink-2)}
-.gl b{font-family:var(--f-disp);font-size:12.5px;font-weight:700;color:var(--ink);
-  display:block;margin-bottom:2px}
+.findings{margin-top:40px;border-top:1px solid var(--ink);padding-top:12px}
+ol.notes{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;
+  column-gap:36px}
+ol.notes li{padding:12px 0;border-bottom:1px solid var(--hair);font-size:16.5px;color:var(--ink-2)}
+ol.notes b{color:var(--ink)}
 
-/* ---------- chain (alt view) ---------- */
-.stages{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch}
-.arrow{display:grid;place-items:center;width:32px;color:var(--line-2)}
-.stage{background:var(--surface);border:1px solid var(--line);border-radius:13px;
-  overflow:hidden;display:flex;flex-direction:column}
-.stage-top{padding:14px 16px 13px;border-bottom:1px solid var(--line);
-  border-top:3px solid var(--sc);background:var(--surface-2)}
-.stage-top .row{display:flex;align-items:center;gap:9px}
-.stage-top .step{font-family:var(--f-mono);font-size:10.5px;color:var(--surface);
-  background:var(--sc);width:18px;height:18px;border-radius:5px;display:grid;
-  place-items:center;flex:none}
-.stage-top h3{font-size:16.5px;font-weight:700;letter-spacing:-.015em}
-.stage-top .ct{font-family:var(--f-mono);font-size:11px;color:var(--ink-2);margin-left:auto;
+details.terms{margin-top:30px;max-width:84ch}
+details>summary{font-family:var(--f-label);font-weight:600;font-size:14px;cursor:pointer;padding:6px 0}
+dl.gl{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 32px;margin:8px 0 0}
+dl.gl div{padding:10px 0;border-top:1px solid var(--hair)}
+dl.gl dt{font-family:var(--f-label);font-weight:600;font-size:13.5px}
+dl.gl dd{margin:2px 0 0;font-size:15px;color:var(--ink-2)}
+
+/* ---------- chain view ---------- */
+.stages{display:grid;grid-template-columns:repeat(3,1fr);gap:0 28px;margin-top:10px}
+.stage,.found{border-top:3px solid var(--sc);padding-top:10px}
+.found{margin-top:36px}
+.st-h{display:flex;align-items:baseline;gap:9px}
+.st-h .step{font-family:var(--f-label);font-weight:600;font-size:13px;color:var(--sc)}
+.st-h h3{font-size:23px}
+.st-h .ct{margin-left:auto;font-family:var(--f-label);font-size:13px;color:var(--ink-3);
   font-variant-numeric:tabular-nums;white-space:nowrap}
-.stage-top .gloss{font-size:13px;color:var(--ink-2);margin:7px 0 0;line-height:1.45}
-.bar{height:3px;background:var(--surface-3);border-radius:2px;margin-top:11px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--sc);border-radius:2px}
-.blocks{padding:2px 15px 14px}
-.block{padding:13px 0 4px}
-.block+.block{border-top:1px dashed var(--line)}
-.block .bh{display:flex;align-items:baseline;gap:8px;margin-bottom:9px}
-.block .bh .bl{font-family:var(--f-disp);font-size:11.5px;font-weight:700;color:var(--ink-2)}
-.block .bh .bn{font-family:var(--f-mono);font-size:10px;color:var(--ink-3);margin-left:auto;
+.gloss{font-style:italic;color:var(--ink-2);font-size:15.5px;margin:4px 0 10px}
+.bar{height:3px;background:var(--hair);margin:0 0 4px}
+.bar i{display:block;height:100%;background:var(--sc)}
+.block{padding:12px 0 6px;border-top:1px solid var(--hair)}
+.bh{display:flex;gap:8px;align-items:baseline;margin-bottom:6px;font-family:var(--f-label);
+  font-size:12.5px}
+.bh .bl{font-weight:600;color:var(--ink-2)}
+.bh .bn{margin-left:auto;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.tiles{display:flex;flex-direction:column}
+.tile{display:flex;align-items:center;gap:9px;background:none;border:0;padding:3px 0;
+  text-align:left;cursor:pointer;font-family:var(--f-text);font-size:15px;line-height:1.3}
+.tile:hover span{text-decoration:underline;text-underline-offset:2px}
+.tile.dim{opacity:.25}
+.tile .gc{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--ink);
+  margin-left:5px;vertical-align:middle}
+.lg{width:18px;height:18px;flex:none;display:grid;place-items:center;background:#fff;
+  border:1px solid var(--hair);overflow:hidden;border-radius:2px}
+.lg img{width:14px;height:14px;object-fit:contain;display:block}
+.lg.mo{font-family:var(--f-label);font-size:7.5px;font-weight:700;color:#fff;border-color:transparent}
+.thin-note{font-size:14.5px;font-style:italic;color:var(--ink-3);border-top:1px solid var(--hair);
+  padding-top:10px;margin:8px 0 0}
+.found-blocks{display:grid;grid-template-columns:repeat(4,1fr);gap:0 28px}
+
+/* ---------- charts ---------- */
+.chart{margin-top:22px;border-top:1px solid var(--ink);padding-top:12px}
+.rows{display:flex;flex-direction:column;gap:5px}
+.brow{display:grid;grid-template-columns:210px 1fr 36px;gap:12px;align-items:center;
+  font-family:var(--f-label);font-size:13px}
+.brow .lab{text-align:right;line-height:1.25}
+.brow .track{height:13px}
+.brow .fill{display:block;height:100%;background:var(--seq)}
+.brow.thin .fill{background:color-mix(in oklab,var(--seq) 45%,var(--paper))}
+.brow .v{color:var(--ink-2);font-variant-numeric:tabular-nums}
+.axis{display:grid;grid-template-columns:210px 1fr 36px;gap:12px;margin-top:8px}
+.axis .sc{grid-column:2;display:flex;justify-content:space-between;font-family:var(--f-label);
+  font-size:11.5px;color:var(--ink-3);border-top:1px solid var(--ink);padding-top:4px}
+.pair{display:grid;grid-template-columns:1fr 160px 32px;gap:14px;align-items:center;
+  padding:8px 0;border-bottom:1px solid var(--hair);font-size:15.5px}
+.pair .p1 em{font-style:normal;color:var(--ink-3);padding:0 6px}
+.pair .track{height:8px}
+.pair .fill{display:block;height:100%;background:var(--seq)}
+.pair .v{font-family:var(--f-label);font-size:13px;color:var(--ink-2);text-align:right;
   font-variant-numeric:tabular-nums}
-.tiles{display:flex;flex-wrap:wrap;gap:5px}
-.tile{font-family:var(--f-disp);font-size:11.5px;font-weight:600;padding:4px 9px 4px 5px;
-  border-radius:8px;border:1px solid color-mix(in oklab,var(--tc) 30%,var(--surface));
-  background:color-mix(in oklab,var(--tc) 8%,var(--surface));color:var(--ink);cursor:pointer;
-  display:inline-flex;align-items:center;gap:7px;max-width:100%;text-align:left;
-  line-height:1.25;transition:transform .09s ease,opacity .09s ease}
-.tile:hover{border-color:var(--tc);transform:translateY(-1px)}
-.tile.dim{opacity:.22;filter:saturate(.15)}
-.lg{width:24px;height:24px;border-radius:6px;background:#fff;flex:none;display:grid;
-  place-items:center;overflow:hidden;border:1px solid rgba(0,0,0,.12)}
-.lg img{width:17px;height:17px;object-fit:contain;display:block}
-.lg.mo{font-family:var(--f-disp);font-size:9.5px;font-weight:800;color:#fff;border-color:transparent}
-.tile .gc{width:5px;height:5px;border-radius:50%;background:var(--tc);flex:none}
-.thin-note{margin:15px 0 0;padding:11px 0 2px;border-top:1px dashed var(--line);
-  font-size:12.5px;line-height:1.5;color:var(--ink-3)}
-.tie svg{display:block;width:100%;height:20px;color:var(--line-2)}
-.found{background:var(--surface);border:1px solid var(--line);border-radius:13px;overflow:hidden}
-.found-blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr))}
-.fb{padding:0 16px 14px;border-right:1px dashed var(--line)}
-.fb:last-child{border-right:0}
+.prose{max-width:70ch;margin-top:24px}
+.prose p{margin:0 0 12px;color:var(--ink-2);font-size:16.5px}
+.prose b{color:var(--ink)}
 
-/* ---------- findings ---------- */
-.findings{margin:34px 0 0}
-.findings h3{font-size:17px;font-weight:700;letter-spacing:-.015em;margin-bottom:14px}
-.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:1px;
-  background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.fcard{background:var(--surface);padding:16px 17px 17px}
-.fcard .n{font-family:var(--f-disp);font-size:27px;font-weight:800;letter-spacing:-.025em;
-  line-height:1;font-variant-numeric:tabular-nums}
-.fcard .t{font-size:13px;color:var(--ink-2);margin-top:8px;line-height:1.5}
-.fcard .t b{color:var(--ink);font-weight:600}
-
-/* ---------- lead charts ---------- */
-.sec-head{max-width:76ch;margin:30px 0 20px}
-.sec-head h2{font-size:23px;font-weight:700;letter-spacing:-.022em;line-height:1.2;
-  margin-bottom:10px}
-.sec-head p{font-size:15.5px;color:var(--ink-2);margin:0 0 9px;line-height:1.6}
-.sec-head p strong{color:var(--ink);font-weight:600}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:13px;
-  padding:20px 22px 22px}
-.panel>h4{font-size:14px;font-weight:700;margin-bottom:3px}
-.panel>.cap{font-size:12.5px;color:var(--ink-3);margin:0 0 18px}
-.rows{display:flex;flex-direction:column;gap:7px}
-.brow{display:grid;grid-template-columns:190px 1fr 34px;gap:12px;align-items:center}
-.brow .lab{font-family:var(--f-disp);font-size:12.5px;text-align:right;line-height:1.25}
-.brow .track{height:15px;background:var(--surface-3);border-radius:0 4px 4px 0}
-.brow .fill{height:100%;background:var(--seq);border-radius:0 4px 4px 0;display:block}
-.brow .v{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);
+/* ---------- grids ---------- */
+details.deep{margin-top:26px;border-top:1px solid var(--ink);padding-top:6px}
+.mx-note{font-size:15px;color:var(--ink-2);max-width:70ch;margin:8px 0 14px}
+.mx-scroll{overflow-x:auto}
+table.mx{border-collapse:separate;border-spacing:1px;font-family:var(--f-label);font-size:11.5px;
   font-variant-numeric:tabular-nums}
-.brow.thin .fill{background:color-mix(in oklab,var(--seq) 55%,var(--surface-3))}
-.axis{display:grid;grid-template-columns:190px 1fr 34px;gap:12px;margin-top:9px}
-.axis .sc{grid-column:2;display:flex;justify-content:space-between;
-  font-family:var(--f-mono);font-size:10px;color:var(--ink-3);border-top:1px solid var(--line);
-  padding-top:5px}
-.pair{display:grid;grid-template-columns:1fr 120px 30px;gap:14px;align-items:center;
-  padding:9px 0;border-bottom:1px solid var(--line)}
-.pair:last-child{border-bottom:0}
-.pair .p1{font-size:13.5px;line-height:1.35}
-.pair .p1 em{font-style:normal;color:var(--ink-3);font-family:var(--f-mono);font-size:11px;
-  padding:0 5px}
-.pair .track{height:8px;background:var(--surface-3);border-radius:4px}
-.pair .fill{height:100%;background:var(--seq);border-radius:4px;display:block}
-.pair .v{font-family:var(--f-mono);font-size:11.5px;color:var(--ink-2);text-align:right;
-  font-variant-numeric:tabular-nums}
-.callouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:12px;
-  margin-top:20px}
-.co{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--seq);
-  border-radius:5px 11px 11px 5px;padding:14px 16px}
-.co .h{font-family:var(--f-disp);font-size:12.5px;font-weight:700;margin-bottom:5px}
-.co .b{font-size:13px;color:var(--ink-2);line-height:1.5}
-.co .b b{color:var(--ink);font-weight:600}
-
-/* ---------- disclosure ---------- */
-details.deep{margin-top:26px;border:1px solid var(--line);border-radius:12px;
-  background:var(--surface);overflow:hidden}
-details.deep>summary{font-family:var(--f-disp);font-size:13.5px;font-weight:600;
-  padding:14px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px}
-details.deep>summary::-webkit-details-marker{display:none}
-details.deep>summary::before{content:"+";font-family:var(--f-mono);font-size:14px;
-  width:18px;height:18px;display:grid;place-items:center;border:1px solid var(--line-2);
-  border-radius:5px;color:var(--ink-2);flex:none}
-details.deep[open]>summary::before{content:"\2212"}
-details.deep>summary .hint{font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3);
-  margin-left:auto;font-weight:400}
-.deep-body{padding:4px 18px 20px;border-top:1px solid var(--line)}
-.deep-body>p.mx-note{font-size:13px;color:var(--ink-2);max-width:70ch;margin:16px 0;
-  line-height:1.55}
-
-/* ---------- matrices ---------- */
-.mx-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
-table.mx{border-collapse:separate;border-spacing:2px;padding:11px;font-family:var(--f-mono);
-  font-size:11px;font-variant-numeric:tabular-nums}
 table.mx th{font-weight:400;color:var(--ink-2);text-align:left}
 table.mx thead th{vertical-align:bottom;padding:0 0 6px}
-table.mx thead th.rot{height:200px;width:30px;padding:0}
-table.mx thead th.rot>div{writing-mode:vertical-rl;transform:rotate(180deg);
-  white-space:nowrap;font-size:10.5px;padding-bottom:5px}
-table.mx tbody th{padding:0 10px 0 4px;white-space:nowrap;font-size:11px}
-table.mx td{width:30px;height:26px;text-align:center;border-radius:4px;color:var(--ink);
-  font-size:10.5px}
-table.mx td.z{color:var(--ink-3);background:var(--surface);
-  background-image:radial-gradient(circle at 1px 1px,var(--line-2) .6px,transparent .6px);
-  background-size:4px 4px}
-table.mx td.diag{background:var(--surface-2);color:var(--ink-3);
-  background-image:linear-gradient(135deg,transparent 44%,var(--line-2) 44%,var(--line-2) 56%,transparent 56%)}
-table.mx td:hover{box-shadow:0 0 0 2px var(--ink-3)}
-table.mx .tot{background:transparent;color:var(--ink-2);border-left:1px solid var(--line);width:38px}
-table.mx tfoot th{padding-top:6px;font-size:10.5px;text-align:center}
+table.mx thead th.rot{height:190px;width:30px;padding:0}
+table.mx thead th.rot>div{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;
+  padding-bottom:6px}
+table.mx tbody th{padding:0 12px 0 0;white-space:nowrap}
+table.mx td{width:30px;height:26px;text-align:center;color:var(--ink)}
+table.mx td.z{color:var(--ink-3)}
+table.mx td.diag{background:var(--tint);font-weight:600}
+table.mx td:hover{outline:1.5px solid var(--ink)}
+table.mx .tot{color:var(--ink-2);border-left:1px solid var(--hair);width:40px}
+table.mx tfoot th{padding-top:6px;text-align:center;border-top:1px solid var(--ink)}
 table.mx tfoot th:first-child{text-align:left}
-.ramp{display:flex;align-items:center;gap:9px;margin:13px 0 0;font-family:var(--f-mono);
-  font-size:10.5px;color:var(--ink-3);flex-wrap:wrap}
-.ramp .steps{display:flex;gap:2px}
-.ramp .steps i{width:24px;height:11px;border-radius:2px;display:block}
-.ramp .zc{width:24px;height:11px;border-radius:2px;background:var(--surface);
-  background-image:radial-gradient(circle at 1px 1px,var(--line-2) .6px,transparent .6px);
-  background-size:4px 4px;border:1px solid var(--line);display:block}
+.ramp{display:flex;align-items:center;gap:8px;margin-top:12px;font-family:var(--f-label);
+  font-size:12px;color:var(--ink-3);flex-wrap:wrap}
+.ramp .steps{display:flex;gap:1px}
+.ramp .steps i{width:22px;height:10px;display:block}
 
 #tip{position:fixed;z-index:90;pointer-events:none;opacity:0;transition:opacity .1s;
-  background:var(--ink);color:var(--bg);font-family:var(--f-mono);font-size:11px;
-  padding:6px 9px;border-radius:6px;max-width:260px;line-height:1.45;left:0;top:0}
+  background:var(--ink);color:var(--paper);font-family:var(--f-label);font-size:12px;
+  padding:6px 9px;max-width:260px;line-height:1.4;left:0;top:0}
 
-/* ---------- drawer ---------- */
-.scrim{position:fixed;inset:0;background:rgba(9,12,17,.44);z-index:60;opacity:0;
+/* ---------- detail drawer ---------- */
+.scrim{position:fixed;inset:0;background:rgba(20,20,18,.28);z-index:60;opacity:0;
   pointer-events:none;transition:opacity .16s}
 .scrim.on{opacity:1;pointer-events:auto}
-.drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,93vw);background:var(--surface);
-  border-left:1px solid var(--line);z-index:70;transform:translateX(101%);
-  transition:transform .2s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
-.drawer.on{transform:translateX(0)}
-.dr-top{padding:18px 20px 15px;border-bottom:1px solid var(--line);
-  border-top:3px solid var(--dc);background:var(--surface-2);position:relative}
-.dr-id{display:flex;align-items:center;gap:11px;padding-right:34px}
-.dr-id .lg{width:38px;height:38px;border-radius:9px}
-.dr-id .lg img{width:26px;height:26px}
-.dr-id .lg.mo{font-size:14px}
-.dr-top h2{font-size:19px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
-.dr-top .eyebrow{display:block;margin-top:9px}
-.dr-close{position:absolute;top:14px;right:16px;width:28px;height:28px}
-.dr-body{padding:18px 20px 32px;overflow-y:auto;flex:1}
-.dr-body .desc{font-size:14.5px;line-height:1.62;margin:0 0 20px}
-.field{margin-bottom:15px}
-.field .eyebrow{margin-bottom:6px;display:block}
-.chips{display:flex;flex-wrap:wrap;gap:4px}
-.chip{font-family:var(--f-mono);font-size:10.5px;padding:3px 7px;border-radius:5px;
-  background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2)}
-.chip.on{background:color-mix(in oklab,var(--accent) 14%,var(--surface));
-  border-color:color-mix(in oklab,var(--accent) 40%,var(--surface));color:var(--ink)}
-.field p{margin:0;font-size:13.5px;color:var(--ink-2)}
-.visit{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-disp);font-size:13px;
-  font-weight:600;padding:9px 14px;border-radius:8px;background:var(--accent);
-  color:var(--accent-ink);text-decoration:none;margin-top:6px}
+.drawer{position:fixed;top:0;right:0;height:100%;width:min(460px,94vw);background:var(--paper);
+  border-left:1px solid var(--ink);z-index:70;transform:translateX(101%);
+  transition:transform .2s ease;display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.dr-top{padding:20px 22px 14px;border-top:5px solid var(--dc);border-bottom:1px solid var(--hair);
+  position:relative}
+.dr-id{display:flex;align-items:center;gap:12px;padding-right:56px}
+.dr-id .lg{width:34px;height:34px}
+.dr-id .lg img{width:24px;height:24px}
+.dr-id .lg.mo{font-size:12px}
+.dr-top h2{font-size:24px;line-height:1.15}
+.trail{display:block;margin-top:10px;font-family:var(--f-label);font-size:12.5px;color:var(--ink-3)}
+.dr-close{position:absolute;top:16px;right:20px;font-family:var(--f-label);font-size:13px;
+  background:none;border:0;cursor:pointer;color:var(--ink-2);text-decoration:underline;
+  text-underline-offset:2px}
+.dr-body{padding:16px 22px 32px;overflow-y:auto;flex:1}
+.dr-body .desc{font-size:16.5px;line-height:1.6;margin:0 0 18px}
+dl.facts{margin:0}
+dl.facts div{padding:9px 0;border-top:1px solid var(--hair)}
+dl.facts dt{font-family:var(--f-label);font-size:12px;font-weight:600;color:var(--ink-3)}
+dl.facts dd{margin:2px 0 0;font-size:15px}
+.visit{display:inline-block;margin-top:16px;font-family:var(--f-label);font-weight:600;font-size:14px}
 
-footer{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);
-  font-size:12.5px;color:var(--ink-3);line-height:1.65;max-width:82ch}
-footer a{text-decoration:underline;text-underline-offset:2px}
-footer strong{color:var(--ink-2)}
-footer .cav{margin-top:11px}
+footer{margin-top:60px;padding:16px 0 60px;border-top:1px solid var(--ink);font-size:14.5px;
+  color:var(--ink-2);max-width:72ch}
+footer p{margin:0 0 10px}
+footer b{color:var(--ink)}
 
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 @media (max-width:960px){
-  .stages{grid-template-columns:1fr;gap:11px}
-  .arrow{width:auto;height:26px;transform:rotate(90deg)}
+  .mast h1{font-size:32px}
+  .dek{font-size:17px}
+  .key{grid-template-columns:1fr 1fr}
+  ol.notes{grid-template-columns:1fr}
+  .stages{grid-template-columns:1fr;gap:26px}
+  .found-blocks{grid-template-columns:1fr 1fr}
   .brow,.axis{grid-template-columns:130px 1fr 32px}
-  .pair{grid-template-columns:1fr 70px 28px}
-  .mast-in .src{display:none}
-  .mast-right{margin-left:0;min-width:0;max-width:100%}
-  .tabs{min-width:0;overflow-x:auto}
+  .pair{grid-template-columns:1fr 80px 28px}
+  .status{margin-left:0;width:100%}
   svg#atlas{max-height:none}
+}
+@media (max-width:560px){
+  .wrap{padding:0 16px}
+  .key,.found-blocks{grid-template-columns:1fr}
+  .tabs{flex-wrap:wrap;gap:0 18px;overflow:visible}
+  .tab{font-size:13.5px;padding:9px 0 7px}
+  .theme{right:16px}
+  .atlas .tools{position:static;flex-direction:row;justify-content:flex-end}
 }
 </style>
 
 <header class="mast">
-  <div class="mast-in">
+  <div class="wrap">
+    <button class="theme" id="themeBtn">Dark mode</button>
     <h1>The Biosecurity Defence Chain</h1>
-    <p class="src">__COUNT__ organisations, from the open dataset at
-      <a href="https://biosecurity.world/" target="_blank" rel="noopener">biosecurity.world</a></p>
-    <div class="mast-right">
+    <p class="dek">The __COUNT__ organisations in the
+      <a href="https://biosecurity.world/" target="_blank" rel="noopener">biosecurity.world</a>
+      dataset, arranged by where they act against a pandemic.</p>
+    <div class="navrow">
       <div class="tabs" role="tablist" aria-label="View">
         <button class="tab" role="tab" aria-selected="true" data-view="atlas">The map</button>
         <button class="tab" role="tab" aria-selected="false" data-view="chain">Chain view</button>
         <button class="tab" role="tab" aria-selected="false" data-view="gaps">Where the gaps are</button>
         <button class="tab" role="tab" aria-selected="false" data-view="links">How topics connect</button>
       </div>
-      <button class="icon-btn" id="themeBtn" title="Switch theme" aria-label="Switch theme">&#9686;</button>
     </div>
   </div>
 </header>
 
-<div class="wrap">
+<main class="wrap">
 
   <div class="fbar" role="group" aria-label="Filters">
-    <span class="eyebrow">Narrow to</span>
-    <span class="search">
-      <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7">
-        <circle cx="6.8" cy="6.8" r="4.6"></circle><path d="M10.3 10.3 14 14"></path></svg>
-      <input id="q" type="search" placeholder="Search by name" aria-label="Search by name">
-    </span>
-    <select class="fsel" id="fAct" aria-label="What they do"><option value="">Anything they do</option></select>
-    <select class="fsel" id="fFoc" aria-label="Topic"><option value="">Any topic</option></select>
-    <select class="fsel" id="fType" aria-label="Kind of organisation"><option value="">Any kind of organisation</option></select>
-    <select class="fsel" id="fLoc" aria-label="Where"><option value="">Anywhere</option></select>
+    <span class="flabel">Filter</span>
+    <input id="q" type="search" placeholder="Search" aria-label="Search names and descriptions">
+    <select id="fAct" aria-label="What they do"><option value="">Any activity</option></select>
+    <select id="fFoc" aria-label="Topic"><option value="">Any topic</option></select>
+    <select id="fType" aria-label="Kind of organisation"><option value="">Any type</option></select>
+    <select id="fLoc" aria-label="Where"><option value="">Anywhere</option></select>
     <button class="toggle" id="fGcbr" aria-pressed="false">Worst-case risk only</button>
-    <button class="clear" id="clearBtn" hidden>Reset</button>
+    <button class="clear" id="clearBtn" hidden>Clear filters</button>
     <span class="status" id="status"></span>
   </div>
 
@@ -400,44 +321,46 @@ footer .cav{margin-top:11px}
       catching what the last one missed. A threat has to cross <strong>three</strong> of them to
       reach the people at the centre: Prevention, then Detection, then Response. The further out a
       barrier sits, the earlier it acts.</p>
-    <p>The dashed outer ring is not a barrier. It is the <strong>shared foundation</strong> the
-      three stand on: funders, educators, coordinators and reporters.</p>
+    <p>The dashed outer ring is not a barrier. It is the <strong>foundation</strong> the three
+      rely on: funders, educators, coordinators and reporters.</p>
     <p>Every dot is one of the __COUNT__ organisations in the field, placed once, on the ring of
       its main mission.</p>
   </div>
 
-  <div class="atlas-shell">
+  <figure class="atlas">
     <div class="tools">
       <button id="zIn" aria-label="Zoom in">+</button>
       <button id="zOut" aria-label="Zoom out">&minus;</button>
-      <button id="zRe" class="wide" aria-label="Reset view">RST</button>
+      <button id="zRe" aria-label="Reset view">Reset</button>
     </div>
     <svg id="atlas" viewBox="0 0 880 880" role="img"
-      aria-label="Concentric map of __COUNT__ biosecurity organisations: three defensive barriers around the population at the centre, inside an outer ring for the foundation they stand on"></svg>
-    <div class="atlas-hint"><span class="h-fine">Ctrl or &#8984; + scroll to zoom &middot; drag to pan &middot; click a dot</span><span class="h-coarse">+ and &minus; to zoom &middot; tap a dot</span></div>
-  </div>
+      aria-label="Concentric map of __COUNT__ biosecurity organisations: three defensive barriers around the population at the centre, inside an outer ring for the foundation they rely on"></svg>
+    <figcaption class="hint"><span class="h-fine">Ctrl or &#8984; + scroll to zoom, drag to pan,
+      click a dot for details.</span><span class="h-coarse">Use + and &minus; to zoom. Tap a dot
+      for details.</span></figcaption>
+  </figure>
 
-  <div class="atlas-key" id="atlasKey"></div>
+  <div class="key" id="atlasKey"></div>
 
-  <div class="findings">
-    <h3>What the map shows once you look</h3>
-    <div class="fgrid" id="findings"></div>
-  </div>
+  <section class="findings">
+    <h3 class="sh">What the map shows</h3>
+    <ol class="notes" id="findings"></ol>
+  </section>
 
-  <details class="jargon">
-    <summary>New to the terminology? Five phrases that unlock most of it</summary>
-    <div class="gl">
-      <div><b>GCBR</b>Global catastrophic biological risk &mdash; a pandemic bad enough to
-        permanently derail civilisation, not just a severe outbreak.</div>
-      <div><b>Dual-use research of concern</b>Legitimate research that could also be repurposed
-        to cause harm. The reason some biology is published carefully.</div>
-      <div><b>Medical countermeasures</b>Vaccines, drugs, diagnostics &mdash; the medical tools
-        used against an outbreak.</div>
-      <div><b>Non-medical countermeasures</b>Everything else that blunts spread: clean indoor
-        air, protective equipment, distancing.</div>
-      <div><b>Pathogen surveillance</b>Systematically watching for dangerous pathogens in
-        people, animals, air or wastewater, to catch an outbreak early.</div>
-    </div>
+  <details class="terms">
+    <summary>Terms used on this page</summary>
+    <dl class="gl">
+      <div><dt>GCBR</dt><dd>Global catastrophic biological risk: a biological event bad enough to
+        do lasting damage to civilisation, beyond a severe outbreak.</dd></div>
+      <div><dt>Dual-use research of concern</dt><dd>Legitimate research that could also be used to
+        cause harm. It is why some biology is published with care.</dd></div>
+      <div><dt>Medical countermeasures</dt><dd>Vaccines, drugs and diagnostics, the medical tools
+        used against an outbreak.</dd></div>
+      <div><dt>Non-medical countermeasures</dt><dd>Other ways to slow spread, such as clean indoor
+        air, protective equipment and distancing.</dd></div>
+      <div><dt>Pathogen surveillance</dt><dd>Watching for dangerous pathogens in people, animals,
+        air or wastewater, to catch an outbreak early.</dd></div>
+    </dl>
   </details>
 </section>
 
@@ -445,12 +368,10 @@ footer .cav{margin-top:11px}
 <section id="view-chain" hidden>
   <div class="sec-head">
     <h2>The same field, as a chain</h2>
-    <p>The map arranged as barriers; this is the same four groups laid out left to right, in the
-      order a threat meets them, with every organisation named. Easier to read down a list,
-      harder to see the shape of.</p>
+    <p>The same organisations as the map, laid out in the order a threat meets them, with every
+      name listed.</p>
   </div>
   <div class="stages" id="stages"></div>
-  <div class="tie" id="tie"></div>
   <div id="found"></div>
 </section>
 
@@ -458,29 +379,24 @@ footer .cav{margin-top:11px}
 <section id="view-gaps" hidden>
   <div class="sec-head">
     <h2>Where the gaps are</h2>
-    <p>A directory tells you who exists. It cannot tell you <strong>what is missing</strong> &mdash;
-      and for someone deciding where to work or give, that is usually the more useful question.</p>
-    <p>Start with the simple version: how many organisations work on each topic. The long bars are
-      crowded topics. The short ones are where a single new organisation would move the needle most.</p>
+    <p>A directory shows who exists. This view shows which topics few organisations work on,
+      which is often more useful if you are deciding where to work or give.</p>
+    <p>A short bar may mean a real gap, or a gap in the dataset's coverage.</p>
   </div>
-  <div class="panel">
-    <h4>Organisations per topic</h4>
-    <p class="cap">Each organisation can work on several topics, so these add up to more than __COUNT__.</p>
+  <div class="chart">
+    <h3 class="sh">Organisations per topic</h3>
+    <p class="cap">Organisations can work on several topics, so these add up to more than __COUNT__.</p>
     <div class="rows" id="topicBars"></div>
     <div class="axis"><div class="sc" id="topicAxis"></div></div>
   </div>
-  <div class="callouts" id="gapCallouts"></div>
+  <div class="prose" id="gapCallouts"></div>
   <details class="deep">
-    <summary>Show the full grid: every topic against every kind of work
-      <span class="hint">detailed view</span></summary>
-    <div class="deep-body">
-      <p class="mx-note">The same data, uncompressed. Rows are topics, columns are kinds of work,
-        and each cell counts the organisations doing both. Darker means more. The
-        <strong>dotted cells are the point</strong>: combinations nobody in the dataset covers
-        at all. Hover any cell for its exact figure.</p>
-      <div class="mx-scroll"><div id="mxGaps"></div></div>
-      <div class="ramp" id="rampGaps"></div>
-    </div>
+    <summary>Show the full grid of topics against types of work</summary>
+    <p class="mx-note">Rows are topics and columns are types of work. Each cell counts the
+      organisations doing both, and darker cells have more. A dash means none. Hover a cell for
+      its figure.</p>
+    <div class="mx-scroll"><div id="mxGaps"></div></div>
+    <div class="ramp" id="rampGaps"></div>
   </details>
 </section>
 
@@ -488,56 +404,50 @@ footer .cav{margin-top:11px}
 <section id="view-links" hidden>
   <div class="sec-head">
     <h2>How topics connect</h2>
-    <p>Topics are not worked on in isolation. When one organisation covers two of them, that says
-      something about how the field actually divides up &mdash; and it tells a newcomer
-      <strong>which topics they will end up learning together</strong>.</p>
-    <p>These are the pairs of topics most often held by the same organisation.</p>
+    <p>When one organisation works on two topics, those topics are linked. These are the pairs
+      most often worked on by the same organisations, which says something about how the field
+      divides its work.</p>
   </div>
-  <div class="panel">
-    <h4>Topics most often worked on together</h4>
-    <p class="cap">Read as: this many organisations work on both.</p>
+  <div class="chart">
+    <h3 class="sh">Topics most often worked on together</h3>
+    <p class="cap">The number is how many organisations work on both.</p>
     <div id="pairList"></div>
   </div>
-  <div class="callouts" id="linkCallouts"></div>
+  <div class="prose" id="linkCallouts"></div>
   <details class="deep">
-    <summary>Show the full grid: every topic against every other topic
-      <span class="hint">detailed view</span></summary>
-    <div class="deep-body">
-      <p class="mx-note">Every topic against every other. Rows and columns are ordered by
-        similarity, so related topics end up next to each other and the field's natural clusters
-        gather into blocks along the diagonal. The hatched diagonal is each topic's own total.</p>
-      <div class="mx-scroll"><div id="mxOverlap"></div></div>
-      <div class="ramp" id="rampOverlap"></div>
-    </div>
+    <summary>Show the full grid of topics against each other</summary>
+    <p class="mx-note">Rows and columns are ordered so that topics often worked on together sit
+      next to each other. The shaded diagonal is each topic's total.</p>
+    <div class="mx-scroll"><div id="mxOverlap"></div></div>
+    <div class="ramp" id="rampOverlap"></div>
   </details>
 </section>
 
 <footer>
-  <strong>Prototype.</strong> Built on the open dataset published by
+  <p><b>About the data.</b> This map is a prototype built on the open dataset published by
   <a href="https://biosecurity.world/" target="_blank" rel="noopener">biosecurity.world</a>
   (<a href="https://biosecurity.world/data/entries.csv" target="_blank" rel="noopener">entries.csv</a>,
   <a href="https://github.com/biosecurity-world/biosecurity.world" target="_blank" rel="noopener">source</a>),
-  which is the maintained and authoritative version of this landscape. Newsletters and podcasts
-  listed there are left out: they are publications rather than organisations, and most repeat an
+  the maintained and authoritative version of this landscape. Newsletters and podcasts listed
+  there are left out, because they are publications rather than organisations and most repeat an
   organisation already on the map. Logos are each organisation's own favicon, shown for
-  identification.
-  <div class="cav"><strong>Reading caveats.</strong> The rings are a diagram, not geography &mdash;
-  where a dot sits <em>within</em> a ring carries no meaning, only which ring it is in. Each
-  organisation is placed once, at its primary classification in the dataset, so layer counts here
-  run lower than those on biosecurity.world, which lists an organisation under every stage it
-  touches. Counts reflect who is <em>catalogued</em> &mdash; not budget, headcount or output. A
-  sparse ring may mean a genuine gap, a gap in the dataset's coverage, or a layer where a few very
-  large institutions do most of the work.</div>
+  identification.</p>
+  <p><b>Reading the map.</b> The rings are a diagram, not geography. Where a dot sits within a
+  ring means nothing, only which ring it is in. Each organisation appears once, at its main
+  classification in the dataset, so ring counts run lower than on biosecurity.world, which lists
+  an organisation under every stage it touches. Counts show who is catalogued, not budget, staff
+  or output. A sparse ring may be a real gap, a gap in the dataset, or a layer where a few large
+  institutions do most of the work.</p>
 </footer>
-</div>
+</main>
 
 <div id="tip" role="status" aria-live="polite"></div>
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-label="Organisation detail" aria-hidden="true" inert>
   <div class="dr-top" id="drTop">
     <div class="dr-id"><span id="drLogo"></span><h2 id="drName"></h2></div>
-    <span class="eyebrow" id="drTrail"></span>
-    <button class="icon-btn dr-close" id="drClose" aria-label="Close">&times;</button>
+    <span class="trail" id="drTrail"></span>
+    <button class="dr-close" id="drClose">Close</button>
   </div>
   <div class="dr-body" id="drBody"></div>
 </aside>
@@ -562,9 +472,8 @@ const LAYERS=[
   blurb:"The outer barrier. Stopping a dangerous agent from ever being made or released.",
   subs:[["Preventing production & release","Made or released"],
         ["Controlling knowledge","Know-how"],["","Across the layer"]]},
- {key:"Transversal",rows:2,c:"var(--trans)",v:"--trans",name:"The shared foundation",
-  short:"FOUNDATION",
-  blurb:"Not a barrier itself, but what keeps the other three standing: funders, educators, coordinators, reporters.",
+ {key:"Transversal",rows:2,c:"var(--trans)",v:"--trans",name:"Foundation",
+  blurb:"Not a barrier. The funders, educators, coordinators and reporters the other three rely on.",
   subs:[["Information","Reporting"],["Education","Training"],
         ["Financing","Funding"],["Coordination","Convening"]]}
 ];
@@ -577,9 +486,11 @@ const LOCS=[...new Set(ORGS.flatMap(o=>o.loc))].sort();
 const state={q:"",act:"",foc:"",type:"",loc:"",gcbr:false,view:"atlas"};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+/* lower-case a label for use mid-sentence, leaving acronyms like "AI x Bio" alone */
+const lc=s=>/^[A-Z][a-z]/.test(s)?s[0].toLowerCase()+s.slice(1):s;
 const colorOf=k=>k==="Prevention"?"var(--prev)":k==="Detection"?"var(--det)":
   k==="Response"?"var(--resp)":"var(--trans)";
-const layerName=k=>k==="Transversal"?"The shared foundation":k;
+const layerName=k=>k==="Transversal"?"Foundation":k;
 const byId={}; ORGS.forEach(o=>{byId[o.id]=o});
 
 /* which barrier has the fewest organisations by main mission, and how many
@@ -668,19 +579,17 @@ function buildAtlas(){
   for(let i=geo.length-1;i>=0;i--){
     const g=geo[i], L=g.L;
     camG.appendChild(mk("circle",{cx:CX,cy:CY,r:g.outer,
-      fill:"color-mix(in oklab,var("+L.v+") 7%,var(--map-bg))",
-      stroke:"color-mix(in oklab,var("+L.v+") 34%,var(--map-bg))","stroke-width":1,
-      "stroke-dasharray":L.key==="Transversal"?"5 4":"none"}));
+      fill:"color-mix(in oklab,var("+L.v+") 8%,var(--paper))",
+      stroke:"color-mix(in oklab,var("+L.v+") 55%,var(--paper))","stroke-width":.8,
+      "stroke-dasharray":L.key==="Transversal"?"4 3":"none"}));
   }
-  geo.forEach(g=>g.radii.forEach(rr=>
-    camG.appendChild(mk("circle",{cx:CX,cy:CY,r:rr,class:"grid"}))));
 
   /* core */
-  camG.appendChild(mk("circle",{cx:CX,cy:CY,r:CORE,fill:"var(--map-core)",
-    stroke:"var(--line-2)","stroke-width":1}));
-  const c1=mk("text",{x:CX,y:CY-3,class:"corelab","text-anchor":"middle"});
+  camG.appendChild(mk("circle",{cx:CX,cy:CY,r:CORE,fill:"var(--paper)",
+    stroke:"var(--hair-2)","stroke-width":.8}));
+  const c1=mk("text",{x:CX,y:CY-2,class:"corelab","text-anchor":"middle"});
   c1.textContent="People"; camG.appendChild(c1);
-  [["what every layer",13],["is protecting",24]].forEach(p=>{
+  [["what every layer",14],["is protecting",26]].forEach(p=>{
     const t=mk("text",{x:CX,y:CY+p[1],class:"coresub","text-anchor":"middle"});
     t.textContent=p[0]; camG.appendChild(t);
   });
@@ -699,7 +608,7 @@ function buildAtlas(){
       "L"+(hb[0]-ux*5).toFixed(1)+" "+(hb[1]-uy*5).toFixed(1)}));
   /* level, just left of where the arrow starts, so it stays inside the viewBox */
   const tl=mk("text",{class:"threat","text-anchor":"end",
-    x:(a0[0]-8).toFixed(1),y:(a0[1]+3).toFixed(1)});
+    x:(a0[0]-8).toFixed(1),y:(a0[1]+4).toFixed(1)});
   tl.textContent="A threat arrives"; camG.appendChild(tl);
 
   const nodesG=mk("g",{});
@@ -713,22 +622,12 @@ function buildAtlas(){
     const SGAP=Math.min(4,span/(buckets.length*6));
     const arcR=(g.inner+g.outer)/2;
 
-    /* layer name, arced across the reserved zone at the top */
-    const pid="lab"+gi;
-    defs.appendChild(mk("path",{id:pid,fill:"none",
-      d:arcPath(arcR+(L.rows>1?7:0),-90-LABEL_ARC/2+1.5,-90+LABEL_ARC/2-1.5)}));
-    const t=mk("text",{class:"ringlab",
-      fill:"color-mix(in oklab,var("+L.v+") 74%,var(--ink))"});
-    const tp=mk("textPath",{href:"#"+pid,startOffset:"50%","text-anchor":"middle"});
-    tp.textContent=(L.short||L.key).toUpperCase();
-    t.appendChild(tp); camG.appendChild(t);
-    const cid="cnt"+gi;
-    defs.appendChild(mk("path",{id:cid,fill:"none",
-      d:arcPath(arcR+(L.rows>1?7:0)-14,-90-LABEL_ARC/2+1.5,-90+LABEL_ARC/2-1.5)}));
-    const t2=mk("text",{class:"ringnum"});
-    const tp2=mk("textPath",{href:"#"+cid,startOffset:"50%","text-anchor":"middle"});
-    tp2.textContent=members.length+" ORGS";
-    t2.appendChild(tp2); camG.appendChild(t2);
+    /* layer name and count, set level in the dot-free gap at the top */
+    const t=mk("text",{class:"ringlab",x:CX,y:(CY-arcR+4).toFixed(1),"text-anchor":"middle",
+      fill:"color-mix(in oklab,var("+L.v+") 80%,var(--ink))"});
+    t.appendChild(document.createTextNode(L.name||L.key));
+    const tn=mk("tspan",{class:"n",dx:5}); tn.textContent=members.length;
+    t.appendChild(tn); camG.appendChild(t);
 
     let a=start;
     buckets.forEach((b,bi)=>{
@@ -742,9 +641,9 @@ function buildAtlas(){
       a+=w;
       const mid=(s0+s1)/2;
       const bottom=Math.sin(mid*Math.PI/180)>0;
-      const slR=g.inner+(bottom?15:7);
+      const slR=g.inner+(bottom?14:7);
       const arcLen=Math.abs(s1-s0)*Math.PI/180*slR;
-      if(b.short.length*6.0 < arcLen*0.9){
+      if(b.short.length*5.4 < arcLen*0.9){
         const sid="sec"+gi+"_"+bi;
         defs.appendChild(mk("path",{id:sid,fill:"none",
           d:bottom?arcPath(slR,s1,s0,0):arcPath(slR,s0,s1,1)}));
@@ -797,8 +696,8 @@ function node(o,rad,ang){
       width:17,height:17,preserveAspectRatio:"xMidYMid meet"}));
   }else{
     g.appendChild(mk("circle",{cx:x.toFixed(1),cy:y.toFixed(1),r:BR-1.3,
-      fill:colorOf(o.cat),opacity:".92"}));
-    const t=mk("text",{x:x.toFixed(1),y:(y+3.2).toFixed(1),class:"mono"});
+      fill:colorOf(o.cat)}));
+    const t=mk("text",{x:x.toFixed(1),y:(y+3).toFixed(1),class:"mono"});
     t.textContent=initials(o.name); g.appendChild(t);
   }
   if(o.gcbr) g.appendChild(mk("circle",{cx:(x+BR-2.5).toFixed(1),
@@ -872,32 +771,32 @@ function wireAtlas(){
   });
 }
 function renderKey(){
-  const html=LAYERS.map(L=>{
-    const n=ORGS.filter(o=>o.cat===L.key).length;
-    return '<div class="kitem"><span class="sw" style="background:'+L.c+'"></span><div>'+
-      '<div class="kt">'+esc(L.name||L.key)+'</div>'+
-      '<div class="kd"><b>'+n+' orgs</b> &middot; '+esc(L.blurb)+'</div></div></div>';
+  /* listed in the order a threat meets them, foundation last */
+  const html=["Prevention","Detection","Response","Transversal"].map(k=>{
+    const L=LAYERS.find(x=>x.key===k), n=ORGS.filter(o=>o.cat===k).length;
+    return '<div class="kitem" style="--kc:'+L.c+'"><div class="kt">'+esc(L.name||L.key)+
+      '<span>'+n+'</span></div><div class="kd">'+esc(L.blurb)+'</div></div>';
   }).join("");
   const s=barrierStats(), t=s.thin;
   $("atlasKey").innerHTML=html+
-    '<div class="keynote">How to read the rings: each organisation sits on one ring, the one for '+
-    'its main mission. <b>'+t.key+'</b> has the fewest of the three barriers, <b>'+t.n+
-    '</b> against <b>'+s.big.n+'</b> on '+s.big.key+'.'+
-    (t.elsewhere?' That undercounts the work: another <b>'+t.elsewhere+'</b> organisations on '+
-      'other rings list a '+t.key.toLowerCase()+' topic such as '+t.topics[0].toLowerCase()+'.':'')+
-    ' A small coloured dot on a logo marks work on worst-case pandemic risk.</div>';
+    '<p class="keynote">Each organisation sits on one ring, the one for its main mission. <b>'+
+    t.key+'</b> has the fewest of the three barriers, <b>'+t.n+'</b> against <b>'+s.big.n+
+    '</b> on '+s.big.key+'.'+
+    (t.elsewhere?' That undercounts the work, though. Another <b>'+t.elsewhere+'</b> '+
+      'organisations on other rings list a '+t.key.toLowerCase()+' topic such as '+
+      lc(t.topics[0])+'.':'')+
+    ' A small dot on a logo marks work on worst-case pandemic risk.</p>';
 }
 
 /* ---------- chain (alt view) ---------- */
 function tile(o){
-  return '<button class="tile'+(filtering()&&!match(o)?" dim":"")+'" data-id="'+o.id+'"'+
-    ' style="--tc:'+colorOf(o.cat)+'">'+logoHTML(o)+'<span>'+esc(o.name)+'</span>'+
-    (o.gcbr?'<i class="gc"></i>':"")+'</button>';
+  return '<button class="tile'+(filtering()&&!match(o)?" dim":"")+'" data-id="'+o.id+'">'+
+    logoHTML(o)+'<span>'+esc(o.name)+(o.gcbr?'<i class="gc"></i>':"")+'</span></button>';
 }
 function blockHTML(orgs,label){
   const shown=orgs.filter(match).length;
   return '<div class="block"><div class="bh"><span class="bl">'+esc(label)+'</span>'+
-    '<span class="bn">'+(filtering()?shown+"/"+orgs.length:orgs.length)+'</span></div>'+
+    '<span class="bn">'+(filtering()?shown+" of "+orgs.length:orgs.length)+'</span></div>'+
     '<div class="tiles">'+orgs.map(tile).join("")+'</div></div>';
 }
 const CHAIN=[
@@ -909,7 +808,7 @@ const CHAIN=[
   gloss:"Spot an outbreak early, while containing it is still cheap.",
   subs:[["Early warning","Watching for outbreaks"],["Diagnostics","Testing and identifying"]]},
  {key:"Response",step:3,c:"var(--resp)",
-  gloss:"Blunt an outbreak that is already spreading.",
+  gloss:"Slow an outbreak that is already spreading.",
   subs:[["Medical countermeasures","Vaccines, drugs, tests"],
         ["Non-medical countermeasures","Clean air, protective equipment"]]}
 ];
@@ -922,43 +821,36 @@ function subBlocks(all,subs){
   if(gen.length) h+=blockHTML(gen,"Across the whole stage");
   return h;
 }
-const ARROW='<div class="arrow" aria-hidden="true"><svg width="20" height="26" viewBox="0 0 20 26"'+
-  ' fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 4l10 9-10 9"></path></svg></div>';
+function stageHead(step,name,all){
+  const shown=all.filter(match).length;
+  return '<div class="st-h"><span class="step">'+step+'</span><h3>'+name+'</h3>'+
+    '<span class="ct">'+(filtering()?shown+" of "+all.length:all.length)+'</span></div>';
+}
 function renderChain(){
   const tot=CHAIN.map(s=>ORGS.filter(o=>o.cat===s.key).length);
   const trTot=ORGS.filter(o=>o.cat==="Transversal").length;
   const mx=Math.max.apply(null,tot.concat([trTot]));
   const thinnest=Math.min.apply(null,tot);
+  const bar=n=>'<div class="bar"><i style="width:'+(n/mx*100).toFixed(1)+'%"></i></div>';
   $("stages").innerHTML=CHAIN.map((st,i)=>{
-    const all=ORGS.filter(o=>o.cat===st.key), shown=all.filter(match).length;
-    return '<div class="stage" style="--sc:'+st.c+'">'+
-      '<div class="stage-top"><div class="row"><span class="step">'+st.step+'</span>'+
-      '<h3>'+st.key+'</h3><span class="ct">'+
-      (filtering()?shown+" of "+all.length:all.length+" orgs")+'</span></div>'+
-      '<p class="gloss">'+st.gloss+'</p>'+
-      '<div class="bar"><i style="width:'+(all.length/mx*100).toFixed(1)+'%"></i></div></div>'+
-      '<div class="blocks">'+subBlocks(all,st.subs)+
+    const all=ORGS.filter(o=>o.cat===st.key);
+    return '<div class="stage" style="--sc:'+st.c+'">'+stageHead(st.step,st.key,all)+
+      '<p class="gloss">'+st.gloss+'</p>'+bar(all.length)+subBlocks(all,st.subs)+
       (tot[i]===thinnest?'<p class="thin-note">The fewest organisations of the three stages, '+
         'counting each only by its main mission. Others work on this stage from elsewhere in '+
-        'the chain: try the topic filter.</p>':'')+
-      '</div></div>';
-  }).join(ARROW);
-  $("tie").innerHTML='<svg viewBox="0 0 1000 20" preserveAspectRatio="none" fill="none"'+
-    ' stroke="currentColor" stroke-width="1.1" aria-hidden="true">'+
-    '<path d="M8 0v7M500 0v7M992 0v7M8 7h984M500 7v13" vector-effect="non-scaling-stroke"></path></svg>';
-  const all=ORGS.filter(o=>o.cat==="Transversal"), shown=all.filter(match).length;
+        'the chain. Try the topic filter.</p>':'')+
+      '</div>';
+  }).join("");
+  const all=ORGS.filter(o=>o.cat==="Transversal");
   let fb="";
   FOUND.forEach(p=>{
     const g=all.filter(o=>o.sub===p[0]);
-    if(g.length) fb+='<div class="fb">'+blockHTML(g,p[1])+'</div>';
+    if(g.length) fb+='<div>'+blockHTML(g,p[1])+'</div>';
   });
   $("found").innerHTML='<div class="found" style="--sc:var(--trans)">'+
-    '<div class="stage-top"><div class="row"><span class="step">4</span>'+
-    '<h3>The shared foundation</h3><span class="ct">'+
-    (filtering()?shown+" of "+all.length:all.length+" orgs")+'</span></div>'+
-    '<p class="gloss">Not a fourth stage, but the floor the other three stand on.</p>'+
-    '<div class="bar"><i style="width:'+(all.length/mx*100).toFixed(1)+'%"></i></div></div>'+
-    '<div class="found-blocks">'+fb+'</div></div>';
+    stageHead(4,"Foundation",all)+
+    '<p class="gloss">Not a fourth stage. These organisations support the other three.</p>'+
+    bar(all.length)+'<div class="found-blocks">'+fb+'</div></div>';
 }
 
 /* ---------- findings ---------- */
@@ -966,27 +858,24 @@ function renderFindings(){
   const n=ORGS.length, at=k=>ORGS.filter(o=>o.cat===k).length;
   const top=Object.entries(tally(ORGS.flatMap(o=>o.foci))).sort((a,b)=>b[1]-a[1])[0];
   const gcbr=ORGS.filter(o=>o.gcbr).length;
-  const s=barrierStats(), t=s.thin;
-  const largest=at("Transversal")>s.big.n;
+  const s=barrierStats(), t=s.thin, fo=at("Transversal");
   const items=[
-    [Math.round(at("Transversal")/n*100)+"%",
-     "of the field is not a barrier at all. It <b>funds, teaches, coordinates or reports on</b> the other three"+
-     (largest?" &mdash; the largest single group.":".")],
-    [t.n,
-     "organisations have <b>"+t.key+"</b> as their main mission, the fewest of the three barriers."+
-     (t.elsewhere?" Another <b>"+t.elsewhere+"</b> work on "+t.key.toLowerCase()+
-       " topics from other rings."
-      :" There are "+s.big.n+" on "+s.big.key+".")],
-    [top[1],"work on <b>"+esc(top[0])+"</b>, the most crowded of "+FOCI.length+
-     " topics &mdash; the clearest centre of gravity in the field."],
-    [Math.round(gcbr/n*100)+"%",
-     "explicitly work on <b>worst-case pandemic risk</b>, not just routine health security."]
+    "<b>"+fo+" of "+n+"</b> organisations ("+Math.round(fo/n*100)+"%) sit in the foundation "+
+      "rather than on a barrier. They fund, teach, coordinate or report on the work of the "+
+      "other three."+(fo>s.big.n?" It is the largest of the four groups.":""),
+    "<b>"+t.n+"</b> organisations have "+t.key+" as their main mission, the fewest of the "+
+      "three barriers."+(t.elsewhere?" Another <b>"+t.elsewhere+"</b> work on "+
+      t.key.toLowerCase()+" topics from other rings.":" "+s.big.key+" has "+s.big.n+"."),
+    "<b>"+esc(top[0])+"</b> is the most common of the "+FOCI.length+" topics, with "+top[1]+
+      " organisations.",
+    "<b>"+gcbr+"</b> organisations ("+Math.round(gcbr/n*100)+"%) work explicitly on global "+
+      "catastrophic biological risk, the most severe end of pandemic risk."
   ];
-  $("findings").innerHTML=items.map(p=>
-    '<div class="fcard"><div class="n">'+p[0]+'</div><div class="t">'+p[1]+'</div></div>').join("");
+  $("findings").innerHTML=items.map(t=>'<li>'+t+'</li>').join("");
 }
 
 /* ---------- gaps ---------- */
+const listJoin=a=>a.length<2?a.join(""):a.slice(0,-1).join(", ")+" and "+a[a.length-1];
 function renderGapsSimple(){
   const list=sel();
   const rows=FOCI.map(f=>({f:f,n:list.filter(o=>o.foci.indexOf(f)>-1).length}))
@@ -998,25 +887,24 @@ function renderGapsSimple(){
     '<span class="v">'+r.n+'</span></div>').join("");
   $("topicAxis").innerHTML='<span>0</span><span>'+mx+' organisations</span>';
   const thin=rows.slice(-3).reverse(), co=[];
-  co.push(['The thinnest topics',
-    thin.map(r=>'<b>'+esc(r.f)+'</b> ('+r.n+')').join(', ')+' &mdash; against '+mx+' on '+
-    esc(rows[0].f)+'.']);
+  co.push('<b>Fewest organisations.</b> '+
+    listJoin(thin.map((r,i)=>esc(i?lc(r.f):r.f)+' ('+r.n+')'))+'. '+esc(rows[0].f)+
+    ', the most covered topic, has '+mx+'.');
   let best=null;
   rows.filter(r=>r.n>=15).forEach(r=>{ACTS.forEach(a=>{
     const c=list.filter(o=>o.foci.indexOf(r.f)>-1 && o.act.indexOf(a)>-1).length;
     if(c<=2 && (!best || r.n>best.n)) best={f:r.f,n:r.n,a:a,c:c};
   })});
-  if(best) co.push(['A crowded topic with a thin edge',
-    '<b>'+esc(best.f)+'</b> has '+best.n+' organisations on it, but '+
-    (best.c===0?'<b>none at all</b>':'only <b>'+best.c+'</b>')+' under <b>'+esc(best.a)+'</b>.']);
+  if(best) co.push('<b>A gap inside a busy topic.</b> '+esc(best.f)+' has '+best.n+
+    ' organisations, but '+(best.c===0?'none of them is':'only '+best.c+' of them '+
+    (best.c===1?'is':'are'))+' listed under '+esc(best.a.toLowerCase())+'.');
   let empt=0;
   FOCI.forEach(f=>ACTS.forEach(a=>{
     if(!list.filter(o=>o.foci.indexOf(f)>-1 && o.act.indexOf(a)>-1).length) empt++;
   }));
-  co.push(['Empty combinations','<b>'+empt+'</b> of the '+(FOCI.length*ACTS.length)+
-    ' topic-and-work-type pairings have nobody in them. The full grid below shows which.']);
-  $("gapCallouts").innerHTML=co.map(c=>
-    '<div class="co"><div class="h">'+c[0]+'</div><div class="b">'+c[1]+'</div></div>').join("");
+  co.push('<b>Empty combinations.</b> '+empt+' of the '+(FOCI.length*ACTS.length)+
+    ' pairings of topic and type of work have no organisations. The full grid below shows which.');
+  $("gapCallouts").innerHTML=co.map(c=>'<p>'+c+'</p>').join("");
 }
 
 /* ---------- links ---------- */
@@ -1038,17 +926,14 @@ function renderLinksSimple(){
     '<span class="v">'+p.v+'</span></div>').join("")
     :'<p class="cap">No pairings in the current selection.</p>';
   const co2=[];
-  if(topN.length) co2.push(['What the top pair means',
-    '<b>'+esc(topN[0].a)+'</b> and <b>'+esc(topN[0].b)+'</b> are held together by '+topN[0].v+
-    ' organisations &mdash; in practice they are one job, not two.']);
+  if(topN.length) co2.push('<b>Most common pair.</b> '+esc(topN[0].a)+' and '+
+    esc(lc(topN[0].b))+', worked on together by '+topN[0].v+' organisations.');
   const stats=FOCI.map(f=>({f:f,n:list.filter(o=>o.foci.indexOf(f)>-1).length,
     partners:FOCI.filter(g=>g!==f && co[f][g]>0).length}));
   const bridge=stats.filter(x=>x.n>=6).sort((a,b)=>b.partners-a.partners)[0];
-  if(bridge) co2.push(['The most connected topic',
-    '<b>'+esc(bridge.f)+'</b> shares organisations with '+
-    (bridge.partners===FOCI.length-1?'<b>every one</b> of the other '+(FOCI.length-1)+' topics'
-      :'<b>'+bridge.partners+'</b> of the other '+(FOCI.length-1)+' topics')+
-    ' &mdash; it touches nearly everything.']);
+  if(bridge) co2.push('<b>Most connected topic.</b> '+esc(bridge.f)+' shares organisations with '+
+    (bridge.partners===FOCI.length-1?'all '+(FOCI.length-1)+' other topics.'
+      :bridge.partners+' of the other '+(FOCI.length-1)+' topics.'));
   const N=list.length||1; let lift=null;
   for(let i=0;i<FOCI.length;i++) for(let j=i+1;j<FOCI.length;j++){
     const a=FOCI[i], b=FOCI[j], obs=co[a][b];
@@ -1056,26 +941,24 @@ function renderLinksSimple(){
     const exp=(co[a][a]*co[b][b])/N; if(exp<=0) continue;
     const rr=obs/exp; if(!lift||rr>lift.r) lift={a:a,b:b,obs:obs,r:rr};
   }
-  if(lift) co2.push(['A tighter pairing than it looks',
-    '<b>'+esc(lift.a)+'</b> and <b>'+esc(lift.b)+'</b> share '+lift.obs+' organisations '+
-    '&mdash; roughly <b>'+lift.r.toFixed(1)+'&times;</b> more than you would expect if topics '+
-    'were spread independently across the field.']);
-  $("linkCallouts").innerHTML=co2.map(c=>
-    '<div class="co"><div class="h">'+c[0]+'</div><div class="b">'+c[1]+'</div></div>').join("");
+  if(lift) co2.push('<b>More often than chance.</b> '+esc(lift.a)+' and '+esc(lc(lift.b))+
+    ' share '+lift.obs+' organisations, about '+lift.r.toFixed(1)+' times what you would '+
+    'expect if topics were spread independently.');
+  $("linkCallouts").innerHTML=co2.map(c=>'<p>'+c+'</p>').join("");
 }
 
 /* ---------- matrices ---------- */
 function cellStyle(v,mx){
   if(!v) return "";
   const r=Math.pow(v/mx,.62);
-  return "background:color-mix(in oklab,var(--seq) "+(14+66*r).toFixed(1)+"%,var(--surface));"+
-    (r>.63?"color:var(--surface);":"");
+  return "background:color-mix(in oklab,var(--seq) "+(12+68*r).toFixed(1)+"%,var(--paper));"+
+    (r>.63?"color:var(--paper);":"");
 }
 function ramp(node2,mx,unit){
   const s=[.2,.4,.6,.8,1].map(r=>'<i style="background:color-mix(in oklab,var(--seq) '+
-    (14+66*Math.pow(r,.62)).toFixed(1)+'%,var(--surface))"></i>').join("");
-  node2.innerHTML='<span class="zc"></span><span>0 &middot; nobody</span>'+
-    '<span class="steps">'+s+'</span><span>'+mx+' '+unit+'</span>';
+    (12+68*Math.pow(r,.62)).toFixed(1)+'%,var(--paper))"></i>').join("");
+  node2.innerHTML='<span>&ndash; none</span><span class="steps">'+s+'</span><span>'+
+    mx+' '+unit+'</span>';
 }
 function renderGapsGrid(){
   const list=sel();
@@ -1084,15 +967,15 @@ function renderGapsGrid(){
   const grid=rows.map(r=>ACTS.map(a=>
     list.filter(o=>o.foci.indexOf(r.f)>-1 && o.act.indexOf(a)>-1).length));
   const mx=Math.max.apply(null,[1].concat(grid.reduce((x,y)=>x.concat(y),[])));
-  let h='<table class="mx"><caption class="sr">Organisations by topic and kind of work</caption>'+
+  let h='<table class="mx"><caption class="sr">Organisations by topic and type of work</caption>'+
     '<thead><tr><th></th>';
   ACTS.forEach(a=>h+='<th class="rot" scope="col"><div>'+esc(a)+'</div></th>');
-  h+='<th class="rot" scope="col"><div>All kinds of work</div></th></tr></thead><tbody>';
+  h+='<th class="rot" scope="col"><div>All types of work</div></th></tr></thead><tbody>';
   rows.forEach((r,i)=>{
     h+='<tr><th scope="row">'+esc(r.f)+'</th>';
     ACTS.forEach((a,j)=>{const v=grid[i][j];
       h+='<td class="'+(v?"":"z")+'" style="'+cellStyle(v,mx)+'" data-tip="<b>'+esc(r.f)+
-        '</b><br>'+esc(a)+'<br>'+v+' organisation'+(v===1?"":"s")+'">'+(v||"")+'</td>'});
+        '</b><br>'+esc(a)+'<br>'+v+' organisation'+(v===1?"":"s")+'">'+(v||"&ndash;")+'</td>'});
     h+='<td class="tot">'+r.total+'</td></tr>';
   });
   h+='</tbody><tfoot><tr><th scope="row">Organisations</th>';
@@ -1128,7 +1011,8 @@ function renderLinksGrid(){
         ' organisations in total">'+co[a][a]+'</td>'; return}
       const v=co[a][b];
       h+='<td class="'+(v?"":"z")+'" style="'+cellStyle(v,mx)+'" data-tip="<b>'+esc(a)+
-        '</b> + <b>'+esc(b)+'</b><br>'+v+' shared organisation'+(v===1?"":"s")+'">'+(v||"")+'</td>';
+        '</b> + <b>'+esc(b)+'</b><br>'+v+' shared organisation'+(v===1?"":"s")+'">'+
+        (v||"&ndash;")+'</td>';
     });
     h+='</tr>';
   });
@@ -1143,25 +1027,23 @@ function openOrg(id){
   $("drTop").style.setProperty("--dc",colorOf(o.cat));
   $("drLogo").innerHTML=logoHTML(o);
   $("drName").textContent=o.name;
-  $("drTrail").textContent=layerName(o.cat)+(o.sub?" — "+o.sub:"");
-  const f=(l,html)=>html?'<div class="field"><span class="eyebrow">'+l+'</span>'+html+'</div>':"";
-  const chips=(a,on)=>'<div class="chips">'+a.map(v=>'<span class="chip'+
-    (on&&on.indexOf(v)>-1?" on":"")+'">'+esc(v)+'</span>').join("")+'</div>';
+  $("drTrail").textContent=layerName(o.cat)+(o.sub?" · "+o.sub:"");
+  const f=(l,html)=>html?'<div><dt>'+l+'</dt><dd>'+html+'</dd></div>':"";
+  /* plain comma lists; the value matching an active filter is set in bold */
+  const items=(a,on)=>a.map(v=>v===on?'<b>'+esc(v)+'</b>':esc(v)).join(", ");
   $("drBody").innerHTML=
-    '<p class="desc">'+esc(o.desc)+'</p>'+
-    f("Kind of organisation",'<p>'+esc(o.type)+'</p>')+
-    f("What they do",chips(o.act,[state.act]))+
-    f("Topics",o.foci.length?chips(o.foci,[state.foc])
-      :'<p>None recorded &mdash; a general-mission organisation.</p>')+
-    f("Where",chips(o.loc,[state.loc]))+
-    f("Worst-case pandemic risk",'<p>'+(o.gcbr
-      ?"Yes &mdash; works explicitly on global catastrophic biological risk."
-      :"Not recorded as working on worst-case risk.")+'</p>')+
+    '<p class="desc">'+esc(o.desc)+'</p><dl class="facts">'+
+    f("Kind of organisation",esc(o.type))+
+    f("What they do",items(o.act,state.act))+
+    f("Topics",o.foci.length?items(o.foci,state.foc):"None recorded")+
+    f("Where",items(o.loc,state.loc))+
+    f("Worst-case pandemic risk",o.gcbr
+      ?"Yes, works explicitly on global catastrophic biological risk"
+      :"Not recorded as working on worst-case risk")+
+    '</dl>'+
     /* the url comes from upstream data, so only link out over http(s) */
     (/^https?:\/\//i.test(o.url)
-      ?'<a class="visit" href="'+esc(o.url)+'" target="_blank" rel="noopener">Visit '+esc(o.name)+
-       ' <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor"'+
-       ' stroke-width="1.8"><path d="M4 10 10 4M5.4 3.6H10.4V8.6"></path></svg></a>':"");
+      ?'<a class="visit" href="'+esc(o.url)+'" target="_blank" rel="noopener">Visit their website</a>':"");
   if(!$("drawer").classList.contains("on")) lastFocus=document.activeElement;
   $("drawer").classList.add("on"); $("drawer").setAttribute("aria-hidden","false");
   $("drawer").inert=false;
@@ -1194,9 +1076,9 @@ document.addEventListener("mouseover",e=>{
 /* ---------- render ---------- */
 function render(){
   const shown=sel().length;
-  $("status").innerHTML=filtering()
-    ? "<b>"+shown+"</b> of "+ORGS.length+" match"
-    : "<b>"+ORGS.length+"</b> organisations";
+  $("status").textContent=filtering()
+    ? shown+" of "+ORGS.length+" match"
+    : ORGS.length+" organisations";
   $("clearBtn").hidden=!filtering();
   if(state.view==="atlas"){paintAtlas();renderFindings()}
   else if(state.view==="chain"){renderChain()}
@@ -1231,12 +1113,16 @@ document.addEventListener("click",e=>{
 });
 $("drClose").onclick=closeDrawer; $("scrim").onclick=closeDrawer;
 document.addEventListener("keydown",e=>{if(e.key==="Escape") closeDrawer()});
-$("themeBtn").onclick=()=>{
+const isDark=()=>{
   const cur=document.documentElement.getAttribute("data-theme");
-  const dark=cur?cur==="dark":matchMedia("(prefers-color-scheme:dark)").matches;
-  document.documentElement.setAttribute("data-theme",dark?"light":"dark");
+  return cur?cur==="dark":matchMedia("(prefers-color-scheme:dark)").matches;
+};
+const themeLabel=()=>{$("themeBtn").textContent=isDark()?"Light mode":"Dark mode"};
+$("themeBtn").onclick=()=>{
+  document.documentElement.setAttribute("data-theme",isDark()?"light":"dark");
+  themeLabel();
 };
 
-buildAtlas(); wireAtlas(); renderKey(); render();
+themeLabel(); buildAtlas(); wireAtlas(); renderKey(); render();
 </script>
 </html>
