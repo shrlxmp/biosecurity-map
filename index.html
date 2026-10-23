@@ -495,7 +495,8 @@ footer b{color:var(--ink)}
     <div class="chart" id="offMapBox">
       <h3 class="sh">Funded, but not on the map</h3>
       <p class="cap">Recipients of these grants that the biosecurity.world dataset does not list.
-        Some are universities or funds that pass money on. Others may be gaps in the dataset.</p>
+        Many are universities, funds that pass money on, or organisations that have since closed
+        or been acquired. A few may be gaps in the dataset.</p>
       <ol class="ranked" id="offMap"></ol>
     </div>
   </div>
@@ -1197,7 +1198,8 @@ function renderMoney(){
       layerName(o.cat)+' above includes money it passed on.');
   }
   if(!f) notes.push('<b>Not on the map.</b> '+money(total-onTotal)+' ('+pct(total-onTotal,total)+
-    ') went to recipients the map does not list. The largest are at the bottom of this page.');
+    ') went to recipients the map does not list, many of them universities or organisations that '+
+    'have since closed or been acquired. The largest are at the bottom of this page.');
   $("moneyNotes").innerHTML=notes.map(n=>'<p>'+n+'</p>').join("");
 
   /* grants by year, stacked by ring, with off-map money in grey */
