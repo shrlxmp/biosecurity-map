@@ -15,6 +15,7 @@ the weekly workflow shows a warning. Output is deterministic, so a run that
 finds nothing new leaves the files byte-identical.
 """
 import csv
+import datetime
 import html
 import io
 import json
@@ -22,6 +23,8 @@ import os
 import re
 import sys
 import urllib.request
+import xml.etree.ElementTree as ET
+import zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT_DIR = os.path.join(HERE, "funding")
@@ -88,7 +91,7 @@ GATES_BIO = re.compile(
 # (e.g. "the global HIV/AIDS pandemic", polio outbreak response)
 GATES_ROUTINE = re.compile(
     r"polio|measles|cholera|malaria|tuberculosis|\bHIV\b|\bAIDS\b|typhoid|rotavirus|"
-    r"pneumococc|meningitis|respiratory syncytial|\bRSV\b", re.I)
+    r"pneumococc|streptococc|meningitis|respiratory syncytial|\bRSV\b", re.I)
 GATES_STRONG = re.compile(
     r"pandemic preparedness|pandemics|pandemic influenza|biosecurity|biosafety|"
     r"health security|covid|sars-cov|coronavirus|epidemic preparedness|100 days mission|"
@@ -265,9 +268,111 @@ def longview():
         or LONGVIEW_BIO.search((g.get("recipient") or "") + " " + (g.get("description") or "")))
 
 
+# ---------------------------------------------------------------- Wellcome
+
+REGISTRY = "https://registry.threesixtygiving.org/data.json"
+# annual average US dollars per pound, for converting Wellcome's grants; the
+# same kind of approximation Trace uses, good enough for totals
+USD_PER_GBP = {2000: 1.516, 2001: 1.440, 2002: 1.501, 2003: 1.634, 2004: 1.832,
+               2005: 1.820, 2006: 1.843, 2007: 2.002, 2008: 1.853, 2009: 1.566,
+               2010: 1.546, 2011: 1.604, 2012: 1.585, 2013: 1.564, 2014: 1.648,
+               2015: 1.528, 2016: 1.355, 2017: 1.289, 2018: 1.335, 2019: 1.277,
+               2020: 1.284, 2021: 1.375, 2022: 1.237, 2023: 1.244, 2024: 1.278,
+               2025: 1.298, 2026: 1.310}
+# Wellcome descriptions are long and mention pandemics in passing, so a
+# description alone counts only when it is plainly about preparedness
+WELLCOME_DESC = re.compile(r"pandemic preparedness|epidemic preparedness|biosecurity|biosafety|"
+                           r"pandemic threat|100 days mission|disease x", re.I)
+
+
+def xlsx_rows(data):
+    """Rows of the first sheet of an .xlsx file, using only the standard library."""
+    ns = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
+    book = zipfile.ZipFile(io.BytesIO(data))
+    shared = []
+    if "xl/sharedStrings.xml" in book.namelist():
+        for item in ET.fromstring(book.read("xl/sharedStrings.xml")).iter(ns + "si"):
+            shared.append("".join(t.text or "" for t in item.iter(ns + "t")))
+    sheet = sorted(n for n in book.namelist() if re.match(r"xl/worksheets/sheet\d+\.xml$", n))[0]
+    rows = []
+    for _, el in ET.iterparse(book.open(sheet)):
+        if el.tag != ns + "row":
+            continue
+        row = {}
+        for cell in el.iter(ns + "c"):
+            col = 0
+            for ch in re.match(r"[A-Z]+", cell.get("r")).group():
+                col = col * 26 + ord(ch) - 64
+            value, kind = cell.find(ns + "v"), cell.get("t")
+            if kind == "s" and value is not None:
+                row[col - 1] = shared[int(value.text)]
+            elif kind == "inlineStr":
+                row[col - 1] = "".join(t.text or "" for t in cell.iter(ns + "t"))
+            else:
+                row[col - 1] = value.text if value is not None else ""
+        rows.append([row.get(i, "") for i in range(max(row) + 1)] if row else [])
+        el.clear()
+    return rows
+
+
+def wellcome():
+    # the file name changes with every release, so find it in the 360Giving registry
+    registry = json.loads(get(REGISTRY, timeout=120))
+    datasets = [d for d in registry
+                if (d.get("publisher") or {}).get("prefix") == "360G-wellcome"
+                and (d.get("title") or "").startswith("Grants awarded")]
+    require(datasets, "Wellcome's grants are not in the 360Giving registry")
+    dataset = max(datasets, key=lambda d: d.get("modified") or "")
+    url = dataset["distribution"][0]["downloadURL"]
+    request = urllib.request.Request(url, headers=UA)
+    with urllib.request.urlopen(request, timeout=300) as response:
+        rows = xlsx_rows(response.read())
+    head, body = rows[0], [dict(zip(rows[0], r)) for r in rows[1:] if r]
+    require(len(body) >= 10000, "expected >= 10000 grants, got %d" % len(body))
+    require({"Recipient Org:Name", "Title", "Description", "Amount Awarded", "Currency",
+             "Award Date", "Identifier"} <= set(head), "spreadsheet is missing columns")
+    keep = []
+    for r in body:
+        title, desc = (r.get("Title") or "").strip(), r.get("Description") or ""
+        by_title = (GATES_BIO.search(title)
+                    and not (GATES_ROUTINE.search(title) and not GATES_STRONG.search(title)))
+        if not (by_title or (WELLCOME_DESC.search(desc) and not GATES_ROUTINE.search(title))):
+            continue
+        try:  # award dates are Excel day numbers
+            year = (datetime.date(1899, 12, 30)
+                    + datetime.timedelta(days=float(r["Award Date"]))).year
+        except (TypeError, ValueError):
+            year = int((r.get("Financial Year") or "0")[:4])
+        amount = float(r.get("Amount Awarded") or 0)
+        if (r.get("Currency") or "GBP") == "GBP":
+            amount *= USD_PER_GBP.get(year, USD_PER_GBP[2026])
+        elif r.get("Currency") != "USD":
+            continue
+        keep.append({"id": r["Identifier"], "year": year,
+                     "recipient": (r.get("Recipient Org:Name") or "").strip(),
+                     "title": title[:300], "amount": round(amount)})
+    require(len(keep) >= 50, "only %d grants passed the rule" % len(keep))
+    keep.sort(key=lambda g: (-g["year"], g["id"]))
+    return {
+        "funder": "Wellcome",
+        "funder_org": "Wellcome Trust",
+        "rule": ("Wellcome does not label biosecurity grants, so this is our rule: grants whose "
+                 "title names pandemic or epidemic threats (pandemics, outbreaks, COVID-19, Ebola "
+                 "and similar), or whose description is plainly about pandemic preparedness or "
+                 "biosecurity, leaving out routine diseases. Pounds are converted to dollars at "
+                 "each year's average rate. Counted only for organisations on the map, because "
+                 "the rule is too loose to trust for everyone else."),
+        "scope": "on_map_only",
+        "source_url": dataset["distribution"][0].get("accessURL") or url,
+        "exported_at": (dataset.get("modified") or "")[:10] or None,
+        "grants": keep,
+    }
+
+
 SOURCES = {"coefficient_giving": coefficient_giving, "gates": gates,
            "sentinel_bio": sentinel_bio, "sff": sff,
-           "openai_foundation": openai_foundation, "longview": longview}
+           "openai_foundation": openai_foundation, "longview": longview,
+           "wellcome": wellcome}
 
 
 def main():

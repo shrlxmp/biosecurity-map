@@ -36,7 +36,7 @@ There are five views:
 - **Where the gaps are.** Organisations per topic, plus the full grid of topics against types
   of work, where empty cells show combinations nobody covers.
 - **How topics connect.** Which topics are worked on by the same organisations.
-- **Where the money goes.** Biosecurity grants from six philanthropic funders, set against the map: each
+- **Where the money goes.** Biosecurity grants from seven philanthropic funders, set against the map: each
   ring's share of the organisations next to its share of the funding, grants by year, the
   largest recipients, and funded organisations the map does not list. The same grants appear
   in each organisation's detail panel and, with *Show funding*, as discs on the map.
@@ -75,7 +75,7 @@ identification only.
 
 ### Funding
 
-Grants come from six philanthropic funders. Each funder has a rule for what counts as a
+Grants come from seven philanthropic funders. Each funder has a rule for what counts as a
 biosecurity grant, and the rule decides which recipients its grants are counted for:
 
 | Funder | What counts | Counted for |
@@ -85,6 +85,7 @@ biosecurity grant, and the rule decides which recipients its grants are counted 
 | OpenAI Foundation | Grants Trace tags as biosecurity | Everyone |
 | Longview Philanthropy | Its biosecurity programme, or grants whose description names biosecurity work | Everyone |
 | Gates Foundation | Our rule: grants from its health, development and policy divisions whose purpose names pandemic or epidemic threats, leaving out routine diseases (polio, HIV, malaria) unless the purpose is pandemic preparedness | Organisations on the map only |
+| Wellcome | Our rule: grants whose title names pandemic or epidemic threats, or whose description is plainly about pandemic preparedness or biosecurity, leaving out routine diseases; pounds converted to dollars at each year's average rate | Organisations on the map only |
 | Survival and Flourishing Fund | Our rule: it has no labels, so only grants to four organisations whose main work is biosecurity (SecureBio, SecureDNA, Amodo Design, Blueprint Biosecurity) | Those four only |
 
 Where a funder labels its own biosecurity grants, its label is used, so the funder decides what
@@ -96,6 +97,9 @@ Sources: Coefficient Giving's grants come from the full export kept in the open 
 funding database, as do the OpenAI Foundation's and Longview's. Trace's own website lists only
 grants with an AI-safety angle; its repository files are what this repo uses. Gates comes from
 its [committed grants database](https://www.gatesfoundation.org/about/committed-grants),
+Wellcome from its grants spreadsheet, published as
+[360Giving](https://www.threesixtygiving.org/) open data under CC BY 4.0 (the build finds the
+current file through the 360Giving registry, because its name changes with every release),
 Sentinel Bio from its [grants page](https://sentinelbio.org/research-and-projects/), and SFF
 from its [recommendations table](https://survivalandflourishing.fund/recommendations).
 
@@ -109,8 +113,8 @@ the largest recipients it could not match.
 
 What the funding numbers are not:
 
-- **Not the size of the field.** These are six philanthropic funders. Governments and industry
-  spend far more and are not counted. A handful of very large grants (Gates to Gavi and CEPI)
+- **Not the size of the field.** These are seven philanthropic funders. Governments and industry
+  spend far more and are not counted. A handful of very large grants (Gates and Wellcome to Gavi and CEPI)
   carry most of the total, so the page lets you look at one funder at a time.
 - **Not money spent.** Amounts are as awarded, and a multi-year grant counts in the year it
   was made.
