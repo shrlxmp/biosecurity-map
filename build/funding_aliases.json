@@ -13,6 +13,9 @@
   {"recipient": "Johns Hopkins Center for Health Security", "title": "Emerging Leaders in Biosecurity",
    "org": "Emerging Leaders in Biosecurity (ELBI) Fellowship",
    "why": "the fellowship is a separate entry on the map"},
+  {"recipient": "Brown University", "title": "Pandemic Center",
+   "org": "The Pandemic Center",
+   "why": "The Pandemic Center is at Brown's School of Public Health"},
   {"recipient": "Council on Strategic Risks", "title": "^Biosecurity Fellowship$",
    "org": "Fellowship for Ending Bioweapons",
    "why": "CSR's biosecurity fellowship is a separate entry on the map"}
@@ -25,6 +28,8 @@
   "International Genetically Engineered Machine Foundation": "iGEM",
   "Blue Ribbon Study Panel on Biodefense": "Bipartisan Commission on Biodefense",
   "Massachusetts Institute of Technology Media Lab": "Sculpting Evolution Group (Esvelt Lab) @ MIT Media Lab",
-  "MIT Media Lab": "Sculpting Evolution Group (Esvelt Lab) @ MIT Media Lab"
+  "MIT Media Lab": "Sculpting Evolution Group (Esvelt Lab) @ MIT Media Lab",
+  "ERA": "ERA Fellowship",
+  "InterAcademy Partnership": "Interacademy Partnership (IAP) Biosecurity Working Group"
  }
 }
