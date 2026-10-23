@@ -239,6 +239,8 @@ ul.glist{margin:6px 0 0;padding:0 0 0 16px;font-size:14px;color:var(--ink-2)}
   background:transparent;padding:4px 0;border-radius:0}
 .fsel-row select option{background:var(--paper);color:var(--ink)}
 .frow{padding:10px 0;border-bottom:1px solid var(--hair)}
+h4.fgroup{font-family:var(--f-label);font-size:12.5px;font-weight:600;color:var(--ink-3);
+  margin:14px 0 0;padding-bottom:4px;border-bottom:1px solid var(--ink)}
 .frow.on{border-left:3px solid var(--ink);padding-left:10px}
 .frow .fh{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:baseline;font-family:var(--f-label);
   font-size:13.5px}
@@ -388,8 +390,8 @@ footer b{color:var(--ink)}
     <svg id="atlas" viewBox="0 0 880 880" role="img"
       aria-label="Concentric map of __COUNT__ biosecurity organisations: three defensive barriers around the population at the centre, inside an outer ring for the foundation they rely on"></svg>
     <figcaption class="hint"><button class="toggle" id="fundToggle" aria-pressed="false">Show
-      funding</button> <span id="fundKey" hidden>Shaded discs show the biosecurity grants found for
-      each organisation, by area.</span> <span class="h-fine">Ctrl or &#8984; + scroll to
+      funding</button> <span id="fundKey" hidden>Shaded discs show the philanthropic biosecurity grants
+      found for each organisation, by area.</span> <span class="h-fine">Ctrl or &#8984; + scroll to
       zoom, drag to pan, click a dot for details.</span><span class="h-coarse">Use + and &minus; to
       zoom. Tap a dot for details.</span></figcaption>
   </figure>
@@ -482,13 +484,15 @@ footer b{color:var(--ink)}
   <div class="sec-head">
     <h2>Where the money goes</h2>
     <p id="moneyLede"></p>
-    <p>This is philanthropic money only, from a handful of funders. Governments and industry
-      spend far more on pandemic preparedness and are not counted here. Read the numbers as where
-      these funders have put their money, not as the size of each part of the field.</p>
+    <p>Philanthropic and government money are shown separately and never added together.
+      Government money here means US federal awards only, and much of it is purchases such as
+      COVID-19 vaccine doses. Other governments and private investment are not counted. Read the
+      numbers as where these funders have put their money, not as the size of each part of the
+      field.</p>
   </div>
   <div class="fsel-row">
     <label for="fundSel">Show grants from</label>
-    <select id="fundSel"><option value="">All funders</option></select>
+    <select id="fundSel"><option value="">All philanthropic funders</option></select>
   </div>
   <div class="chart">
     <h3 class="sh">The funders</h3>
@@ -544,7 +548,9 @@ footer b{color:var(--ink)}
   funding database. The others come from each funder's own published grants; Wellcome's via the
   <a href="https://www.threesixtygiving.org/" target="_blank" rel="noopener">360Giving</a> open
   data standard, under CC BY 4.0. Each funder's rule
-  for what counts is shown in the funding view. Recipients are matched to organisations on the map
+  for what counts is shown in the funding view. US federal awards come from
+  <a href="https://www.usaspending.gov/" target="_blank" rel="noopener">USAspending.gov</a> and are
+  kept separate from the philanthropic grants. Recipients are matched to organisations on the map
   by name, plus a short hand-checked list of aliases. A grant to a name the map does not use counts
   as not on the map.</p>
   <p><b>Reading the map.</b> The rings are a diagram, not geography. Where a dot sits within a
@@ -1165,14 +1171,18 @@ function agg(grants){
   });
   return F;
 }
-const FUND=agg(FG);
+/* government money is kept apart: never added to philanthropic totals */
+const isGov=i=>FSRC[i].kind==="government";
+const PG=FG.filter(g=>!isGov(g[5])), GG=FG.filter(g=>isGov(g[5]));
+const FUND=agg(PG), GOVF=agg(GG);
 /* funders that are themselves on the map: map id -> funder index */
 const GIVER={};
 FSRC.forEach((s,i)=>{if(s.org!=null&&byId[s.org]) GIVER[s.org]=i});
 const RING_ORDER=["Prevention","Detection","Response","Transversal"];
 const sum=a=>a.reduce((s,g)=>s+g[1],0);
 const pct=(a,b)=>Math.round(100*a/(b||1))+"%";
-const money=v=>v>=1e6?"$"+(v/1e6).toFixed(v>=1e8?0:1).replace(/\.0$/,"")+"M"
+const money=v=>v>=1e9?"$"+(v/1e9).toFixed(v>=1e10?0:2).replace(/\.?0+$/,"")+"B"
+  :v>=1e6?"$"+(v/1e6).toFixed(v>=1e8?0:1).replace(/\.0$/,"")+"M"
   :v>=1e3?"$"+Math.round(v/1e3)+"k":"$"+Math.round(v);
 const plural=(n,w)=>n+" "+w+(n===1?"":"s");
 const funderName=i=>esc(FSRC[i].funder);
@@ -1189,6 +1199,14 @@ function fundHTML(id){
       (by.length>1?', '+funderName(g[5]):'')+': '+esc(g[4])+'</li>').join("")+
     (f.n>4?'<li>and '+(f.n-4)+' more</li>':'')+'</ul>';
 }
+function govHTML(id){
+  const f=GOVF[id]; if(!f) return "";
+  const top=f.list.slice().sort((a,b)=>b[1]-a[1]);
+  return money(f.total)+" in "+plural(f.n,"award")+", "+(f.y0===f.y1?f.y0:f.y0+"–"+f.y1)+
+    ". Kept apart from the philanthropic grants above."+
+    '<ul class="glist">'+top.slice(0,3).map(g=>'<li>'+g[0]+', '+money(g[1])+': '+esc(g[4])+
+      '</li>').join("")+(f.n>3?'<li>and '+(f.n-3)+' more</li>':'')+'</ul>';
+}
 function giverHTML(i){
   const g=FG.filter(x=>x[5]===i), on=g.filter(x=>x[2]!=null);
   const scope=FSRC[i].scope==="all"?"":" Only its grants to organisations on the map are counted.";
@@ -1199,7 +1217,7 @@ function giverHTML(i){
 function renderMoney(){
   if(!FUNDING){$("moneyLede").textContent="Funding data is not in this build."; return}
   const fsel=state.funder===""?null:+state.funder;
-  const G=FG.filter(g=>fsel==null||g[5]===fsel);
+  const G=fsel==null?PG:FG.filter(g=>g[5]===fsel), gov=fsel!=null&&isGov(fsel);
   const list=sel(), ids=new Set(list.map(o=>o.id)), f=filtering();
   const onMap=G.filter(g=>g[2]!=null), mine=onMap.filter(g=>ids.has(g[2]));
   /* money off the map counts only for funders that label their own biosecurity grants */
@@ -1207,7 +1225,8 @@ function renderMoney(){
   const onTotal=sum(onMap), mineTotal=sum(mine), offTotal=sum(offG);
   const funded=new Set(onMap.map(g=>g[2])).size;
   $("moneyLede").innerHTML=(fsel==null
-    ?'Biosecurity grants from <strong>'+FSRC.length+' philanthropic funders</strong>. '+
+    ?'Biosecurity grants from <strong>'+FSRC.filter((s,i)=>!isGov(i)).length+
+      ' philanthropic funders</strong>. '+
       '<strong>'+money(onTotal)+'</strong> of them went to '+funded+' of the '+ORGS.length+
       ' organisations on this map.'
     :'<strong>'+funderName(fsel)+'.</strong> '+esc(FSRC[fsel].rule)+' <strong>'+money(onTotal)+
@@ -1217,14 +1236,18 @@ function renderMoney(){
       money(mineTotal)+'</strong>.':'');
 
   /* one row per funder: what it gave to the map and to everyone else */
-  $("funderTable").innerHTML=FSRC.map((s,i)=>{
+  const frow=(s,i)=>{
     const g=FG.filter(x=>x[5]===i), on=g.filter(x=>x[2]!=null), off=g.filter(x=>x[2]==null);
     return '<div class="frow'+(fsel===i?' on':'')+'"><div class="fh"><b>'+esc(s.funder)+'</b>'+
       '<span>'+money(sum(on))+' to '+plural(new Set(on.map(x=>x[2])).size,"organisation")+
       ' on the map</span><span>'+(s.scope==="all"?money(sum(off))+' elsewhere'
         :'grants elsewhere not counted')+'</span></div>'+
       '<p>'+esc(s.rule)+' <a href="'+esc(s.url)+'" target="_blank" rel="noopener">Source</a></p></div>';
-  }).join("");
+  };
+  const govRows=FSRC.map((s,i)=>isGov(i)?frow(s,i):"").join("");
+  $("funderTable").innerHTML='<h4 class="fgroup">Philanthropic funders</h4>'+
+    FSRC.map((s,i)=>isGov(i)?"":frow(s,i)).join("")+
+    (govRows?'<h4 class="fgroup">Government, shown separately</h4>'+govRows:'');
 
   /* share of organisations against share of funding, ring by ring */
   const rows=RING_ORDER.map(k=>{
@@ -1250,7 +1273,8 @@ function renderMoney(){
         money(A[inRing[0]].total)+').':''));
   }
   if(fsel==null&&mineTotal){
-    const share=FSRC.map((s,i)=>({i:i,v:sum(mine.filter(g=>g[5]===i))})).sort((a,b)=>b.v-a.v);
+    const share=FSRC.map((s,i)=>({i:i,v:isGov(i)?0:sum(mine.filter(g=>g[5]===i))}))
+      .sort((a,b)=>b.v-a.v);
     notes.push('<b>Who gives.</b> Of the money reaching these organisations, '+pct(share[0].v,mineTotal)+
       ' came from '+funderName(share[0].i)+(share[1]&&share[1].v?' and '+pct(share[1].v,mineTotal)+
       ' from '+funderName(share[1].i):'')+'. A few very large grants carry most of the weight, so '+
@@ -1259,10 +1283,20 @@ function renderMoney(){
   if(ranked.length>=5) notes.push('<b>Concentration.</b> The five largest recipients received '+
     pct(ranked.slice(0,5).reduce((s,id)=>s+A[id].total,0),mineTotal)+' of the money that '+
     'reached these organisations. '+(list.length-ranked.length)+' of the '+list.length+
-    ' received none of these grants.');
+    ' received none of '+(gov?'these awards.':'these grants.'));
   /* grantmaking grants, and grants to funders that are in this data themselves,
      move on to others: possibly counted twice, possibly lost from view */
-  const passed=mine.filter(g=>/grantmaking|regrant/i.test(g[4])||GIVER[g[2]]!=null);
+  if(gov&&mineTotal){
+    /* most federal money here buys products rather than funding research */
+    const bought=mine.filter(g=>/doses|treatment courses|procure|production|donation|purchase|stockpile/i
+      .test(g[4]));
+    notes.push('<b>Purchases, not research.</b> '+pct(sum(bought),mineTotal)+' of this ('+
+      money(sum(bought))+') is for buying products such as COVID-19 vaccine doses and treatment '+
+      'courses, mostly through the Department of the Army for Operation Warp Speed. It is money '+
+      'paid to these organisations, not grants for their research, which is why it dwarfs every '+
+      'philanthropic funder.');
+  }
+  const passed=gov?[]:mine.filter(g=>/grantmaking|regrant/i.test(g[4])||GIVER[g[2]]!=null);
   if(passed.length){
     const by={}; passed.forEach(g=>{by[g[2]]=(by[g[2]]||0)+g[1]});
     const lead=Object.keys(by).sort((a,b)=>by[b]-by[a])[0], o=byId[lead];
@@ -1299,7 +1333,7 @@ function renderMoney(){
   $("topMoney").innerHTML=ranked.length?ranked.slice(0,10).map(id=>{
     const o=byId[id], F=A[id];
     return '<li><button class="tile" data-id="'+o.id+'">'+logoHTML(o)+'<span>'+esc(o.name)+
-      '</span></button><span class="gn">'+plural(F.n,"grant")+'</span><span class="amt">'+
+      '</span></button><span class="gn">'+plural(F.n,gov?"award":"grant")+'</span><span class="amt">'+
       money(F.total)+'</span></li>';
   }).join(""):'<li>None of the matching organisations received these grants.</li>';
 
@@ -1331,7 +1365,8 @@ function openOrg(id){
     f("Worst-case pandemic risk",o.gcbr
       ?"Yes, works explicitly on global catastrophic biological risk"
       :"Not recorded as working on worst-case risk")+
-    (FUNDING?f("Biosecurity grants received",fundHTML(o.id)):"")+
+    (FUNDING?f("Philanthropic biosecurity grants received",fundHTML(o.id)):"")+
+    (FUNDING&&GOVF[o.id]?f("US federal biosecurity awards",govHTML(o.id)):"")+
     (FUNDING&&GIVER[o.id]!=null?f("Biosecurity grants given",giverHTML(GIVER[o.id])):"")+
     (o.extra?f("Source","Added by this map. Not yet in the biosecurity.world dataset, so "+
       "its classification is this map's, not theirs."):"")+
@@ -1428,8 +1463,14 @@ $("fundToggle").onclick=e=>{
 if(!FUNDING||!Object.keys(FUND).length){$("fundToggle").hidden=true; $("moneyTab").hidden=true}
 /* funder picker in the funding view, and "show its grants" links in the drawer */
 state.funder="";
-FSRC.forEach((s,i)=>{const o=document.createElement("option"); o.value=i; o.textContent=s.funder;
-  $("fundSel").appendChild(o)});
+FSRC.forEach((s,i)=>{if(isGov(i)) return; const o=document.createElement("option"); o.value=i;
+  o.textContent=s.funder; $("fundSel").appendChild(o)});
+if(GG.length){
+  const og=document.createElement("optgroup"); og.label="Government, shown separately";
+  FSRC.forEach((s,i)=>{if(!isGov(i)) return; const o=document.createElement("option"); o.value=i;
+    o.textContent=s.funder; og.appendChild(o)});
+  $("fundSel").appendChild(og);
+}
 $("fundSel").onchange=e=>{state.funder=e.target.value; render()};
 document.addEventListener("click",e=>{
   const a=e.target.closest&&e.target.closest(".showfunder"); if(!a) return;

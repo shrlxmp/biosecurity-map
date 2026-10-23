@@ -1,0 +1,26 @@
+{
+ "_comment": "Organisations on the map and the exact names they appear under in USAspending.gov, checked by hand with its recipient search. Keys are map labels. A value is a list of names, or an object with names plus a description regex for recipients whose awards mostly belong to someone else (MIT Lincoln Laboratory's contracts are made out to MIT). University-based centres (Johns Hopkins CHS, Georgetown CGHSS, CIDRAP and others) are left out: their awards go to the university and can't be told apart. NTI, CEPI and the Institute for Progress have no federal awards listed.",
+ "recipients": {
+  "Moderna": ["MODERNATX, INC.", "MODERNATX  INC.", "MODERNA US, INC.", "MODERNA US  INC."],
+  "Pfizer": ["PFIZER INC", "PFIZER INC."],
+  "Merck": ["MERCK SHARP & DOHME CORP.", "MERCK SHARP & DOHME LLC", "MERCK & CO., INC."],
+  "Novavax": ["NOVAVAX INC"],
+  "Vir Biotechnology": ["VIR BIOTECHNOLOGY, INC."],
+  "Mammoth Biosciences": ["MAMMOTH BIOSCIENCES INC"],
+  "Roche": ["ROCHE MOLECULAR SYSTEMS INC.", "ROCHE MOLECULAR SYSTEMS, INC."],
+  "Gryphon Scientific @ Deloitte": ["GRYPHON SCIENTIFIC, LLC"],
+  "RTX BBN Technologies": ["RTX BBN TECHNOLOGIES, INC.", "RAYTHEON BBN TECHNOLOGIES CORP.", "BBN TECHNOLOGIES CORP."],
+  "Aclid": ["ACLID, INC."],
+  "Valthos": ["VALTHOS INC."],
+  "Battelle": ["BATTELLE MEMORIAL INSTITUTE", "BATTELLE NATIONAL BIODEFENSE INSTITUTE, LLC"],
+  "Broad Institute @ MIT, Harvard": ["THE BROAD INSTITUTE, INC"],
+  "RAND": ["RAND CORPORATION"],
+  "Global Health Policy Center at the Center for Strategic and International Studies (CSIS)": ["CENTER FOR STRATEGIC AND INTERNATIONAL STUDIES, INC"],
+  "Lawrence Livermore National Laboratory (LLNL)": ["LAWRENCE LIVERMORE NATIONAL SECURITY, LLC"],
+  "Los Alamos National Laboratory (LANL)": ["TRIAD NATIONAL SECURITY, LLC", "TRIAD NATIONAL SECURITY  LLC", "LOS ALAMOS NATIONAL SECURITY, LLC"],
+  "Sandia National Laboratories (SNL)": ["NATIONAL TECHNOLOGY & ENGINEERING SOLUTIONS OF SANDIA, LLC"],
+  "Argonne National Laboratory (ANL)": ["UCHICAGO ARGONNE, LLC"],
+  "MIT Lincoln Laboratory": {"names": ["MASSACHUSETTS INSTITUTE OF TECHNOLOGY"], "description": "LINCOLN LAB"},
+  "Gavi, the Vaccine Alliance": ["GAVI ALLIANCE"]
+ }
+}

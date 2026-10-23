@@ -369,10 +369,140 @@ def wellcome():
     }
 
 
+# ---------------------------------------------------------------- US federal government
+
+USASPENDING = "https://api.usaspending.gov/api/v2/search/spending_by_award/"
+# departments that fund biodefense and pandemic work; Energy (national-lab
+# operating contracts) and Veterans Affairs (routine drug purchases) are left out
+US_AGENCIES = ["Department of Health and Human Services", "Department of Defense",
+               "Department of Homeland Security", "Agency for International Development",
+               "Department of State"]
+# preparedness is the whole remit of HHS's preparedness office (BARDA's parent),
+# so its awards count whatever their description says ("Biomedical (advanced)")
+ASPR = "Office of Assistant Secretary for Preparedness and Response"
+# ...except its chemical, radiological and nuclear work
+NOT_BIO = re.compile(r"sulfur mustard|mustard gas|nerve agent|organophosph|chlorine|cyanide|"
+                     r"radiolog|radiation|nuclear|\barcs?\b|burn injur|thermal burn|co-60|"
+                     r"cobalt|cesium", re.I)
+BIO_NAMED = re.compile(r"biolog|pathogen|virus|viral|vaccin|bacteri|anthrax|smallpox|covid|"
+                       r"sars|ebola|influenza|pandemic|toxin|plague|filovir", re.I)
+US_TYPES = {"contract": ["A", "B", "C", "D"], "grant": ["02", "03", "04", "05"]}
+US_BIO = re.compile(
+    GATES_BIO.pattern + r"|sars-cov-2|mrna-1273|bnt162|biodefen|"
+    # not the combined "chemical, biological, radiological and nuclear" phrase on
+    # its own: those programmes are mostly chemical and radiological testing
+    r"biological (?:threat|weapon|agent|defense|warfare)|select agent|"
+    r"anthrax|smallpox|botulinum|\bplague\b|tularemia|medical countermeasure|"
+    r"\bbarda\b|project nextgen|warp speed|pandemic influenza|\bh7n9\b|biosurveillance|"
+    r"biothreat|filovir|equine encephalitis|biowatch|\bnbacc\b|"
+    # named pandemic and biodefense products, whose award descriptions often give
+    # only the product name (Paxlovid is "oral protease inhibitor PF-07321332")
+    r"paxlovid|nirmatrelvir|pf-07321332|molnupiravir|mk-4482|remdesivir|bebtelovimab|"
+    r"sotrovimab|bamlanivimab|casirivimab|regen-cov|evusheld|tixagevimab|ervebo|jynneos|"
+    r"acam2000|tpoxx|tecovirimat|brincidofovir|biothrax|cyfendus|anthrasil|raxibacumab|"
+    r"obiltoxaximab", re.I)
+# sent to the API so it only returns likely awards; the local rule above decides
+US_KEYWORDS = ["pandemic", "covid", "covid-19", "sars-cov-2", "coronavirus", "biodefense",
+               "anthrax", "smallpox", "ebola", "countermeasure", "biological", "barda",
+               "mrna-1273", "h5n1", "avian", "mpox", "monkeypox", "marburg", "nipah",
+               "filovirus", "plague", "botulinum", "outbreak", "biothreat", "nextgen",
+               "paxlovid", "molnupiravir", "ervebo", "jynneos", "pf-07321332"]
+
+
+def us_post(body):
+    request = urllib.request.Request(USASPENDING, data=json.dumps(body).encode(),
+                                     headers=dict(UA, **{"content-type": "application/json"}))
+    with urllib.request.urlopen(request, timeout=120) as response:
+        return json.loads(response.read())
+
+
+def us_awards(name, codes, scope):
+    """Every award for one recipient search, page by page, largest first."""
+    for page in range(1, 41):
+        data = us_post({
+            "filters": dict({"recipient_search_text": [name], "award_type_codes": codes,
+                             "time_period": [{"start_date": "2007-10-01",
+                                              "end_date": "2026-09-30"}]}, **scope),
+            "fields": ["Award ID", "Recipient Name", "Award Amount", "Awarding Agency",
+                       "Awarding Sub Agency", "Description", "Start Date"],
+            "limit": 100, "page": page, "sort": "Award Amount", "order": "desc"})
+        yield from data.get("results") or []
+        if not (data.get("page_metadata") or {}).get("hasNext"):
+            return
+    print("  note: stopped after 40 pages for %s; only its smallest awards are missed" % name)
+
+
+def us_federal():
+    config = json.load(io.open(os.path.join(HERE, "government_recipients.json"), encoding="utf-8"))
+    every_agency = {"keywords": US_KEYWORDS,
+                    "agencies": [{"type": "awarding", "tier": "toptier", "name": a}
+                                 for a in US_AGENCIES]}
+    aspr_only = {"agencies": [{"type": "awarding", "tier": "subtier", "name": ASPR}]}
+    keep, seen, checked = [], set(), 0
+    for label, spec in sorted(config["recipients"].items()):
+        names = spec["names"] if isinstance(spec, dict) else spec
+        wanted = {re.sub(r"\s+", " ", n).upper() for n in names}
+        must = re.compile(spec["description"], re.I) if isinstance(spec, dict) else None
+        for name in names:
+            for kind, codes in US_TYPES.items():
+                for scope in (every_agency, aspr_only):
+                    for r in us_awards(name, codes, scope):
+                        checked += 1
+                        key = r.get("generated_internal_id") or r.get("Award ID")
+                        who = re.sub(r"\s+", " ", r.get("Recipient Name") or "").upper()
+                        desc = r.get("Description") or ""
+                        amount = r.get("Award Amount") or 0
+                        if key in seen or who not in wanted or amount <= 0:
+                            continue
+                        if must and not must.search(desc):
+                            continue
+                        if NOT_BIO.search(desc) and not BIO_NAMED.search(desc):
+                            continue  # chemical, radiological or nuclear work
+                        from_aspr = (r.get("Awarding Sub Agency") or "") == ASPR
+                        if not (from_aspr or US_BIO.search(desc)):
+                            continue
+                        if GATES_ROUTINE.search(desc) and not GATES_STRONG.search(desc):
+                            continue
+                        year = re.match(r"(\d{4})", r.get("Start Date") or "")
+                        if not year:
+                            continue
+                        seen.add(key)
+                        keep.append({"id": key, "year": int(year.group(1)), "recipient": label,
+                                     "title": "%s (%s, %s)" % (
+                                         re.sub(r"\s+", " ", desc).strip().capitalize()[:240],
+                                         r.get("Awarding Sub Agency") or r.get("Awarding Agency"),
+                                         kind),
+                                     "amount": round(amount)})
+    require(checked >= 100, "only %d awards came back; is the API down?" % checked)
+    require(keep, "no awards passed the rule")
+    keep.sort(key=lambda g: (-g["year"], str(g["id"])))
+    return {
+        "funder": "US federal government",
+        "funder_org": None,
+        "kind": "government",
+        "rule": ("Contracts, grants and cooperative agreements from the departments of Health and "
+                 "Human Services (including NIH and CDC), Defense and Homeland Security, USAID and "
+                 "State, whose description names pandemic or biodefense work (pandemics, COVID-19, "
+                 "biological threats, anthrax, smallpox, medical countermeasures, or named products "
+                 "such as Paxlovid), leaving out routine diseases. Every award from HHS's "
+                 "preparedness office (ASPR, which runs BARDA) counts, except its chemical, "
+                 "radiological and nuclear work. Only for a hand-checked list "
+                 "of organisations on the map: university-based centres are left out because their "
+                 "awards go to the university. Awards made through contracting consortia (much of "
+                 "Operation Warp Speed, including Novavax's main COVID-19 award) are listed under "
+                 "the consortium and so are missing. Amounts are total obligations, including "
+                 "purchases such as vaccine doses."),
+        "scope": "on_map_only",
+        "source_url": "https://www.usaspending.gov/",
+        "exported_at": None,
+        "grants": keep,
+    }
+
+
 SOURCES = {"coefficient_giving": coefficient_giving, "gates": gates,
            "sentinel_bio": sentinel_bio, "sff": sff,
            "openai_foundation": openai_foundation, "longview": longview,
-           "wellcome": wellcome}
+           "wellcome": wellcome, "us_federal": us_federal}
 
 
 def main():

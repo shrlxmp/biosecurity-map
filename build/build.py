@@ -243,12 +243,14 @@ def load_funding(orgs):
         for name, amount in sorted(unmatched.items(), key=lambda kv: -kv[1])[:3]:
             print("      not on the map: $%.1fM %s" % (amount / 1e6, name or "(unnamed)"))
         sources.append({"key": doc["key"], "funder": doc["funder"], "rule": doc["rule"],
+                        "kind": doc.get("kind", "philanthropic"),
                         "scope": doc["scope"], "url": doc["source_url"],
                         "exported_at": doc.get("exported_at"),
                         "org": by_label.get(doc.get("funder_org"))})
-    # biggest funder first, so the page lists them in that order
+    # philanthropic funders first, then government; biggest first within each
     totals = {i: sum(g[1] for g in grants if g[5] == i) for i in range(len(sources))}
-    order = sorted(range(len(sources)), key=lambda i: -totals[i])
+    order = sorted(range(len(sources)),
+                   key=lambda i: (sources[i]["kind"] == "government", -totals[i]))
     remap = {old: new for new, old in enumerate(order)}
     for g in grants:
         g[5] = remap[g[5]]

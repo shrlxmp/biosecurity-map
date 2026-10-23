@@ -111,6 +111,31 @@ grant titles (for example *GAVI Alliance* for Gavi, or *Blue Ribbon Study Panel 
 the former name of the Bipartisan Commission on Biodefense). The build prints, for each funder,
 the largest recipients it could not match.
 
+### Government funding
+
+US federal awards are shown as a separate layer and never added to the philanthropic totals.
+They come from [USAspending.gov](https://www.usaspending.gov/), which covers contracts, grants
+and cooperative agreements across federal agencies, companies included.
+
+- **Who:** a hand-checked list in `build/government_recipients.json` of the exact names
+  organisations on the map appear under (*MODERNATX, INC.*, *TRIAD NATIONAL SECURITY, LLC* for
+  Los Alamos). University-based centres such as Johns Hopkins CHS or CIDRAP are left out,
+  because their awards go to the university and can't be told apart.
+- **From whom:** Health and Human Services (including NIH and CDC), Defense, Homeland
+  Security, USAID and State. Energy and Veterans Affairs are left out, because their awards to
+  these organisations are national-lab operating contracts and routine drug purchases.
+- **What counts:** the award description has to name pandemic or biodefence work, or a named
+  product such as Paxlovid or the Ervebo Ebola vaccine, and routine diseases are left out.
+  Every award from HHS's preparedness office (ASPR, which runs BARDA) counts, because
+  preparedness is its whole remit, except its chemical, radiological and nuclear work.
+- **What's missing:** awards made through contracting consortia, which USAspending lists under
+  the consortium. Much of Operation Warp Speed went this way, including Novavax's main
+  COVID-19 award. Other governments are not covered yet.
+
+Amounts are total obligations. About three quarters of the money is purchases (COVID-19 vaccine
+doses and treatment courses), so the page says so rather than treating it as research funding.
+The fetch takes a few minutes, because it pages through each organisation's awards.
+
 What the funding numbers are not:
 
 - **Not the size of the field.** These are seven philanthropic funders. Governments and industry
@@ -163,6 +188,7 @@ python build/fetch_logos.py          # refresh cached favicons -> build/logos.js
 python build/build.py                # rebuild index.html from build/entries.csv
 python build/build.py --refresh      # re-download entries.csv from biosecurity.world first
 python build/fetch_funding.py        # refresh funders' grants -> build/funding/*.json
+python build/fetch_funding.py us_federal   # just one funder (keys are the file names)
 ```
 
 `build/template.html` is the page with `__ORGS__`, `__LOGOS__`, `__FUNDING__` and `__COUNT__`
