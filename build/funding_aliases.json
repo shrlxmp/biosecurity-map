@@ -1,5 +1,5 @@
 {
- "_comment": "Links Coefficient Giving grant recipients to organisations on the map when the names differ. Values are map labels from entries.csv. by_title rules are checked first and need both the recipient and a title match (a regular expression). build.py warns about any label that no longer exists. Every entry was checked by hand against the grant titles.",
+ "_comment": "Links grant recipients to organisations on the map when the names differ, for every funder in build/funding/. Values are map labels. by_title rules are checked first and need both the recipient and a title (or purpose) match, as a regular expression. build.py warns about any label that no longer exists. Every entry was checked by hand against the grant titles.",
  "by_title": [
   {
    "recipient": "SecureBio",
@@ -48,6 +48,18 @@
    "title": "Big if True Science|BiTS",
    "org": "Renaissance Philanthropy - Big if True Science (BiTS) Biosecurity Accelerator",
    "why": "the accelerator is the entry on the map; the fund's other grants are not"
+  },
+  {
+   "recipient": "Center for Strategic & International Studies, Inc.",
+   "title": "health security",
+   "org": "Global Health Policy Center at the Center for Strategic and International Studies (CSIS)",
+   "why": "CSIS's health security work is its Global Health Policy Center"
+  },
+  {
+   "recipient": "Robert Koch Institute",
+   "title": "WHO Hub for Pandemic",
+   "org": "The WHO Hub for Pandemic and Epidemic Intelligence (WHO Pandemic Hub)",
+   "why": "the grant was to support the WHO Hub, which is its own entry on the map"
   }
  ],
  "by_recipient": {
@@ -61,6 +73,10 @@
   "MIT Media Lab": "Sculpting Evolution Group (Esvelt Lab) @ MIT Media Lab",
   "ERA": "ERA Fellowship",
   "InterAcademy Partnership": "Interacademy Partnership (IAP) Biosecurity Working Group",
-  "CSIRO": "Australian Centre for Disease Preparedness (ACDP) @ CSIRO"
+  "CSIRO": "Australian Centre for Disease Preparedness (ACDP) @ CSIRO",
+  "GAVI Alliance": "Gavi, the Vaccine Alliance",
+  "Coalition for Epidemic Preparedness Innovation": "Coalition for Epidemic Preparedness Innovations (CEPI)",
+  "Nuclear Threat Initiative Biosecurity Programme (NTI | Bio)": "Nuclear Threat Initiative | bio (NTI.bio)",
+  "Center for Communicable Disease Dynamics (Harvard T.H. Chan School)": "Center for Communicable Disease Dynamics (CCDD) @ Harvard T.H. Chan School of Public Health"
  }
 }

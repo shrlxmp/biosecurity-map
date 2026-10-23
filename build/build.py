@@ -13,6 +13,7 @@ logo are inlined, so it needs no server, no API and no network at run time.
 """
 import argparse
 import csv
+import glob
 import io
 import json
 import os
@@ -107,7 +108,8 @@ def to_org(row):
     }
 
 
-NAME_STOP = {"the", "inc", "llc", "ltd", "foundation", "corporation", "corp",
+# "foundation" is not on the list: "CDC Foundation" is not the CDC
+NAME_STOP = {"the", "inc", "llc", "ltd", "corporation", "corp",
              "of", "for", "and", "at", "a"}
 
 
@@ -180,15 +182,19 @@ def load_extras(upstream):
 
 
 def load_funding(orgs):
-    """Coefficient Giving's biosecurity grants, each linked to an organisation
-    on the map where the recipient is one. Returns None if the data is absent."""
-    path = os.path.join(HERE, "funding_cg.json")
-    if not os.path.exists(path):
-        print("! build/funding_cg.json missing - run build/fetch_funding.py "
-              "(the funding view is left empty without it)")
+    """Biosecurity grants from every funder in build/funding/, each linked to an
+    organisation on the map where the recipient is one.
+
+    Each funder file says which recipients its grants count for: "all", only
+    organisations on the map ("on_map_only", for funders whose biosecurity
+    rule is ours and too loose to trust elsewhere), or a hand-checked list
+    ("listed_only"). Returns None if there is no funding data at all."""
+    folder = os.path.join(HERE, "funding")
+    paths = sorted(glob.glob(os.path.join(folder, "*.json")))
+    if not paths:
+        print("! build/funding/ is empty - run build/fetch_funding.py "
+              "(the funding view is left out without it)")
         return None
-    with io.open(path, encoding="utf-8") as handle:
-        doc = json.load(handle)
     with io.open(os.path.join(HERE, "funding_aliases.json"), encoding="utf-8") as handle:
         aliases = json.load(handle)
 
@@ -201,30 +207,52 @@ def load_funding(orgs):
 
     def org_for(grant):
         for rule in aliases["by_title"]:
-            if (grant["org"] == rule["recipient"]
+            if (grant["recipient"] == rule["recipient"]
                     and re.search(rule["title"], grant["title"])):
                 return by_label.get(rule["org"])
-        if grant["org"] in aliases["by_recipient"]:
-            return by_label.get(aliases["by_recipient"][grant["org"]])
-        return keys.get(norm_name(grant["org"]))
+        if grant["recipient"] in aliases["by_recipient"]:
+            return by_label.get(aliases["by_recipient"][grant["recipient"]])
+        return keys.get(norm_name(grant["recipient"]))
 
-    grants, unmatched = [], {}
-    for grant in doc["grants"]:
-        org_id = org_for(grant)
-        amount = grant["amount"] or 0
-        if org_id is None:
-            unmatched[grant["org"]] = unmatched.get(grant["org"], 0) + amount
-        # compact rows: year, amount, organisation id (or null), recipient, title
-        grants.append([grant["year"], amount, org_id, grant["org"], grant["title"]])
-
-    total = sum(g[1] for g in grants)
-    on_map = sum(g[1] for g in grants if g[2] is not None)
-    print("  funding: %d grants, $%.1fM, of which $%.1fM (%d%%) to %d organisations on the map"
-          % (len(grants), total / 1e6, on_map / 1e6, round(100 * on_map / (total or 1)),
-             len({g[2] for g in grants if g[2] is not None})))
-    for name, amount in sorted(unmatched.items(), key=lambda kv: -kv[1])[:8]:
-        print("    not on the map: $%.1fM %s" % (amount / 1e6, name or "(unnamed)"))
-    return {"exported_at": doc.get("exported_at"), "grants": grants}
+    sources, grants = [], []
+    for path in paths:
+        with io.open(path, encoding="utf-8") as handle:
+            doc = json.load(handle)
+        only = {by_label.get(label) for label in doc.get("only_orgs") or []}
+        for label in doc.get("only_orgs") or []:
+            if label not in by_label:
+                print("! %s counts grants for %r, which is not on the map" % (doc["key"], label))
+        index, kept, unmatched = len(sources), 0, {}
+        for grant in doc["grants"]:
+            org_id = org_for(grant)
+            if doc["scope"] == "on_map_only" and org_id is None:
+                continue
+            if doc["scope"] == "listed_only" and org_id not in only:
+                continue
+            if org_id is None:
+                unmatched[grant["recipient"]] = (unmatched.get(grant["recipient"], 0)
+                                                 + (grant["amount"] or 0))
+            kept += 1
+            # compact rows: year, amount, organisation id (or null), recipient, title, funder
+            grants.append([grant["year"], grant["amount"] or 0, org_id, grant["recipient"],
+                           grant["title"], index])
+        rows = [g for g in grants if g[5] == index]
+        on_map = sum(g[1] for g in rows if g[2] is not None)
+        print("  funding %-30s %4d grants counted, $%.1fM on the map, $%.1fM elsewhere"
+              % (doc["funder"], kept, on_map / 1e6, (sum(g[1] for g in rows) - on_map) / 1e6))
+        for name, amount in sorted(unmatched.items(), key=lambda kv: -kv[1])[:3]:
+            print("      not on the map: $%.1fM %s" % (amount / 1e6, name or "(unnamed)"))
+        sources.append({"key": doc["key"], "funder": doc["funder"], "rule": doc["rule"],
+                        "scope": doc["scope"], "url": doc["source_url"],
+                        "exported_at": doc.get("exported_at"),
+                        "org": by_label.get(doc.get("funder_org"))})
+    # biggest funder first, so the page lists them in that order
+    totals = {i: sum(g[1] for g in grants if g[5] == i) for i in range(len(sources))}
+    order = sorted(range(len(sources)), key=lambda i: -totals[i])
+    remap = {old: new for new, old in enumerate(order)}
+    for g in grants:
+        g[5] = remap[g[5]]
+    return {"sources": [sources[i] for i in order], "grants": grants}
 
 
 def main():
