@@ -32,6 +32,7 @@
   --seq:#5b9ccc;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{background:var(--paper)}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-text);
   font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;font-optical-sizing:auto}
@@ -116,6 +117,11 @@ svg#atlas.drag{cursor:grabbing}
   text-anchor:middle}
 #atlas .node .gdot{fill:var(--ink);stroke:var(--paper);stroke-width:1}
 #atlas .node:hover .halo{stroke-width:2.4}
+#atlas .disc{fill:color-mix(in oklab,var(--nc) 20%,transparent);
+  stroke:color-mix(in oklab,var(--nc) 60%,transparent);stroke-width:.8}
+#atlas .disc.dim{opacity:.12}
+.hint .toggle{font-size:12px;margin-right:12px;padding:0}
+#fundKey{margin-right:12px;color:var(--ink-2)}
 #atlas .node.dim{opacity:.13}
 #atlas .node.dim:hover{opacity:.6}
 
@@ -197,6 +203,35 @@ dl.gl dd{margin:2px 0 0;font-size:15px;color:var(--ink-2)}
 .prose p{margin:0 0 12px;color:var(--ink-2);font-size:16.5px}
 .prose b{color:var(--ink)}
 
+/* ---------- money ---------- */
+.rm-key{font-family:var(--f-label);font-size:12px;color:var(--ink-3);margin:0 0 6px}
+.rm{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center;padding:8px 0;
+  border-bottom:1px solid var(--hair);font-family:var(--f-label);font-size:13px}
+.rm .lab{font-weight:600}
+.rm .b{display:flex;align-items:center;gap:8px;height:17px}
+.rm .b i{display:block;height:9px;flex:none}
+.rm .b i.o{background:var(--hair-2)}
+.rm .b span{color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.years{display:flex;align-items:flex-end;gap:6px;height:220px;padding-top:6px;overflow-x:auto}
+.yr{flex:1;min-width:34px;height:100%;display:flex;flex-direction:column;align-items:center;
+  justify-content:flex-end}
+.yr .stack{width:100%;max-width:46px;display:flex;flex-direction:column-reverse}
+.yr .stack i{display:block;width:100%;min-height:1px}
+.yr .yv{font-family:var(--f-label);font-size:11px;color:var(--ink-2);margin-bottom:4px;
+  white-space:nowrap;font-variant-numeric:tabular-nums}
+.yr .yl{font-family:var(--f-label);font-size:11.5px;color:var(--ink-3);width:100%;
+  text-align:center;border-top:1px solid var(--ink);padding-top:4px}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:0 36px}
+ol.ranked{list-style:none;margin:6px 0 0;padding:0}
+ol.ranked li{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--hair);
+  font-size:15px}
+ol.ranked .tile{flex:1;min-width:0}
+ol.ranked .nm{flex:1;min-width:0}
+ol.ranked .gn{font-family:var(--f-label);font-size:12px;color:var(--ink-3);white-space:nowrap}
+ol.ranked .amt{font-family:var(--f-label);font-size:13px;font-weight:600;white-space:nowrap;
+  font-variant-numeric:tabular-nums;min-width:56px;text-align:right}
+ul.glist{margin:6px 0 0;padding:0 0 0 16px;font-size:14px;color:var(--ink-2)}
+
 /* ---------- grids ---------- */
 details.deep{margin-top:26px;border-top:1px solid var(--ink);padding-top:6px}
 .mx-note{font-size:15px;color:var(--ink-2);max-width:70ch;margin:8px 0 14px}
@@ -268,6 +303,9 @@ footer b{color:var(--ink)}
   .found-blocks{grid-template-columns:1fr 1fr}
   .brow,.axis{grid-template-columns:130px 1fr 32px}
   .pair{grid-template-columns:1fr 80px 28px}
+  .twocol{grid-template-columns:1fr}
+  .rm{grid-template-columns:96px 1fr}
+  .yr{min-width:28px}
   .status{margin-left:0;width:100%}
   svg#atlas{max-height:none}
 }
@@ -294,6 +332,7 @@ footer b{color:var(--ink)}
         <button class="tab" role="tab" aria-selected="false" data-view="chain">Chain view</button>
         <button class="tab" role="tab" aria-selected="false" data-view="gaps">Where the gaps are</button>
         <button class="tab" role="tab" aria-selected="false" data-view="links">How topics connect</button>
+        <button class="tab" role="tab" aria-selected="false" data-view="money" id="moneyTab">Where the money goes</button>
       </div>
     </div>
   </div>
@@ -335,9 +374,11 @@ footer b{color:var(--ink)}
     </div>
     <svg id="atlas" viewBox="0 0 880 880" role="img"
       aria-label="Concentric map of __COUNT__ biosecurity organisations: three defensive barriers around the population at the centre, inside an outer ring for the foundation they rely on"></svg>
-    <figcaption class="hint"><span class="h-fine">Ctrl or &#8984; + scroll to zoom, drag to pan,
-      click a dot for details.</span><span class="h-coarse">Use + and &minus; to zoom. Tap a dot
-      for details.</span></figcaption>
+    <figcaption class="hint"><button class="toggle" id="fundToggle" aria-pressed="false">Show
+      funding</button> <span id="fundKey" hidden>Shaded discs show Coefficient Giving's biosecurity
+      grants to each organisation, by area.</span> <span class="h-fine">Ctrl or &#8984; + scroll to
+      zoom, drag to pan, click a dot for details.</span><span class="h-coarse">Use + and &minus; to
+      zoom. Tap a dot for details.</span></figcaption>
   </figure>
 
   <div class="key" id="atlasKey"></div>
@@ -423,6 +464,43 @@ footer b{color:var(--ink)}
   </details>
 </section>
 
+<!-- ============ MONEY ============ -->
+<section id="view-money" hidden>
+  <div class="sec-head">
+    <h2>Where the money goes</h2>
+    <p id="moneyLede"></p>
+    <p>This is one funder, and philanthropic money only. Governments, industry and other
+      foundations spend far more on pandemic preparedness and are not counted here. Read the
+      numbers as where this funder has put its money, not as the size of each part of the
+      field.</p>
+  </div>
+  <div class="chart">
+    <h3 class="sh">Share of organisations and share of funding, by ring</h3>
+    <p class="cap">Funding here counts only grants to organisations on the map. Amounts are as
+      awarded, and a multi-year grant counts in the year it was made.</p>
+    <div id="ringMoney"></div>
+  </div>
+  <div class="prose" id="moneyNotes"></div>
+  <div class="chart">
+    <h3 class="sh">Grants by year</h3>
+    <p class="cap">Coloured by the ring of the organisation that received the money. Hatched grey is
+      money to recipients that are not on the map.<span id="partYear"></span></p>
+    <div class="years" id="yearMoney"></div>
+  </div>
+  <div class="twocol">
+    <div class="chart">
+      <h3 class="sh">Largest recipients on the map</h3>
+      <ol class="ranked" id="topMoney"></ol>
+    </div>
+    <div class="chart" id="offMapBox">
+      <h3 class="sh">Funded, but not on the map</h3>
+      <p class="cap">Recipients of these grants that the biosecurity.world dataset does not list.
+        Some are universities or funds that pass money on. Others may be gaps in the dataset.</p>
+      <ol class="ranked" id="offMap"></ol>
+    </div>
+  </div>
+</section>
+
 <footer>
   <p><b>About the data.</b> This map is a prototype built on the open dataset published by
   <a href="https://biosecurity.world/" target="_blank" rel="noopener">biosecurity.world</a>
@@ -432,6 +510,12 @@ footer b{color:var(--ink)}
   there are left out, because they are publications rather than organisations and most repeat an
   organisation already on the map. Logos are each organisation's own favicon, shown for
   identification.</p>
+  <p><b>About the funding.</b> Grants are Coefficient Giving's (formerly Open Philanthropy), in
+  its two biosecurity focus areas, from the export kept by
+  <a href="https://trace.manifund.org/" target="_blank" rel="noopener">Trace</a>, Manifund's
+  funding database. Recipients are matched to organisations on the map by name, plus a short
+  hand-checked list of aliases. A grant to a name the map does not use counts as not on the
+  map.</p>
   <p><b>Reading the map.</b> The rings are a diagram, not geography. Where a dot sits within a
   ring means nothing, only which ring it is in. Each organisation appears once, at its main
   classification in the dataset, so ring counts run lower than on biosecurity.world, which lists
@@ -455,6 +539,9 @@ footer b{color:var(--ink)}
 <script>
 const ORGS = __ORGS__;
 const LOGOS = __LOGOS__;
+/* Coefficient Giving biosecurity grants: {exported_at, grants:[[year, usd,
+   organisation id or null, recipient, title], ...]}, or null without data */
+const FUNDING = __FUNDING__;
 
 /* layers, ordered from the centre outwards = latest to earliest intervention */
 const LAYERS=[
@@ -559,6 +646,7 @@ function arcPath(r,a0,a1,sweep){
 const rnd=s=>{const x=Math.sin(s*12.9898)*43758.5453; return x-Math.floor(x)};
 
 let atlasBuilt=false, cam={k:1,x:0,y:0}, camG=null;
+const nodePos={};
 
 function buildAtlas(){
   const svg=$("atlas");
@@ -677,6 +765,16 @@ function buildAtlas(){
       }
     });
   });
+  /* funding discs sit under the dots, hidden until the toggle is on */
+  const discG=mk("g",{id:"discs"}); discG.style.display="none";
+  const mxFund=Math.max(1,...Object.values(FUND).map(f=>f.total));
+  Object.keys(FUND).forEach(id=>{
+    const p=nodePos[id]; if(!p) return;
+    discG.appendChild(mk("circle",{cx:p[0].toFixed(1),cy:p[1].toFixed(1),class:"disc",
+      "data-id":id,style:"--nc:"+colorOf(byId[id].cat),
+      r:(BR+2+30*Math.sqrt(FUND[id].total/mxFund)).toFixed(1)}));
+  });
+  camG.appendChild(discG);
   camG.appendChild(nodesG);
   atlasBuilt=true;
   applyCam();
@@ -702,12 +800,13 @@ function node(o,rad,ang){
   }
   if(o.gcbr) g.appendChild(mk("circle",{cx:(x+BR-2.5).toFixed(1),
     cy:(y-BR+2.5).toFixed(1),r:2.6,class:"gdot"}));
+  nodePos[o.id]=[x,y];
   return g;
 }
 function paintAtlas(){
   if(!atlasBuilt) return;
   const f=filtering();
-  $("atlas").querySelectorAll(".node").forEach(n=>{
+  $("atlas").querySelectorAll(".node,.disc").forEach(n=>{
     n.classList.toggle("dim", f && !match(byId[+n.getAttribute("data-id")]));
   });
 }
@@ -1021,6 +1120,119 @@ function renderLinksGrid(){
   ramp($("rampOverlap"),mx,"shared");
 }
 
+/* ---------- money ---------- */
+const FG=FUNDING?FUNDING.grants:[];
+/* per-organisation totals, keyed by map id */
+const FUND={};
+FG.forEach(g=>{
+  if(g[2]==null||!byId[g[2]]) return;
+  const f=FUND[g[2]]||(FUND[g[2]]={total:0,n:0,y0:9999,y1:0,list:[]});
+  f.total+=g[1]; f.n++; f.y0=Math.min(f.y0,g[0]); f.y1=Math.max(f.y1,g[0]); f.list.push(g);
+});
+const RING_ORDER=["Prevention","Detection","Response","Transversal"];
+const sum=a=>a.reduce((s,g)=>s+g[1],0);
+const pct=(a,b)=>Math.round(100*a/(b||1))+"%";
+const money=v=>v>=1e6?"$"+(v/1e6).toFixed(v>=1e8?0:1).replace(/\.0$/,"")+"M"
+  :v>=1e3?"$"+Math.round(v/1e3)+"k":"$"+Math.round(v);
+function fundHTML(id){
+  const f=FUND[id];
+  if(!f) return "None found. It may be funded under another name, or by other funders.";
+  const top=f.list.slice().sort((a,b)=>b[1]-a[1]);
+  return money(f.total)+" in "+f.n+" grant"+(f.n>1?"s":"")+", "+
+    (f.y0===f.y1?f.y0:f.y0+"–"+f.y1)+'<ul class="glist">'+
+    top.slice(0,4).map(g=>'<li>'+g[0]+', '+money(g[1])+': '+esc(g[4])+'</li>').join("")+
+    (f.n>4?'<li>and '+(f.n-4)+' more</li>':'')+'</ul>';
+}
+function renderMoney(){
+  if(!FUNDING){$("moneyLede").textContent="Funding data is not in this build."; return}
+  const list=sel(), ids=new Set(list.map(o=>o.id)), f=filtering();
+  const onMap=FG.filter(g=>g[2]!=null), mine=onMap.filter(g=>ids.has(g[2]));
+  const total=sum(FG), onTotal=sum(onMap), mineTotal=sum(mine);
+  const years=FG.map(g=>g[0]), y0=Math.min(...years), y1=Math.max(...years);
+  const funded=new Set(onMap.map(g=>g[2])).size;
+  $("moneyLede").innerHTML='Coefficient Giving, formerly Open Philanthropy, is one of the '+
+    'largest philanthropic funders in biosecurity. Since '+y0+' it has given <strong>'+
+    money(total)+'</strong> in '+FG.length+' grants through its biosecurity focus areas. <strong>'+
+    money(onTotal)+'</strong> of that ('+pct(onTotal,total)+') went to '+funded+' of the '+
+    ORGS.length+' organisations on this map.'+
+    (f?' The '+list.length+' organisations matching your filters received <strong>'+
+      money(mineTotal)+'</strong>.':'');
+
+  /* share of organisations against share of funding, ring by ring */
+  const rows=RING_ORDER.map(k=>{
+    const n=list.filter(o=>o.cat===k).length, m=sum(mine.filter(g=>byId[g[2]].cat===k));
+    return {k:k,n:n,m:m,os:n/(list.length||1),ms:m/(mineTotal||1)};
+  });
+  const scale=Math.max(.01,...rows.map(r=>Math.max(r.os,r.ms)));
+  $("ringMoney").innerHTML='<p class="rm-key">Grey bars are each ring\'s share of the '+
+    'organisations. Coloured bars are its share of the funding.</p>'+rows.map(r=>
+    '<div class="rm"><span class="lab">'+layerName(r.k)+'</span><div>'+
+    '<div class="b"><i class="o" style="width:'+(r.os/scale*50).toFixed(1)+'%"></i><span>'+
+      r.n+' organisation'+(r.n===1?'':'s')+', '+pct(r.os,1)+'</span></div>'+
+    '<div class="b"><i style="width:'+(r.ms/scale*50).toFixed(1)+'%;background:'+colorOf(r.k)+
+      '"></i><span>'+money(r.m)+', '+pct(r.ms,1)+'</span></div></div></div>').join("");
+
+  const notes=[], t=barrierStats().thin, tr=rows.find(r=>r.k===t.key);
+  if(tr&&mineTotal){
+    const inRing=Object.keys(FUND).filter(id=>ids.has(+id)&&byId[id].cat===t.key)
+      .sort((a,b)=>FUND[b].total-FUND[a].total);
+    notes.push('<b>'+t.key+'.</b> '+t.key+' organisations are '+pct(tr.os,1)+' of the '+
+      'organisations here and received '+pct(tr.ms,1)+' of this money ('+money(tr.m)+').'+
+      (inRing.length?' The largest share went to '+esc(byId[inRing[0]].name)+' ('+
+        money(FUND[inRing[0]].total)+').':''));
+  }
+  const ranked=Object.keys(FUND).filter(id=>ids.has(+id)).sort((a,b)=>FUND[b].total-FUND[a].total);
+  if(ranked.length>=5) notes.push('<b>Concentration.</b> The five largest recipients received '+
+    pct(ranked.slice(0,5).reduce((s,id)=>s+FUND[id].total,0),mineTotal)+' of the money that '+
+    'reached these organisations. '+(list.length-ranked.length)+' of the '+list.length+
+    ' received none of these grants.');
+  /* grants for the recipient's own grantmaking move on to others we cannot see */
+  const passed=mine.filter(g=>/grantmaking|regrant/i.test(g[4]));
+  if(passed.length){
+    const by={}; passed.forEach(g=>{by[g[2]]=(by[g[2]]||0)+g[1]});
+    const lead=Object.keys(by).sort((a,b)=>by[b]-by[a])[0], o=byId[lead];
+    notes.push('<b>Money passed on.</b> '+money(sum(passed))+' of the money to these organisations was '+
+      'for their own grantmaking, '+(Object.keys(by).length>1?'most of it':'all of it')+' to '+esc(o.name)+
+      '. That money ends up with other organisations this page cannot see, so the share for '+
+      layerName(o.cat)+' above includes money it passed on.');
+  }
+  if(!f) notes.push('<b>Not on the map.</b> '+money(total-onTotal)+' ('+pct(total-onTotal,total)+
+    ') went to recipients the map does not list. The largest are at the bottom of this page.');
+  $("moneyNotes").innerHTML=notes.map(n=>'<p>'+n+'</p>').join("");
+
+  /* grants by year, stacked by ring, with off-map money in grey */
+  const yrs=[]; for(let y=y0;y<=y1;y++) yrs.push(y);
+  const parts=yrs.map(y=>{
+    const g=FG.filter(x=>x[0]===y);
+    const seg=RING_ORDER.map(k=>({k:k,v:sum(g.filter(x=>x[2]!=null&&ids.has(x[2])&&byId[x[2]].cat===k))}));
+    if(!f) seg.push({k:"off",v:sum(g.filter(x=>x[2]==null||!byId[x[2]]))});
+    return {y:y,seg:seg,t:seg.reduce((s,x)=>s+x.v,0)};
+  });
+  const ymx=Math.max(1,...parts.map(p=>p.t));
+  $("partYear").textContent=y1>=new Date().getFullYear()?" "+y1+" is the year so far.":"";
+  $("yearMoney").innerHTML=parts.map(p=>'<div class="yr"><span class="yv">'+(p.t?money(p.t):'')+
+    '</span><div class="stack" style="height:'+(p.t/ymx*170).toFixed(1)+'px">'+
+    p.seg.filter(s=>s.v).map(s=>'<i style="flex:'+s.v+';background:'+
+      (s.k==="off"?"repeating-linear-gradient(135deg,var(--hair-2) 0 2px,transparent 2px 5px)":colorOf(s.k))+'" data-tip="<b>'+p.y+'</b><br>'+
+      (s.k==="off"?"Not on the map":layerName(s.k))+': '+money(s.v)+'"></i>').join("")+
+    '</div><span class="yl">'+p.y+'</span></div>').join("");
+
+  $("topMoney").innerHTML=ranked.length?ranked.slice(0,10).map(id=>{
+    const o=byId[id], F=FUND[id];
+    return '<li><button class="tile" data-id="'+o.id+'">'+logoHTML(o)+'<span>'+esc(o.name)+
+      '</span></button><span class="gn">'+F.n+' grant'+(F.n>1?'s':'')+'</span><span class="amt">'+
+      money(F.total)+'</span></li>';
+  }).join(""):'<li>None of the matching organisations received these grants.</li>';
+
+  $("offMapBox").hidden=f;
+  const off={};
+  FG.filter(g=>g[2]==null).forEach(g=>{const k=g[3]||"Unnamed recipients";
+    off[k]=off[k]||{v:0,n:0}; off[k].v+=g[1]; off[k].n++});
+  $("offMap").innerHTML=Object.entries(off).sort((a,b)=>b[1].v-a[1].v).slice(0,10).map(e=>
+    '<li><span class="nm">'+esc(e[0])+'</span><span class="gn">'+e[1].n+' grant'+
+    (e[1].n>1?'s':'')+'</span><span class="amt">'+money(e[1].v)+'</span></li>').join("");
+}
+
 /* ---------- drawer ---------- */
 function openOrg(id){
   const o=byId[+id]; if(!o) return;
@@ -1040,6 +1252,7 @@ function openOrg(id){
     f("Worst-case pandemic risk",o.gcbr
       ?"Yes, works explicitly on global catastrophic biological risk"
       :"Not recorded as working on worst-case risk")+
+    (FUNDING?f("Coefficient Giving biosecurity grants",fundHTML(o.id)):"")+
     '</dl>'+
     /* the url comes from upstream data, so only link out over http(s) */
     (/^https?:\/\//i.test(o.url)
@@ -1083,13 +1296,14 @@ function render(){
   if(state.view==="atlas"){paintAtlas();renderFindings()}
   else if(state.view==="chain"){renderChain()}
   else if(state.view==="gaps"){renderGapsSimple();renderGapsGrid()}
-  else {renderLinksSimple();renderLinksGrid()}
+  else if(state.view==="links"){renderLinksSimple();renderLinksGrid()}
+  else renderMoney();
 }
 function setView(v){
   state.view=v;
   document.querySelectorAll(".tab").forEach(t=>
     t.setAttribute("aria-selected",String(t.getAttribute("data-view")===v)));
-  ["atlas","chain","gaps","links"].forEach(k=>{$("view-"+k).hidden=(k!==v)});
+  ["atlas","chain","gaps","links","money"].forEach(k=>{$("view-"+k).hidden=(k!==v)});
   render();
 }
 document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>setView(t.getAttribute("data-view"))});
@@ -1122,6 +1336,14 @@ $("themeBtn").onclick=()=>{
   document.documentElement.setAttribute("data-theme",isDark()?"light":"dark");
   themeLabel();
 };
+
+/* the funding layer on the map */
+$("fundToggle").onclick=e=>{
+  const on=e.currentTarget.getAttribute("aria-pressed")!=="true";
+  e.currentTarget.setAttribute("aria-pressed",String(on));
+  $("discs").style.display=on?"":"none"; $("fundKey").hidden=!on;
+};
+if(!FUNDING||!Object.keys(FUND).length){$("fundToggle").hidden=true; $("moneyTab").hidden=true}
 
 themeLabel(); buildAtlas(); wireAtlas(); renderKey(); render();
 </script>

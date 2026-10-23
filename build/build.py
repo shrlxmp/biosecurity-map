@@ -17,6 +17,7 @@ import io
 import json
 import os
 import re
+import unicodedata
 import urllib.parse
 import urllib.request
 
@@ -106,6 +107,83 @@ def to_org(row):
     }
 
 
+NAME_STOP = {"the", "inc", "llc", "ltd", "foundation", "corporation", "corp",
+             "of", "for", "and", "at", "a"}
+
+
+def norm_name(name):
+    """Fold a name to a comparable key: case, accents, punctuation, filler words."""
+    name = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode()
+    name = re.sub(r"[^a-z0-9 ]", " ", name.lower().replace("&", " and "))
+    return " ".join(w for w in name.split() if w not in NAME_STOP)
+
+
+def name_keys(orgs):
+    """Every key a map label can be matched by: the full label, the part
+    before " @ ", each with and without its bracketed acronym, and the acronym
+    alone. A key shared by two organisations is dropped as ambiguous."""
+    keys = {}
+    for org in orgs:
+        label = org["name"]
+        base = re.split(r"\s+@\s+", label)[0]
+        forms = {label, base, re.sub(r"\s*\([^)]*\)", "", label),
+                 re.sub(r"\s*\([^)]*\)", "", base)}
+        forms.update(re.findall(r"\(([^)]+)\)", label))
+        for form in forms:
+            key = norm_name(form)
+            if key:
+                keys.setdefault(key, set()).add(org["id"])
+    return {k: next(iter(v)) for k, v in keys.items() if len(v) == 1}
+
+
+def load_funding(orgs):
+    """Coefficient Giving's biosecurity grants, each linked to an organisation
+    on the map where the recipient is one. Returns None if the data is absent."""
+    path = os.path.join(HERE, "funding_cg.json")
+    if not os.path.exists(path):
+        print("! build/funding_cg.json missing - run build/fetch_funding.py "
+              "(the funding view is left empty without it)")
+        return None
+    with io.open(path, encoding="utf-8") as handle:
+        doc = json.load(handle)
+    with io.open(os.path.join(HERE, "funding_aliases.json"), encoding="utf-8") as handle:
+        aliases = json.load(handle)
+
+    by_label = {org["name"]: org["id"] for org in orgs}
+    for target in ([r["org"] for r in aliases["by_title"]]
+                   + list(aliases["by_recipient"].values())):
+        if target not in by_label:
+            print("! funding_aliases.json names %r, which is not on the map" % target)
+    keys = name_keys(orgs)
+
+    def org_for(grant):
+        for rule in aliases["by_title"]:
+            if (grant["org"] == rule["recipient"]
+                    and re.search(rule["title"], grant["title"])):
+                return by_label.get(rule["org"])
+        if grant["org"] in aliases["by_recipient"]:
+            return by_label.get(aliases["by_recipient"][grant["org"]])
+        return keys.get(norm_name(grant["org"]))
+
+    grants, unmatched = [], {}
+    for grant in doc["grants"]:
+        org_id = org_for(grant)
+        amount = grant["amount"] or 0
+        if org_id is None:
+            unmatched[grant["org"]] = unmatched.get(grant["org"], 0) + amount
+        # compact rows: year, amount, organisation id (or null), recipient, title
+        grants.append([grant["year"], amount, org_id, grant["org"], grant["title"]])
+
+    total = sum(g[1] for g in grants)
+    on_map = sum(g[1] for g in grants if g[2] is not None)
+    print("  funding: %d grants, $%.1fM, of which $%.1fM (%d%%) to %d organisations on the map"
+          % (len(grants), total / 1e6, on_map / 1e6, round(100 * on_map / (total or 1)),
+             len({g[2] for g in grants if g[2] is not None})))
+    for name, amount in sorted(unmatched.items(), key=lambda kv: -kv[1])[:8]:
+        print("    not on the map: $%.1fM %s" % (amount / 1e6, name or "(unnamed)"))
+    return {"exported_at": doc.get("exported_at"), "grants": grants}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--refresh", action="store_true",
@@ -138,9 +216,11 @@ def main():
                                                separators=(",", ":")), 1)
     page = page.replace("__LOGOS__", json.dumps(logos, ensure_ascii=True,
                                                 separators=(",", ":")), 1)
+    page = page.replace("__FUNDING__", json.dumps(load_funding(orgs), ensure_ascii=True,
+                                                  separators=(",", ":")), 1)
     # the count also appears in static copy, so it tracks the weekly refresh
     page = page.replace("__COUNT__", str(len(orgs)))
-    if "__ORGS__" in page or "__LOGOS__" in page or "__COUNT__" in page:
+    if any(p in page for p in ("__ORGS__", "__LOGOS__", "__FUNDING__", "__COUNT__")):
         raise SystemExit("template placeholders were not all substituted")
 
     out = os.path.join(ROOT, "index.html")

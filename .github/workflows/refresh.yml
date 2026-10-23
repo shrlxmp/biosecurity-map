@@ -32,11 +32,19 @@ jobs:
         # empty map
         run: python build/build.py --refresh
 
+      - name: Fetch the latest Coefficient Giving biosecurity grants
+        # reads Trace's export of the grants database; validated before
+        # build/funding_cg.json is overwritten, and a no-op when nothing changed.
+        # If Trace is unreachable the map still refreshes, using the last
+        # committed grants, and the run shows a warning for this step.
+        continue-on-error: true
+        run: python build/fetch_funding.py
+
       - name: Fetch logos for any newly listed organisations
         # incremental: only reaches out for domains not already cached
         run: python build/fetch_logos.py
 
-      - name: Rebuild so any new logos are inlined
+      - name: Rebuild so any new logos and grants are inlined
         run: python build/build.py
 
       - name: Commit if anything changed

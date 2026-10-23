@@ -29,13 +29,17 @@ more organisations on other rings work on detection topics such as pathogen surv
 page shows both numbers and works them out from the data on every build, so the counts and
 the claims stay true after each refresh.
 
-There are four views:
+There are five views:
 
 - **The map.** The rings, with every organisation as a clickable logo.
 - **Chain view.** The same four groups as columns of names, easier to read down.
 - **Where the gaps are.** Organisations per topic, plus the full grid of topics against types
   of work, where empty cells show combinations nobody covers.
 - **How topics connect.** Which topics are worked on by the same organisations.
+- **Where the money goes.** Coefficient Giving's biosecurity grants, set against the map: each
+  ring's share of the organisations next to its share of the funding, grants by year, the
+  largest recipients, and funded organisations the map does not list. The same grants appear
+  in each organisation's detail panel and, with *Show funding*, as discs on the map.
 
 ## Data
 
@@ -55,6 +59,38 @@ most repeat an organisation that is already on it. `build.py` drops them at buil
 Logos are each organisation's own favicon, fetched once and inlined, and used for
 identification only.
 
+### Funding
+
+Grants come from **Coefficient Giving** (formerly Open Philanthropy), one of the largest
+philanthropic funders in biosecurity. Only grants in its two biosecurity focus areas are
+counted (*Biosecurity & Pandemic Preparedness* and *Science Supporting Biosecurity and
+Pandemic Preparedness*), so the funder decides what counts as biosecurity, not this repo.
+
+The data is read from the export kept in the open repository of
+[Trace](https://trace.manifund.org/) ([source](https://github.com/manifund/trace)), Manifund's
+funding database, which refreshes it automatically from Coefficient Giving's grants index.
+Trace itself only lists grants with an AI-safety angle, so its website shows a small part of
+biosecurity funding. Its full Coefficient Giving export is what this repo uses.
+
+`build/fetch_funding.py` keeps the biosecurity grants in `build/funding_cg.json`. `build.py`
+matches recipients to organisations on the map by name. Where the names differ, it uses
+`build/funding_aliases.json`, a short list of links checked by hand against the grant titles
+(for example *Blue Ribbon Study Panel on Biodefense*, the former name of the Bipartisan
+Commission on Biodefense). The build prints the largest recipients it could not match, which
+is the place to look for a missing alias or a gap in the dataset.
+
+What the funding numbers are not:
+
+- **Not the size of the field.** This is one philanthropic funder. Governments, industry and
+  other foundations spend far more and are not counted.
+- **Not money spent.** Amounts are as awarded, and a multi-year grant counts in the year it
+  was made.
+- **Not always the final recipient.** Some grants pay for the recipient's own grantmaking
+  (most of all Blueprint Biosecurity's), and that money moves on to organisations the page
+  cannot see. The page says how much.
+- **Not complete matching.** A grant to a name the map does not use counts as not on the map,
+  even if it went to an organisation that is.
+
 ### Reading caveats
 
 - The rings are a **diagram, not geography**. Where a dot sits *within* a ring means
@@ -71,8 +107,9 @@ identification only.
 
 The map **refreshes itself weekly**. A scheduled GitHub Actions workflow
 (`.github/workflows/refresh.yml`) runs every Monday. It pulls the latest `entries.csv` from
-biosecurity.world, fetches logos for any newly listed organisations, rebuilds `index.html`,
-and commits only if something changed. GitHub Pages then redeploys on its own.
+biosecurity.world, refreshes the Coefficient Giving grants, fetches logos for any newly listed
+organisations, rebuilds `index.html`, and commits only if something changed. If the grants
+can't be fetched, the map still refreshes using the last saved grants. GitHub Pages then redeploys on its own.
 
 You can also run it on demand from the **Actions** tab → *Refresh map from biosecurity.world*
 → *Run workflow*.
@@ -92,10 +129,11 @@ To regenerate it locally:
 python build/fetch_logos.py          # refresh cached favicons -> build/logos.json
 python build/build.py                # rebuild index.html from build/entries.csv
 python build/build.py --refresh      # re-download entries.csv from biosecurity.world first
+python build/fetch_funding.py        # refresh Coefficient Giving grants -> build/funding_cg.json
 ```
 
-`build/template.html` is the page with `__ORGS__`, `__LOGOS__` and `__COUNT__` placeholders
-where the data goes. Edit the template, not `index.html`, which is generated and gets
+`build/template.html` is the page with `__ORGS__`, `__LOGOS__`, `__FUNDING__` and `__COUNT__`
+placeholders where the data goes. Edit the template, not `index.html`, which is generated and gets
 overwritten.
 
 The build needs Python 3 only, with no dependencies.
@@ -105,4 +143,5 @@ The build needs Python 3 only, with no dependencies.
 Code in this repository: MIT (see `LICENSE`).
 
 Organisation data belongs to biosecurity.world and its contributors. Please credit them, not
-this repo, as the source. Logos are the property of the respective organisations.
+this repo, as the source. Grant records are Coefficient Giving's, compiled by Trace, whose
+compilation is released under CC0 and whose code is MIT-licensed. Logos are the property of the respective organisations.
