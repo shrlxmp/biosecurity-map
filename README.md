@@ -56,6 +56,20 @@ Newsletters and podcasts listed in the dataset (entries named `Newsletter - …`
 most repeat an organisation that is already on it. `build.py` drops them at build time, and
 `entries.csv` keeps them.
 
+### Organisations added here
+
+`build/extra_entries.csv` adds organisations that biosecurity.world does not list yet, in the
+same columns as its dataset (ids start at 900001 so they never clash). They are drawn like
+any other organisation, and each one's detail panel says it was added by this map, so its
+classification is ours rather than biosecurity.world's. The six there now were picked
+because they receive Coefficient Giving biosecurity grants and meet biosecurity.world's own
+[inclusion criteria](https://docs.google.com/document/d/12JhGqx5PaA_jD0UKPDfWX4dfDp1gBoxdVM5tDTykPCA/edit).
+
+When biosecurity.world adds one of them (same website, or a matching name), the build leaves
+our row out and prints a notice to delete it, so an organisation never appears twice. The
+better fix is always to suggest the organisation to biosecurity.world through
+[their form](https://biosecurityworld.notion.site/33a4061a75b7806fad1dee0fcd2e921a).
+
 Logos are each organisation's own favicon, fetched once and inlined, and used for
 identification only.
 

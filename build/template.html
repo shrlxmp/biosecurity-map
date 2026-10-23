@@ -323,9 +323,8 @@ footer b{color:var(--ink)}
   <div class="wrap">
     <button class="theme" id="themeBtn">Dark mode</button>
     <h1>The Biosecurity Defence Chain</h1>
-    <p class="dek">The __COUNT__ organisations in the
-      <a href="https://biosecurity.world/" target="_blank" rel="noopener">biosecurity.world</a>
-      dataset, arranged by where they act against a pandemic.</p>
+    <p class="dek">__COUNT__ biosecurity organisations, arranged by where they act against a
+      pandemic. __SOURCE__</p>
     <div class="navrow">
       <div class="tabs" role="tablist" aria-label="View">
         <button class="tab" role="tab" aria-selected="true" data-view="atlas">The map</button>
@@ -509,8 +508,9 @@ footer b{color:var(--ink)}
   <a href="https://github.com/biosecurity-world/biosecurity.world" target="_blank" rel="noopener">source</a>),
   the maintained and authoritative version of this landscape. Newsletters and podcasts listed
   there are left out, because they are publications rather than organisations and most repeat an
-  organisation already on the map. Logos are each organisation's own favicon, shown for
-  identification.</p>
+  organisation already on the map. A few organisations it does not list yet are added by this
+  map and say so in their detail panel. Each one is dropped automatically once biosecurity.world
+  adds it. Logos are each organisation's own favicon, shown for identification.</p>
   <p><b>About the funding.</b> Grants are Coefficient Giving's (formerly Open Philanthropy), in
   its two biosecurity focus areas, from the export kept by
   <a href="https://trace.manifund.org/" target="_blank" rel="noopener">Trace</a>, Manifund's
@@ -1255,6 +1255,8 @@ function openOrg(id){
       ?"Yes, works explicitly on global catastrophic biological risk"
       :"Not recorded as working on worst-case risk")+
     (FUNDING?f("Coefficient Giving biosecurity grants",fundHTML(o.id)):"")+
+    (o.extra?f("Source","Added by this map. Not yet in the biosecurity.world dataset, so "+
+      "its classification is this map's, not theirs."):"")+
     '</dl>'+
     /* the url comes from upstream data, so only link out over http(s) */
     (/^https?:\/\//i.test(o.url)

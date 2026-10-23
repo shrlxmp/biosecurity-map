@@ -22,6 +22,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CSV_PATH = os.path.join(HERE, "entries.csv")
+EXTRA_PATH = os.path.join(HERE, "extra_entries.csv")
 LOGOS_PATH = os.path.join(HERE, "logos.json")
 UA = {"User-Agent": "Mozilla/5.0 (favicon collector for a static data visualisation)"}
 
@@ -53,6 +54,10 @@ def main():
 
     with io.open(CSV_PATH, encoding="utf-8") as handle:
         rows = list(csv.DictReader(handle))
+    # organisations the map adds itself need logos too
+    if os.path.exists(EXTRA_PATH):
+        with io.open(EXTRA_PATH, encoding="utf-8") as handle:
+            rows += list(csv.DictReader(handle))
     domains = sorted({d for d in (domain_of(r["link"]) for r in rows) if d})
 
     cache = {}

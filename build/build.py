@@ -118,22 +118,65 @@ def norm_name(name):
     return " ".join(w for w in name.split() if w not in NAME_STOP)
 
 
+def label_forms(label):
+    """The ways a map label can be written: the full label, the part before
+    " @ ", each with and without its bracketed acronym, and the acronym alone."""
+    base = re.split(r"\s+@\s+", label)[0]
+    forms = {label, base, re.sub(r"\s*\([^)]*\)", "", label),
+             re.sub(r"\s*\([^)]*\)", "", base)}
+    forms.update(re.findall(r"\(([^)]+)\)", label))
+    return {f for f in forms if norm_name(f)}
+
+
 def name_keys(orgs):
-    """Every key a map label can be matched by: the full label, the part
-    before " @ ", each with and without its bracketed acronym, and the acronym
-    alone. A key shared by two organisations is dropped as ambiguous."""
+    """Map every name form to its organisation. A key shared by two
+    organisations is dropped as ambiguous."""
     keys = {}
     for org in orgs:
-        label = org["name"]
-        base = re.split(r"\s+@\s+", label)[0]
-        forms = {label, base, re.sub(r"\s*\([^)]*\)", "", label),
-                 re.sub(r"\s*\([^)]*\)", "", base)}
-        forms.update(re.findall(r"\(([^)]+)\)", label))
-        for form in forms:
-            key = norm_name(form)
-            if key:
-                keys.setdefault(key, set()).add(org["id"])
+        for form in label_forms(org["name"]):
+            keys.setdefault(norm_name(form), set()).add(org["id"])
     return {k: next(iter(v)) for k, v in keys.items() if len(v) == 1}
+
+
+def norm_link(url):
+    parts = urllib.parse.urlparse(url.strip().lower())
+    host = parts.netloc[4:] if parts.netloc.startswith("www.") else parts.netloc
+    return host + parts.path.rstrip("/")
+
+
+def load_extras(upstream):
+    """Organisations this map adds while biosecurity.world reviews them.
+
+    build/extra_entries.csv uses biosecurity.world's own columns. A row is
+    retired, with a notice, as soon as the upstream dataset lists the same
+    organisation (same link, or a matching name), so the two never both show."""
+    path = os.path.join(HERE, "extra_entries.csv")
+    if not os.path.exists(path):
+        return []
+    with io.open(path, encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
+    if rows:
+        missing = REQUIRED_COLUMNS - set(rows[0].keys())
+        if missing:
+            raise SystemExit("extra_entries.csv is missing columns %s"
+                             % ", ".join(sorted(missing)))
+    keys = name_keys(upstream)
+    links = {norm_link(org["url"]) for org in upstream}
+    ids = {org["id"] for org in upstream}
+    extras = []
+    for row in rows:
+        org = to_org(row)
+        if org["id"] in ids:
+            raise SystemExit("extra_entries.csv id %d clashes with biosecurity.world" % org["id"])
+        hit = (norm_link(org["url"]) in links
+               or any(norm_name(f) in keys for f in label_forms(org["name"])))
+        if hit:
+            print("  extra %r is now in biosecurity.world's data: left out, "
+                  "delete its row from build/extra_entries.csv" % org["name"])
+            continue
+        org["extra"] = True
+        extras.append(org)
+    return extras
 
 
 def load_funding(orgs):
@@ -192,8 +235,10 @@ def main():
 
     rows = load_entries(args.refresh)
     orgs = [to_org(row) for row in rows if not PUBLICATION.match(row["label"])]
-    orgs.sort(key=lambda org: org["name"].lower())
     skipped = len(rows) - len(orgs)
+    extras = load_extras(orgs)
+    orgs += extras
+    orgs.sort(key=lambda org: org["name"].lower())
 
     logos_path = os.path.join(HERE, "logos.json")
     logos = {}
@@ -220,7 +265,15 @@ def main():
                                                   separators=(",", ":")), 1)
     # the count also appears in static copy, so it tracks the weekly refresh
     page = page.replace("__COUNT__", str(len(orgs)))
-    if any(p in page for p in ("__ORGS__", "__LOGOS__", "__FUNDING__", "__COUNT__")):
+    # credit line under the title, saying how many organisations this map added
+    source = ('Data from <a href="https://biosecurity.world/" target="_blank" '
+              'rel="noopener">biosecurity.world</a>')
+    if extras:
+        source += (", plus %d organisation%s added here that it does not list yet"
+                   % (len(extras), "" if len(extras) == 1 else "s"))
+    page = page.replace("__SOURCE__", source + ".")
+    if any(p in page for p in ("__ORGS__", "__LOGOS__", "__FUNDING__", "__COUNT__",
+                               "__SOURCE__")):
         raise SystemExit("template placeholders were not all substituted")
 
     out = os.path.join(ROOT, "index.html")
@@ -230,7 +283,8 @@ def main():
     print("wrote %s" % out)
     print("  %d organisations, %d with a logo, %d KB"
           % (len(orgs), with_logo, len(page.encode("utf-8")) // 1024))
-    print("  %d newsletters and podcasts left out" % skipped)
+    print("  %d newsletters and podcasts left out, %d organisations added from "
+          "build/extra_entries.csv" % (skipped, len(extras)))
 
 
 if __name__ == "__main__":

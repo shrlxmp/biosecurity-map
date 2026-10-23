@@ -1,24 +1,54 @@
 {
  "_comment": "Links Coefficient Giving grant recipients to organisations on the map when the names differ. Values are map labels from entries.csv. by_title rules are checked first and need both the recipient and a title match (a regular expression). build.py warns about any label that no longer exists. Every entry was checked by hand against the grant titles.",
  "by_title": [
-  {"recipient": "SecureBio", "title": "Detection|Nucleic Acid Observatory|Early Warning",
+  {
+   "recipient": "SecureBio",
+   "title": "Detection|Nucleic Acid Observatory|Early Warning",
    "org": "SecureBio Detection",
-   "why": "SecureBio's detection work is a separate entry on the map"},
-  {"recipient": "Berkeley Existential Risk Initiative", "title": "Esvelt|Sculpting Evolution",
+   "why": "SecureBio's detection work is a separate entry on the map"
+  },
+  {
+   "recipient": "Berkeley Existential Risk Initiative",
+   "title": "Esvelt|Sculpting Evolution",
    "org": "Sculpting Evolution Group (Esvelt Lab) @ MIT Media Lab",
-   "why": "BERI passed these through to Kevin Esvelt's group"},
-  {"recipient": "Massachusetts Institute of Technology", "title": "Esvelt",
+   "why": "BERI passed these through to Kevin Esvelt's group"
+  },
+  {
+   "recipient": "Massachusetts Institute of Technology",
+   "title": "Esvelt",
    "org": "Sculpting Evolution Group (Esvelt Lab) @ MIT Media Lab",
-   "why": "grant names Kevin Esvelt"},
-  {"recipient": "Johns Hopkins Center for Health Security", "title": "Emerging Leaders in Biosecurity",
+   "why": "grant names Kevin Esvelt"
+  },
+  {
+   "recipient": "Johns Hopkins Center for Health Security",
+   "title": "Emerging Leaders in Biosecurity",
    "org": "Emerging Leaders in Biosecurity (ELBI) Fellowship",
-   "why": "the fellowship is a separate entry on the map"},
-  {"recipient": "Brown University", "title": "Pandemic Center",
+   "why": "the fellowship is a separate entry on the map"
+  },
+  {
+   "recipient": "Brown University",
+   "title": "Pandemic Center",
    "org": "The Pandemic Center",
-   "why": "The Pandemic Center is at Brown's School of Public Health"},
-  {"recipient": "Council on Strategic Risks", "title": "^Biosecurity Fellowship$",
+   "why": "The Pandemic Center is at Brown's School of Public Health"
+  },
+  {
+   "recipient": "Council on Strategic Risks",
+   "title": "^Biosecurity Fellowship$",
    "org": "Fellowship for Ending Bioweapons",
-   "why": "CSR's biosecurity fellowship is a separate entry on the map"}
+   "why": "CSR's biosecurity fellowship is a separate entry on the map"
+  },
+  {
+   "recipient": "Harvard University",
+   "title": "Communicable Disease Dynamics",
+   "org": "Center for Communicable Disease Dynamics (CCDD) @ Harvard T.H. Chan School of Public Health",
+   "why": "grant names the centre"
+  },
+  {
+   "recipient": "Renaissance Philanthropy Fund",
+   "title": "Big if True Science|BiTS",
+   "org": "Renaissance Philanthropy - Big if True Science (BiTS) Biosecurity Accelerator",
+   "why": "the accelerator is the entry on the map; the fund's other grants are not"
+  }
  ],
  "by_recipient": {
   "Nuclear Threat Initiative": "Nuclear Threat Initiative | bio (NTI.bio)",
@@ -30,6 +60,7 @@
   "Massachusetts Institute of Technology Media Lab": "Sculpting Evolution Group (Esvelt Lab) @ MIT Media Lab",
   "MIT Media Lab": "Sculpting Evolution Group (Esvelt Lab) @ MIT Media Lab",
   "ERA": "ERA Fellowship",
-  "InterAcademy Partnership": "Interacademy Partnership (IAP) Biosecurity Working Group"
+  "InterAcademy Partnership": "Interacademy Partnership (IAP) Biosecurity Working Group",
+  "CSIRO": "Australian Centre for Disease Preparedness (ACDP) @ CSIRO"
  }
 }
