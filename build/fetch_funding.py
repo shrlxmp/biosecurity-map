@@ -22,6 +22,7 @@ import json
 import os
 import re
 import sys
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 import zipfile
@@ -91,7 +92,8 @@ GATES_BIO = re.compile(
 # (e.g. "the global HIV/AIDS pandemic", polio outbreak response)
 GATES_ROUTINE = re.compile(
     r"polio|measles|cholera|malaria|tuberculosis|\bHIV\b|\bAIDS\b|typhoid|rotavirus|"
-    r"pneumococc|streptococc|meningitis|respiratory syncytial|\bRSV\b", re.I)
+    r"pneumococc|streptococc|meningitis|respiratory syncytial|\bRSV\b|gonorrh|syphilis|"
+    r"chlamydia", re.I)
 GATES_STRONG = re.compile(
     r"pandemic preparedness|pandemics|pandemic influenza|biosecurity|biosafety|"
     r"health security|covid|sars-cov|coronavirus|epidemic preparedness|100 days mission|"
@@ -499,10 +501,224 @@ def us_federal():
     }
 
 
+def government_config():
+    return json.load(io.open(os.path.join(HERE, "government_recipients.json"), encoding="utf-8"))
+
+
+# a looser rule for grants already tied to a biosecurity centre through the
+# researcher who leads it: seasonal flu tracking and outbreak modelling count
+CENTRE_BIO = re.compile(US_BIO.pattern + r"|influenza|phylodynam|genomic (?:surveillance|epidemiology)|"
+                        r"pathogen surveillance|emerging infect|transmission|epidemic|"
+                        r"virus evolution|viral evolution|biosecur|"
+                        r"communicable disease dynamics", re.I)
+
+
+def routine(text):
+    return GATES_ROUTINE.search(text) and not GATES_STRONG.search(text)
+
+
+# ---------------------------------------------------------------- NIH, for university centres
+
+NIH = "https://api.reporter.nih.gov/v2/projects/search"
+
+
+def nih_centres():
+    config = government_config()["nih_pis"]
+    keep, seen = [], set()
+    for label, spec in sorted(config.items()):
+        org = re.compile(spec["org"], re.I)
+        for first, last in spec["pis"]:
+            offset = 0
+            while True:
+                request = urllib.request.Request(NIH, data=json.dumps({
+                    "criteria": {"pi_names": [{"first_name": first, "last_name": last}]},
+                    "include_fields": ["ApplId", "ProjectNum", "FiscalYear", "AwardAmount",
+                                       "ProjectTitle", "Organization", "AgencyIcAdmin"],
+                    "offset": offset, "limit": 500}).encode(),
+                    headers=dict(UA, **{"content-type": "application/json"}))
+                with urllib.request.urlopen(request, timeout=120) as response:
+                    data = json.loads(response.read())
+                rows = data.get("results") or []
+                for r in rows:
+                    title = r.get("project_title") or ""
+                    grantee = (r.get("organization") or {}).get("org_name") or ""
+                    key = r.get("appl_id")
+                    if key in seen or not org.search(grantee) or not r.get("award_amount"):
+                        continue
+                    if not CENTRE_BIO.search(title) or routine(title):
+                        continue
+                    seen.add(key)
+                    keep.append({"id": key, "year": r["fiscal_year"], "recipient": label,
+                                 "title": "%s (NIH %s, %s %s)" % (
+                                     title.strip(), ((r.get("agency_ic_admin") or {})
+                                                     .get("abbreviation") or "").strip(),
+                                     first, last),
+                                 "amount": round(r["award_amount"])})
+                offset += len(rows)
+                if not rows or offset >= (data.get("meta") or {}).get("total", 0):
+                    break
+    require(keep, "no NIH grants passed the rule")
+    keep.sort(key=lambda g: (-g["year"], str(g["id"])))
+    return {
+        "funder": "US NIH, for university centres",
+        "funder_org": None,
+        "kind": "government",
+        "rule": ("NIH grants led by researchers who lead university-based centres on the map (for "
+                 "example Marc Lipsitch for Harvard's CCDD, Trevor Bedford for Nextstrain), at that "
+                 "university, whose title names pandemic or outbreak work, influenza or pathogen "
+                 "surveillance, leaving out routine diseases. Each fiscal year's award counts. These "
+                 "centres are not in the USAspending list, so no award is counted twice. A grant led by "
+                 "someone else at the centre is missed."),
+        "scope": "on_map_only",
+        "source_url": "https://reporter.nih.gov/",
+        "exported_at": None,
+        "grants": keep,
+    }
+
+
+# ---------------------------------------------------------------- European Union (CORDIS)
+
+CORDIS = ["https://cordis.europa.eu/data/cordis-h2020projects-csv.zip",
+          "https://cordis.europa.eu/data/cordis-HORIZONprojects-csv.zip"]
+USD_PER_EUR = {2014: 1.329, 2015: 1.110, 2016: 1.107, 2017: 1.130, 2018: 1.181, 2019: 1.120,
+               2020: 1.142, 2021: 1.183, 2022: 1.053, 2023: 1.081, 2024: 1.082, 2025: 1.093,
+               2026: 1.120}
+# EU calls dedicated to epidemics name it in their topic code (SC1-PHE-CORONAVIRUS-2020)
+EU_TOPIC = re.compile(r"CORONAVIRUS|COVID|EPIDEM|PANDEM|PREPAREDNESS|OUTBREAK|EBOLA|ZIKA|HERA", re.I)
+upper = lambda name: re.sub(r"\s+", " ", name or "").strip().upper()
+
+
+def eu_cordis():
+    config = government_config()["eu"]
+    label_of = {upper(n): label for label, names in config.items() for n in names}
+    csv.field_size_limit(10 ** 8)
+    keep = []
+    for url in CORDIS:
+        request = urllib.request.Request(url, headers=UA)
+        with urllib.request.urlopen(request, timeout=600) as response:
+            book = zipfile.ZipFile(io.BytesIO(response.read()))
+        read = lambda name: csv.DictReader(io.TextIOWrapper(book.open(name), encoding="utf-8"),
+                                           delimiter=";")
+        partners = {}
+        for r in read("organization.csv"):
+            label = label_of.get(upper(r.get("name")))
+            money = (r.get("ecContribution") or "").replace(",", ".")
+            if label and money:
+                try:
+                    if float(money) > 0:
+                        partners.setdefault(r["projectID"], []).append((label, float(money)))
+                except ValueError:
+                    pass
+        projects = 0
+        for r in read("project.csv"):
+            projects += 1
+            if r["id"] not in partners:
+                continue
+            title = r.get("title") or ""
+            if not (EU_TOPIC.search(r.get("topics") or "") or US_BIO.search(title)
+                    or WELLCOME_DESC.search(r.get("objective") or "")) or routine(title):
+                continue
+            year = int((r.get("startDate") or "0")[:4] or 0)
+            if not year:
+                continue
+            for label, eur in partners[r["id"]]:
+                keep.append({"id": "%s|%s" % (r["id"], label), "year": year, "recipient": label,
+                             "title": "%s (%s, %s)" % (title.strip(), r.get("acronym") or "",
+                                                       r.get("frameworkProgramme") or ""),
+                             "amount": round(eur * USD_PER_EUR.get(year, USD_PER_EUR[2026]))})
+        require(projects >= 10000, "only %d projects in %s" % (projects, url))
+    require(keep, "no EU projects passed the rule")
+    keep.sort(key=lambda g: (-g["year"], g["id"]))
+    return {
+        "funder": "European Union research programmes",
+        "funder_org": None,
+        "kind": "government",
+        "rule": ("Horizon 2020 and Horizon Europe projects, from CORDIS, that come from calls dedicated "
+                 "to epidemics or preparedness, or whose title names pandemic or biodefense work, or "
+                 "whose summary is plainly about pandemic preparedness or biosecurity, leaving out "
+                 "routine diseases. Each organisation counts only its own share of the EU contribution, "
+                 "converted to dollars at each year's average rate. Only for a hand-checked list of "
+                 "organisations on the map."),
+        "scope": "on_map_only",
+        "source_url": "https://cordis.europa.eu/",
+        "exported_at": None,
+        "grants": keep,
+    }
+
+
+# ---------------------------------------------------------------- UK Research and Innovation
+
+GTR = "https://gtr.ukri.org/gtr/api/"
+
+
+def gtr(path):
+    request = urllib.request.Request(GTR + path, headers=dict(
+        UA, Accept="application/vnd.rcuk.gtr.json-v7"))
+    with urllib.request.urlopen(request, timeout=120) as response:
+        return json.loads(response.read())
+
+
+def ukri():
+    config = government_config()["ukri"]
+    keep, seen = [], set()
+    for label, spec in sorted(config.items()):
+        names = {n.lower() for n in spec["names"]}
+        ids = set()
+        for term in spec["search"]:
+            found = gtr("organisations?q=%s&s=100" % urllib.parse.quote(term))
+            ids |= {o["id"] for o in found.get("organisation") or [] if o["name"].lower() in names}
+        for org_id in sorted(ids):
+            page = 1
+            while True:
+                data = gtr("organisations/%s/projects?s=100&p=%d" % (org_id, page))
+                for p in data.get("project") or []:
+                    links = {}
+                    for link in (p.get("links") or {}).get("link") or []:
+                        links.setdefault(link["rel"], []).append(link["href"])
+                    # only projects the organisation leads: the money is paid to the lead
+                    if p["id"] in seen or not any(h.endswith(org_id) for h in links.get("LEAD_ORG", [])):
+                        continue
+                    title = p.get("title") or ""
+                    if not (p.get("leadFunder") == "COVID" or US_BIO.search(title)
+                            or WELLCOME_DESC.search(p.get("abstractText") or "")) or routine(title):
+                        continue
+                    for href in links.get("FUND", [])[:1]:
+                        fund = gtr(href.split("/gtr/api/", 1)[1])
+                        pounds = ((fund.get("valuePounds") or {}).get("amount") or 0)
+                        if not (pounds and fund.get("start")):
+                            continue
+                        year = datetime.datetime.fromtimestamp(fund["start"] / 1000, datetime.timezone.utc).year
+                        seen.add(p["id"])
+                        keep.append({"id": p["id"], "year": year, "recipient": label,
+                                     "title": "%s (%s)" % (title.strip(), p.get("leadFunder") or "UKRI"),
+                                     "amount": round(pounds * USD_PER_GBP.get(year, USD_PER_GBP[2026]))})
+                if page >= (data.get("totalPages") or 1):
+                    break
+                page += 1
+    require(keep, "no UKRI projects passed the rule")
+    keep.sort(key=lambda g: (-g["year"], g["id"]))
+    return {
+        "funder": "UK Research and Innovation",
+        "funder_org": None,
+        "kind": "government",
+        "rule": ("Projects from UK Research and Innovation's councils and Innovate UK, from its Gateway to "
+                 "Research, that the organisation leads and that came from UKRI's COVID-19 rapid response, "
+                 "or whose title names pandemic or biodefense work, or whose summary is plainly about "
+                 "pandemic preparedness or biosecurity, leaving out routine diseases. Pounds are "
+                 "converted to dollars at each year's average rate. Only for a hand-checked list of "
+                 "organisations on the map."),
+        "scope": "on_map_only",
+        "source_url": "https://gtr.ukri.org/",
+        "exported_at": None,
+        "grants": keep,
+    }
+
+
 SOURCES = {"coefficient_giving": coefficient_giving, "gates": gates,
            "sentinel_bio": sentinel_bio, "sff": sff,
            "openai_foundation": openai_foundation, "longview": longview,
-           "wellcome": wellcome, "us_federal": us_federal}
+           "wellcome": wellcome, "us_federal": us_federal, "nih_centres": nih_centres,
+           "eu_cordis": eu_cordis, "ukri": ukri}
 
 
 def main():

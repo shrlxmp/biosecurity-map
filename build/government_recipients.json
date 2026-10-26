@@ -1,26 +1,308 @@
 {
- "_comment": "Organisations on the map and the exact names they appear under in USAspending.gov, checked by hand with its recipient search. Keys are map labels. A value is a list of names, or an object with names plus a description regex for recipients whose awards mostly belong to someone else (MIT Lincoln Laboratory's contracts are made out to MIT). University-based centres (Johns Hopkins CHS, Georgetown CGHSS, CIDRAP and others) are left out: their awards go to the university and can't be told apart. NTI, CEPI and the Institute for Progress have no federal awards listed.",
+ "_comment": "Hand-checked links between organisations on the map and how government funders name them. Keys are map labels. 'recipients' are exact USAspending.gov recipient names; a value can be an object with a description regex for recipients whose awards mostly belong to someone else (MIT Lincoln Laboratory's contracts are made out to MIT). 'nih_pis' attributes NIH grants to university-based centres through the researchers who lead them, with a regex the grantee organisation must match; these centres are not in 'recipients', so nothing is counted twice. 'eu' are exact participant names in CORDIS (EU Horizon programmes). 'ukri' are exact organisation names in UKRI's Gateway to Research, with the search terms that find them.",
  "recipients": {
-  "Moderna": ["MODERNATX, INC.", "MODERNATX  INC.", "MODERNA US, INC.", "MODERNA US  INC."],
-  "Pfizer": ["PFIZER INC", "PFIZER INC."],
-  "Merck": ["MERCK SHARP & DOHME CORP.", "MERCK SHARP & DOHME LLC", "MERCK & CO., INC."],
-  "Novavax": ["NOVAVAX INC"],
-  "Vir Biotechnology": ["VIR BIOTECHNOLOGY, INC."],
-  "Mammoth Biosciences": ["MAMMOTH BIOSCIENCES INC"],
-  "Roche": ["ROCHE MOLECULAR SYSTEMS INC.", "ROCHE MOLECULAR SYSTEMS, INC."],
-  "Gryphon Scientific @ Deloitte": ["GRYPHON SCIENTIFIC, LLC"],
-  "RTX BBN Technologies": ["RTX BBN TECHNOLOGIES, INC.", "RAYTHEON BBN TECHNOLOGIES CORP.", "BBN TECHNOLOGIES CORP."],
-  "Aclid": ["ACLID, INC."],
-  "Valthos": ["VALTHOS INC."],
-  "Battelle": ["BATTELLE MEMORIAL INSTITUTE", "BATTELLE NATIONAL BIODEFENSE INSTITUTE, LLC"],
-  "Broad Institute @ MIT, Harvard": ["THE BROAD INSTITUTE, INC"],
-  "RAND": ["RAND CORPORATION"],
-  "Global Health Policy Center at the Center for Strategic and International Studies (CSIS)": ["CENTER FOR STRATEGIC AND INTERNATIONAL STUDIES, INC"],
-  "Lawrence Livermore National Laboratory (LLNL)": ["LAWRENCE LIVERMORE NATIONAL SECURITY, LLC"],
-  "Los Alamos National Laboratory (LANL)": ["TRIAD NATIONAL SECURITY, LLC", "TRIAD NATIONAL SECURITY  LLC", "LOS ALAMOS NATIONAL SECURITY, LLC"],
-  "Sandia National Laboratories (SNL)": ["NATIONAL TECHNOLOGY & ENGINEERING SOLUTIONS OF SANDIA, LLC"],
-  "Argonne National Laboratory (ANL)": ["UCHICAGO ARGONNE, LLC"],
-  "MIT Lincoln Laboratory": {"names": ["MASSACHUSETTS INSTITUTE OF TECHNOLOGY"], "description": "LINCOLN LAB"},
-  "Gavi, the Vaccine Alliance": ["GAVI ALLIANCE"]
+  "Moderna": [
+   "MODERNATX, INC.",
+   "MODERNATX  INC.",
+   "MODERNA US, INC.",
+   "MODERNA US  INC."
+  ],
+  "Pfizer": [
+   "PFIZER INC",
+   "PFIZER INC."
+  ],
+  "Merck": [
+   "MERCK SHARP & DOHME CORP.",
+   "MERCK SHARP & DOHME LLC",
+   "MERCK & CO., INC."
+  ],
+  "Novavax": [
+   "NOVAVAX INC"
+  ],
+  "Vir Biotechnology": [
+   "VIR BIOTECHNOLOGY, INC."
+  ],
+  "Mammoth Biosciences": [
+   "MAMMOTH BIOSCIENCES INC"
+  ],
+  "Roche": [
+   "ROCHE MOLECULAR SYSTEMS INC.",
+   "ROCHE MOLECULAR SYSTEMS, INC."
+  ],
+  "Gryphon Scientific @ Deloitte": [
+   "GRYPHON SCIENTIFIC, LLC"
+  ],
+  "RTX BBN Technologies": [
+   "RTX BBN TECHNOLOGIES, INC.",
+   "RAYTHEON BBN TECHNOLOGIES CORP.",
+   "BBN TECHNOLOGIES CORP."
+  ],
+  "Aclid": [
+   "ACLID, INC."
+  ],
+  "Valthos": [
+   "VALTHOS INC."
+  ],
+  "Battelle": [
+   "BATTELLE MEMORIAL INSTITUTE",
+   "BATTELLE NATIONAL BIODEFENSE INSTITUTE, LLC"
+  ],
+  "Broad Institute @ MIT, Harvard": [
+   "THE BROAD INSTITUTE, INC"
+  ],
+  "RAND": [
+   "RAND CORPORATION"
+  ],
+  "Global Health Policy Center at the Center for Strategic and International Studies (CSIS)": [
+   "CENTER FOR STRATEGIC AND INTERNATIONAL STUDIES, INC"
+  ],
+  "Lawrence Livermore National Laboratory (LLNL)": [
+   "LAWRENCE LIVERMORE NATIONAL SECURITY, LLC"
+  ],
+  "Los Alamos National Laboratory (LANL)": [
+   "TRIAD NATIONAL SECURITY, LLC",
+   "TRIAD NATIONAL SECURITY  LLC",
+   "LOS ALAMOS NATIONAL SECURITY, LLC"
+  ],
+  "Sandia National Laboratories (SNL)": [
+   "NATIONAL TECHNOLOGY & ENGINEERING SOLUTIONS OF SANDIA, LLC"
+  ],
+  "Argonne National Laboratory (ANL)": [
+   "UCHICAGO ARGONNE, LLC"
+  ],
+  "MIT Lincoln Laboratory": {
+   "names": [
+    "MASSACHUSETTS INSTITUTE OF TECHNOLOGY"
+   ],
+   "description": "LINCOLN LAB"
+  },
+  "Gavi, the Vaccine Alliance": [
+   "GAVI ALLIANCE"
+  ]
+ },
+ "nih_pis": {
+  "Center for Communicable Disease Dynamics (CCDD) @ Harvard T.H. Chan School of Public Health": {
+   "org": "HARVARD",
+   "pis": [
+    [
+     "Marc",
+     "Lipsitch"
+    ],
+    [
+     "Yonatan",
+     "Grad"
+    ],
+    [
+     "William",
+     "Hanage"
+    ],
+    [
+     "Caroline",
+     "Buckee"
+    ]
+   ]
+  },
+  "Johns Hopkins Center for Health Security (CHS)": {
+   "org": "JOHNS HOPKINS",
+   "pis": [
+    [
+     "Thomas",
+     "Inglesby"
+    ],
+    [
+     "Gigi",
+     "Gronvall"
+    ],
+    [
+     "Crystal",
+     "Watson"
+    ],
+    [
+     "Amesh",
+     "Adalja"
+    ],
+    [
+     "Anita",
+     "Cicero"
+    ]
+   ]
+  },
+  "Center for Infectious Disease Research and Policy (CIDRAP) @ University of Minnesota": {
+   "org": "MINNESOTA",
+   "pis": [
+    [
+     "Michael",
+     "Osterholm"
+    ]
+   ]
+  },
+  "Center for Global Health Science and Security (CGHSS) @ Georgetown University": {
+   "org": "GEORGETOWN",
+   "pis": [
+    [
+     "Rebecca",
+     "Katz"
+    ]
+   ]
+  },
+  "Global Center for Health Security (GCHS) @ University of Nebraska Medical Center": {
+   "org": "NEBRASKA",
+   "pis": [
+    [
+     "James",
+     "Lawler"
+    ],
+    [
+     "John",
+     "Lowe"
+    ]
+   ]
+  },
+  "Biosecurity and Pandemic Policy Center @ Scowcroft Institute": {
+   "org": "TEXAS A&M",
+   "pis": [
+    [
+     "Gerald",
+     "Parker"
+    ]
+   ]
+  },
+  "The Pandemic Center": {
+   "org": "BROWN",
+   "pis": [
+    [
+     "Jennifer",
+     "Nuzzo"
+    ]
+   ]
+  },
+  "Nextstrain": {
+   "org": "FRED HUTCHINSON",
+   "pis": [
+    [
+     "Trevor",
+     "Bedford"
+    ]
+   ]
+  },
+  "Sculpting Evolution Group (Esvelt Lab) @ MIT Media Lab": {
+   "org": "MASSACHUSETTS INSTITUTE OF TECHNOLOGY",
+   "pis": [
+    [
+     "Kevin",
+     "Esvelt"
+    ]
+   ]
+  }
+ },
+ "eu": {
+  "Institut Pasteur": [
+   "INSTITUT PASTEUR"
+  ],
+  "European Molecular Biology Laboratory (EMBL)": [
+   "EUROPEAN MOLECULAR BIOLOGY LABORATORY"
+  ],
+  "BioNTech": [
+   "BIONTECH INNOVATIVE MANUFACTURING SERVICES GMBH",
+   "BIONTECH RNA PHARMACEUTICALS GMBH",
+   "BIONTECH SE"
+  ],
+  "Robert Koch Institute (RKI)": [
+   "ROBERT KOCH-INSTITUT"
+  ],
+  "Francis Crick Institute": [
+   "THE FRANCIS CRICK INSTITUTE LIMITED"
+  ],
+  "Wellcome Sanger Institute": [
+   "GENOME RESEARCH LIMITED LBG",
+   "WELLCOME TRUST SANGER INSTITUTE"
+  ],
+  "Coalition for Epidemic Preparedness Innovations (CEPI)": [
+   "COALITION FOR EPIDEMIC PREPAREDNESS INNOVATIONS"
+  ],
+  "iGEM": [
+   "IGEM FOUNDATION, INC."
+  ],
+  "Biomedical Alliance in Europe (BioMed Alliance)": [
+   "BIOMEDICAL ALLIANCE IN EUROPE"
+  ],
+  "European Medicines Agency (EMA)": [
+   "THE EUROPEAN MEDICINES AGENCY"
+  ],
+  "Roche": [
+   "F. HOFFMANN-LA ROCHE AG",
+   "ROCHE DIAGNOSTICS GMBH",
+   "ROCHE DIAGNOSTICS INTERNATIONAL AG"
+  ],
+  "Pfizer": [
+   "PFIZER LIMITED",
+   "PFIZER PHARMA GMBH",
+   "PFIZER"
+  ],
+  "Merck": [
+   "MERCK SHARP & DOHME CORP",
+   "MSD R&D INNOVATION CENTRE LIMITED"
+  ],
+  "Novavax": [
+   "NOVAVAX AB",
+   "NOVAVAX INC"
+  ],
+  "Moderna": [
+   "MODERNA TX, INC"
+  ],
+  "RAND": [
+   "RAND EUROPE COMMUNITY INTEREST COMPANY"
+  ],
+  "Broad Institute @ MIT, Harvard": [
+   "THE BROAD INSTITUTE INC CORPORATION*BROAD INSTITUTE OF MIT AND HARVARD"
+  ],
+  "Battelle": [
+   "BATTELLE MEMORIAL INSTITUTE NON PROFIT CORPORATION"
+  ]
+ },
+ "ukri": {
+  "Francis Crick Institute": {
+   "search": [
+    "Francis Crick"
+   ],
+   "names": [
+    "Francis Crick Institute",
+    "The Francis Crick Institute",
+    "THE FRANCIS CRICK INSTITUTE",
+    "THE FRANCIS CRICK INSTITUTE LIMITED"
+   ]
+  },
+  "Wellcome Sanger Institute": {
+   "search": [
+    "Sanger",
+    "Genome Research"
+   ],
+   "names": [
+    "The Wellcome Trust Sanger Institute",
+    "Wellcome Sanger Institute",
+    "WELLCOME SANGER INSTITUTE",
+    "WELLCOME TRUST SANGER INSTITUTE",
+    "GENOME RESEARCH LIMITED",
+    "Genome Research Ltd"
+   ]
+  },
+  "Amodo Design": {
+   "search": [
+    "Amodo"
+   ],
+   "names": [
+    "AMODO DESIGN LTD",
+    "Amodo"
+   ]
+  },
+  "RAND": {
+   "search": [
+    "RAND Europe"
+   ],
+   "names": [
+    "RAND Europe",
+    "Rand EU"
+   ]
+  }
  }
 }

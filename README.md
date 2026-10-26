@@ -113,9 +113,18 @@ the largest recipients it could not match.
 
 ### Government funding
 
-US federal awards are shown as a separate layer and never added to the philanthropic totals.
-They come from [USAspending.gov](https://www.usaspending.gov/), which covers contracts, grants
-and cooperative agreements across federal agencies, companies included.
+Government awards are shown as a separate layer and never added to the philanthropic totals.
+The money picker has each source on its own and an *All government sources* view. There are
+four sources, and `build/government_recipients.json` says which names count for each.
+
+| Source | Who | What counts |
+|---|---|---|
+| US federal ([USAspending](https://www.usaspending.gov/)) | Exact recipient names, companies included | See below |
+| US NIH, for university centres ([RePORTER](https://reporter.nih.gov/)) | Grants led by the researchers who lead a centre (Lipsitch for CCDD, Osterholm for CIDRAP, Bedford for Nextstrain, Esvelt), at that university | Title names pandemic or outbreak work, influenza, coronaviruses or biodefence; routine diseases left out |
+| EU research ([CORDIS](https://cordis.europa.eu/)) | Named partners in Horizon 2020 and Horizon Europe projects, counting only that partner's own share | A call dedicated to epidemics or preparedness, or a title or summary plainly about it; euros converted at each year's average rate |
+| UK Research and Innovation ([Gateway to Research](https://gtr.ukri.org/)) | Projects the organisation leads | UKRI's COVID-19 rapid response, or a title or abstract about pandemic or biodefence work; pounds converted |
+
+US federal awards cover contracts, grants and cooperative agreements across federal agencies:
 
 - **Who:** a hand-checked list in `build/government_recipients.json` of the exact names
   organisations on the map appear under (*MODERNATX, INC.*, *TRIAD NATIONAL SECURITY, LLC* for
@@ -130,11 +139,17 @@ and cooperative agreements across federal agencies, companies included.
   preparedness is its whole remit, except its chemical, radiological and nuclear work.
 - **What's missing:** awards made through contracting consortia, which USAspending lists under
   the consortium. Much of Operation Warp Speed went this way, including Novavax's main
-  COVID-19 award. Other governments are not covered yet.
+  COVID-19 award.
 
-Amounts are total obligations. About three quarters of the money is purchases (COVID-19 vaccine
-doses and treatment courses), so the page says so rather than treating it as research funding.
-The fetch takes a few minutes, because it pages through each organisation's awards.
+Amounts are total obligations. About three quarters of the US federal money is purchases
+(COVID-19 vaccine doses and treatment courses), so the page says so rather than treating it as
+research funding. The fetch takes a few minutes: it pages through each organisation's US
+awards and downloads the CORDIS project files (about 90MB).
+
+Known gaps: Johns Hopkins CHS, the Pandemic Center and Georgetown CGHSS have no NIH grants
+under their leaders, so they show none. UKRI money mostly goes to universities, which the
+lead-organisation rule can't tie to a centre, so that source is small. Other national
+governments are not covered.
 
 What the funding numbers are not:
 

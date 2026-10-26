@@ -488,7 +488,8 @@ footer .byline a{color:var(--ink-2)}
     <h2>Where the money goes</h2>
     <p id="moneyLede"></p>
     <p>Philanthropic and government money are shown separately and never added together.
-      Government money here means US federal awards only, and much of it is purchases such as
+      Government money here means US federal awards, NIH grants to university centres, EU
+      research programmes and UK Research and Innovation, and much of it is US purchases such as
       COVID-19 vaccine doses. Other governments and private investment are not counted. Read the
       numbers as where these funders have put their money, not as the size of each part of the
       field.</p>
@@ -551,9 +552,13 @@ footer .byline a{color:var(--ink-2)}
   funding database. The others come from each funder's own published grants; Wellcome's via the
   <a href="https://www.threesixtygiving.org/" target="_blank" rel="noopener">360Giving</a> open
   data standard, under CC BY 4.0. Each funder's rule
-  for what counts is shown in the funding view. US federal awards come from
-  <a href="https://www.usaspending.gov/" target="_blank" rel="noopener">USAspending.gov</a> and are
-  kept separate from the philanthropic grants. Recipients are matched to organisations on the map
+  for what counts is shown in the funding view. Government awards are kept separate from the
+  philanthropic grants and come from
+  <a href="https://www.usaspending.gov/" target="_blank" rel="noopener">USAspending.gov</a> (US
+  federal), <a href="https://reporter.nih.gov/" target="_blank" rel="noopener">NIH RePORTER</a>
+  (university centres), <a href="https://cordis.europa.eu/" target="_blank" rel="noopener">CORDIS</a>
+  (EU research programmes) and UKRI's
+  <a href="https://gtr.ukri.org/" target="_blank" rel="noopener">Gateway to Research</a>. Recipients are matched to organisations on the map
   by name, plus a short hand-checked list of aliases. A grant to a name the map does not use counts
   as not on the map.</p>
   <p><b>Reading the map.</b> The rings are a diagram, not geography. Where a dot sits within a
@@ -1208,7 +1213,9 @@ function fundHTML(id){
 function govHTML(id){
   const f=GOVF[id]; if(!f) return "";
   const top=f.list.slice().sort((a,b)=>b[1]-a[1]);
+  const by=Object.entries(f.by).sort((a,b)=>b[1]-a[1]);
   return money(f.total)+" in "+plural(f.n,"award")+", "+(f.y0===f.y1?f.y0:f.y0+"–"+f.y1)+
+    ", from "+by.map(e=>funderName(e[0])+(by.length>1?" "+money(e[1]):"")).join(", ")+
     ". Kept apart from the philanthropic grants above."+
     '<ul class="glist">'+top.slice(0,3).map(g=>'<li>'+g[0]+', '+money(g[1])+': '+esc(g[4])+
       '</li>').join("")+(f.n>3?'<li>and '+(f.n-3)+' more</li>':'')+'</ul>';
@@ -1222,8 +1229,10 @@ function giverHTML(i){
 }
 function renderMoney(){
   if(!FUNDING){$("moneyLede").textContent="Funding data is not in this build."; return}
-  const fsel=state.funder===""?null:+state.funder;
-  const G=fsel==null?PG:FG.filter(g=>g[5]===fsel), gov=fsel!=null&&isGov(fsel);
+  /* "" is every philanthropic funder, "gov" every government source, a number one source */
+  const fsel=state.funder===""?null:state.funder==="gov"?"gov":+state.funder;
+  const allGov=fsel==="gov", one=typeof fsel==="number";
+  const G=fsel==null?PG:allGov?GG:FG.filter(g=>g[5]===fsel), gov=allGov||(one&&isGov(fsel));
   const list=sel(), ids=new Set(list.map(o=>o.id)), f=filtering();
   const onMap=G.filter(g=>g[2]!=null), mine=onMap.filter(g=>ids.has(g[2]));
   /* money off the map counts only for funders that label their own biosecurity grants */
@@ -1235,6 +1244,10 @@ function renderMoney(){
       ' philanthropic funders</strong>. '+
       '<strong>'+money(onTotal)+'</strong> of them went to '+funded+' of the '+ORGS.length+
       ' organisations on this map.'
+    :allGov?'Government biosecurity awards from <strong>'+FSRC.filter((s,i)=>isGov(i)).length+
+      ' sources</strong>: '+FSRC.filter((s,i)=>isGov(i)).map(s=>esc(s.funder)).join(", ")+'. <strong>'+
+      money(onTotal)+'</strong> went to '+funded+' of the '+ORGS.length+' organisations on this '+
+      'map. Pick one source in the menu to read its rule.'
     :'<strong>'+funderName(fsel)+'.</strong> '+esc(FSRC[fsel].rule)+' <strong>'+money(onTotal)+
       '</strong> went to '+plural(funded,"organisation")+' on this map'+
       (FSRC[fsel].scope==="all"?', and '+money(offTotal)+' to recipients that are not on it.':'.'))+
@@ -1278,8 +1291,8 @@ function renderMoney(){
       (inRing.length?' The largest share went to '+esc(byId[inRing[0]].name)+' ('+
         money(A[inRing[0]].total)+').':''));
   }
-  if(fsel==null&&mineTotal){
-    const share=FSRC.map((s,i)=>({i:i,v:isGov(i)?0:sum(mine.filter(g=>g[5]===i))}))
+  if((fsel==null||allGov)&&mineTotal){
+    const share=FSRC.map((s,i)=>({i:i,v:isGov(i)!==allGov?0:sum(mine.filter(g=>g[5]===i))}))
       .sort((a,b)=>b.v-a.v);
     notes.push('<b>Who gives.</b> Of the money reaching these organisations, '+pct(share[0].v,mineTotal)+
       ' came from '+funderName(share[0].i)+(share[1]&&share[1].v?' and '+pct(share[1].v,mineTotal)+
@@ -1296,7 +1309,7 @@ function renderMoney(){
     /* most federal money here buys products rather than funding research */
     const bought=mine.filter(g=>/doses|treatment courses|procure|production|donation|purchase|stockpile/i
       .test(g[4]));
-    notes.push('<b>Purchases, not research.</b> '+pct(sum(bought),mineTotal)+' of this ('+
+    if(bought.length) notes.push('<b>Purchases, not research.</b> '+pct(sum(bought),mineTotal)+' of this ('+
       money(sum(bought))+') is for buying products such as COVID-19 vaccine doses and treatment '+
       'courses, mostly through the Department of the Army for Operation Warp Speed. It is money '+
       'paid to these organisations, not grants for their research, which is why it dwarfs every '+
@@ -1372,7 +1385,7 @@ function openOrg(id){
       ?"Yes, works explicitly on global catastrophic biological risk"
       :"Not recorded as working on worst-case risk")+
     (FUNDING?f("Philanthropic biosecurity grants received",fundHTML(o.id)):"")+
-    (FUNDING&&GOVF[o.id]?f("US federal biosecurity awards",govHTML(o.id)):"")+
+    (FUNDING&&GOVF[o.id]?f("Government biosecurity awards",govHTML(o.id)):"")+
     (FUNDING&&GIVER[o.id]!=null?f("Biosecurity grants given",giverHTML(GIVER[o.id])):"")+
     (o.extra?f("Source","Added by this map. Not yet in the biosecurity.world dataset, so "+
       "its classification is this map's, not theirs."):"")+
@@ -1475,6 +1488,8 @@ if(GG.length){
   const og=document.createElement("optgroup"); og.label="Government, shown separately";
   FSRC.forEach((s,i)=>{if(!isGov(i)) return; const o=document.createElement("option"); o.value=i;
     o.textContent=s.funder; og.appendChild(o)});
+  const all=document.createElement("option"); all.value="gov"; all.textContent="All government sources";
+  og.insertBefore(all,og.firstChild);
   $("fundSel").appendChild(og);
 }
 $("fundSel").onchange=e=>{state.funder=e.target.value; render()};
