@@ -233,9 +233,10 @@ def load_funding(orgs):
                 unmatched[grant["recipient"]] = (unmatched.get(grant["recipient"], 0)
                                                  + (grant["amount"] or 0))
             kept += 1
-            # compact rows: year, amount, organisation id (or null), recipient, title, funder
+            # compact rows: year, amount, organisation id (or null), recipient, title, funder,
+            # and 1 for a government purchase of products rather than research
             grants.append([grant["year"], grant["amount"] or 0, org_id, grant["recipient"],
-                           grant["title"], index])
+                           grant["title"], index, 1 if grant.get("purchase") else 0])
         rows = [g for g in grants if g[5] == index]
         on_map = sum(g[1] for g in rows if g[2] is not None)
         print("  funding %-30s %4d grants counted, $%.1fM on the map, $%.1fM elsewhere"

@@ -2,7 +2,7 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Biosecurity Defence Chain</title>
+<title>Who Funds Biosecurity</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&display=swap">
@@ -86,6 +86,9 @@ button,input,select{font:inherit;color:inherit}
 .lede h2,.sec-head h2{font-size:30px;line-height:1.15;margin-bottom:12px}
 .lede p,.sec-head p{margin:0 0 12px;color:var(--ink-2)}
 .lede strong,.sec-head strong{color:var(--ink);font-weight:600}
+.map-lede{padding-top:20px}
+.map-lede h2{font-size:23px;margin-bottom:6px}
+.map-lede p{font-size:15.5px;margin-bottom:0}
 h3.sh{font-size:20px;line-height:1.25}
 .cap{font-size:15px;color:var(--ink-3);font-style:italic;margin:2px 0 16px}
 
@@ -232,8 +235,11 @@ ol.ranked .amt{font-family:var(--f-label);font-size:13px;font-weight:600;white-s
   font-variant-numeric:tabular-nums;min-width:56px;text-align:right}
 ul.glist{margin:6px 0 0;padding:0 0 0 16px;font-size:14px;color:var(--ink-2)}
 
-.fsel-row{display:flex;gap:10px;align-items:baseline;margin:4px 0 0;font-family:var(--f-label);
-  font-size:13.5px}
+.fsel-row{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;margin:4px 0 0;
+  font-family:var(--f-label);font-size:13.5px}
+.fsel-row .toggle{font-size:13px;margin-left:8px}
+.uf{columns:3 230px;column-gap:28px;margin:6px 0 4px}
+.uf .tile{width:100%;break-inside:avoid;font-size:14.5px}
 .fsel-row label{font-weight:600}
 .fsel-row select{font-family:var(--f-label);font-size:13.5px;border:0;border-bottom:1px solid var(--hair-2);
   background:transparent;padding:4px 0;border-radius:0}
@@ -341,16 +347,16 @@ footer .byline a{color:var(--ink-2)}
 <header class="mast">
   <div class="wrap">
     <button class="theme" id="themeBtn">Dark mode</button>
-    <h1>The Biosecurity Defence Chain</h1>
-    <p class="dek">__COUNT__ biosecurity organisations, arranged by where they act against a
-      pandemic. __SOURCE__</p>
+    <h1>Who funds biosecurity</h1>
+    <p class="dek">Grants from philanthropic funders and governments, matched to __COUNT__
+      biosecurity organisations and to where each acts against a pandemic. __SOURCE__</p>
     <div class="navrow">
       <div class="tabs" role="tablist" aria-label="View">
-        <button class="tab" role="tab" aria-selected="true" data-view="atlas">The map</button>
+        <button class="tab" role="tab" aria-selected="true" data-view="money" id="moneyTab">Where the money goes</button>
+        <button class="tab" role="tab" aria-selected="false" data-view="atlas">The map</button>
         <button class="tab" role="tab" aria-selected="false" data-view="chain">Chain view</button>
         <button class="tab" role="tab" aria-selected="false" data-view="gaps">Where the gaps are</button>
         <button class="tab" role="tab" aria-selected="false" data-view="links">How topics connect</button>
-        <button class="tab" role="tab" aria-selected="false" data-view="money" id="moneyTab">Where the money goes</button>
       </div>
     </div>
   </div>
@@ -371,17 +377,13 @@ footer .byline a{color:var(--ink-2)}
   </div>
 
 <!-- ============ THE MAP ============ -->
-<section id="view-atlas">
-  <div class="lede">
+<section id="view-atlas" hidden>
+  <div class="lede map-lede">
     <h2>Every layer a pandemic has to get through</h2>
-    <p>Biosecurity is built as <strong>defence in depth</strong>: a series of barriers, each one
-      catching what the last one missed. A threat has to cross <strong>three</strong> of them to
-      reach the people at the centre: Prevention, then Detection, then Response. The further out a
-      barrier sits, the earlier it acts.</p>
-    <p>The dashed outer ring is not a barrier. It is the <strong>foundation</strong> the three
+    <p>Each dot is one organisation, placed once, on the ring of its main mission. A threat has to
+      get past <strong>Prevention</strong>, <strong>Detection</strong> and <strong>Response</strong>
+      to reach people at the centre. The dashed outer ring is the <strong>foundation</strong> they
       rely on: funders, educators, coordinators and reporters.</p>
-    <p>Every dot is one of the __COUNT__ organisations in the field, placed once, on the ring of
-      its main mission.</p>
   </div>
 
   <figure class="atlas">
@@ -483,20 +485,18 @@ footer .byline a{color:var(--ink-2)}
 </section>
 
 <!-- ============ MONEY ============ -->
-<section id="view-money" hidden>
+<section id="view-money">
   <div class="sec-head">
     <h2>Where the money goes</h2>
     <p id="moneyLede"></p>
-    <p>Philanthropic and government money are shown separately and never added together.
-      Government money here means US federal awards, NIH grants to university centres, EU
-      research programmes and UK Research and Innovation, and much of it is US purchases such as
-      COVID-19 vaccine doses. Other governments and private investment are not counted. Read the
-      numbers as where these funders have put their money, not as the size of each part of the
-      field.</p>
+    <p>Philanthropic and government money are never added together. Read the numbers as where
+      these funders put their money, not as the size of each part of the field.</p>
   </div>
   <div class="fsel-row">
     <label for="fundSel">Show grants from</label>
     <select id="fundSel"><option value="">All philanthropic funders</option></select>
+    <button class="toggle" id="bigToggle" aria-pressed="false">Include Gavi and CEPI</button>
+    <button class="toggle" id="buyToggle" aria-pressed="false" hidden>Include purchases</button>
   </div>
   <div class="chart">
     <h3 class="sh">The funders</h3>
@@ -512,6 +512,14 @@ footer .byline a{color:var(--ink-2)}
     <div id="ringMoney"></div>
   </div>
   <div class="prose" id="moneyNotes"></div>
+  <div class="chart" id="unfundedBox">
+    <h3 class="sh">No grants found</h3>
+    <p class="cap">Non-profits, think tanks and research groups on the map with no grant found from
+      these philanthropic funders. Companies, governments, funders and the US national labs are
+      left out. Some are funded under another name, through a university, or by
+      funders this page doesn't cover, so read it as a list to check, not a list of the unfunded.</p>
+    <div id="unfunded"></div>
+  </div>
   <div class="chart">
     <h3 class="sh">Grants by year</h3>
     <p class="cap">Coloured by the ring of the organisation that received the money. Hatched grey is
@@ -619,7 +627,7 @@ const FOCI=[...new Set(ORGS.flatMap(o=>o.foci))].sort();
 const TYPES=[...new Set(ORGS.map(o=>o.type))].sort();
 const LOCS=[...new Set(ORGS.flatMap(o=>o.loc))].sort();
 
-const state={q:"",act:"",foc:"",type:"",loc:"",gcbr:false,view:"atlas"};
+const state={q:"",act:"",foc:"",type:"",loc:"",gcbr:false,view:"money"};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 /* lower-case a label for use mid-sentence, leaving acronyms like "AI x Bio" alone */
@@ -1186,6 +1194,13 @@ function agg(grants){
 const isGov=i=>FSRC[i].kind==="government";
 const PG=FG.filter(g=>!isGov(g[5])), GG=FG.filter(g=>isGov(g[5]));
 const FUND=agg(PG), GOVF=agg(GG);
+/* Gavi and CEPI get a few vaccine grants far larger than anything else in the field,
+   so the funding view leaves them out unless asked */
+const BIG=new Set(ORGS.filter(o=>/^Gavi\b|\(CEPI\)/.test(o.name)).map(o=>o.id));
+/* organisations philanthropic funders rarely give to: companies, governments, the media,
+   other funders and the government-run US national labs */
+const notGrantee=o=>/^(For-profit company|Government|Intergovernmental entity|Media)$/.test(o.type)||
+  o.sub==="Financing"||/National Laborator/.test(o.name);
 /* funders that are themselves on the map: map id -> funder index */
 const GIVER={};
 FSRC.forEach((s,i)=>{if(s.org!=null&&byId[s.org]) GIVER[s.org]=i});
@@ -1214,9 +1229,11 @@ function govHTML(id){
   const f=GOVF[id]; if(!f) return "";
   const top=f.list.slice().sort((a,b)=>b[1]-a[1]);
   const by=Object.entries(f.by).sort((a,b)=>b[1]-a[1]);
+  const bought=sum(f.list.filter(g=>g[6]));
   return money(f.total)+" in "+plural(f.n,"award")+", "+(f.y0===f.y1?f.y0:f.y0+"–"+f.y1)+
-    ", from "+by.map(e=>funderName(e[0])+(by.length>1?" "+money(e[1]):"")).join(", ")+
-    ". Kept apart from the philanthropic grants above."+
+    ", from "+by.map(e=>funderName(e[0])+(by.length>1?" "+money(e[1]):"")).join(", ")+"."+
+    (bought?" "+money(bought)+" of it paid for products such as vaccine doses, not research.":"")+
+    " Kept apart from the philanthropic grants above."+
     '<ul class="glist">'+top.slice(0,3).map(g=>'<li>'+g[0]+', '+money(g[1])+': '+esc(g[4])+
       '</li>').join("")+(f.n>3?'<li>and '+(f.n-3)+' more</li>':'')+'</ul>';
 }
@@ -1232,8 +1249,15 @@ function renderMoney(){
   /* "" is every philanthropic funder, "gov" every government source, a number one source */
   const fsel=state.funder===""?null:state.funder==="gov"?"gov":+state.funder;
   const allGov=fsel==="gov", one=typeof fsel==="number";
-  const G=fsel==null?PG:allGov?GG:FG.filter(g=>g[5]===fsel), gov=allGov||(one&&isGov(fsel));
-  const list=sel(), ids=new Set(list.map(o=>o.id)), f=filtering();
+  const G0=fsel==null?PG:allGov?GG:FG.filter(g=>g[5]===fsel), gov=allGov||(one&&isGov(fsel));
+  /* the toggles add back Gavi and CEPI, and government purchases of products */
+  const isBig=g=>!state.big&&BIG.has(g[2]), isBuy=g=>gov&&!state.buy&&g[6]===1;
+  const G=G0.filter(g=>!isBig(g)&&!isBuy(g));
+  const leftBig=sum(G0.filter(isBig)), leftBuy=sum(G0.filter(g=>isBuy(g)&&!isBig(g)));
+  $("bigToggle").hidden=!G0.some(g=>BIG.has(g[2]));
+  $("buyToggle").hidden=!gov||!G0.some(g=>g[6]===1);
+  const list=sel().filter(o=>state.big||!BIG.has(o.id)), ids=new Set(list.map(o=>o.id)), f=filtering();
+  const nOrgs=ORGS.length-(state.big?0:BIG.size);
   const onMap=G.filter(g=>g[2]!=null), mine=onMap.filter(g=>ids.has(g[2]));
   /* money off the map counts only for funders that label their own biosecurity grants */
   const offG=G.filter(g=>g[2]==null&&FSRC[g[5]].scope==="all");
@@ -1242,15 +1266,19 @@ function renderMoney(){
   $("moneyLede").innerHTML=(fsel==null
     ?'Biosecurity grants from <strong>'+FSRC.filter((s,i)=>!isGov(i)).length+
       ' philanthropic funders</strong>. '+
-      '<strong>'+money(onTotal)+'</strong> of them went to '+funded+' of the '+ORGS.length+
+      '<strong>'+money(onTotal)+'</strong> of them went to '+funded+' of the '+nOrgs+
       ' organisations on this map.'
     :allGov?'Government biosecurity awards from <strong>'+FSRC.filter((s,i)=>isGov(i)).length+
       ' sources</strong>: '+FSRC.filter((s,i)=>isGov(i)).map(s=>esc(s.funder)).join(", ")+'. <strong>'+
-      money(onTotal)+'</strong> went to '+funded+' of the '+ORGS.length+' organisations on this '+
+      money(onTotal)+'</strong> went to '+funded+' of the '+nOrgs+' organisations on this '+
       'map. Pick one source in the menu to read its rule.'
     :'<strong>'+funderName(fsel)+'.</strong> '+esc(FSRC[fsel].rule)+' <strong>'+money(onTotal)+
       '</strong> went to '+plural(funded,"organisation")+' on this map'+
       (FSRC[fsel].scope==="all"?', and '+money(offTotal)+' to recipients that are not on it.':'.'))+
+    (leftBig?' Gavi and CEPI are left out. They received <strong>'+money(leftBig)+'</strong> more, '+
+      'mostly in a few vaccine grants large enough to outweigh the rest of the field.':'')+
+    (leftBuy?' Purchases of products, such as COVID-19 vaccine doses and treatment courses, are '+
+      'left out: <strong>'+money(leftBuy)+'</strong>.':'')+
     (f?' The '+list.length+' organisations matching your filters received <strong>'+
       money(mineTotal)+'</strong>.':'');
 
@@ -1307,8 +1335,7 @@ function renderMoney(){
      move on to others: possibly counted twice, possibly lost from view */
   if(gov&&mineTotal){
     /* most federal money here buys products rather than funding research */
-    const bought=mine.filter(g=>/doses|treatment courses|procure|production|donation|purchase|stockpile/i
-      .test(g[4]));
+    const bought=mine.filter(g=>g[6]===1);
     if(bought.length) notes.push('<b>Purchases, not research.</b> '+pct(sum(bought),mineTotal)+' of this ('+
       money(sum(bought))+') is for buying products such as COVID-19 vaccine doses and treatment '+
       'courses, mostly through the Department of the Army for Operation Warp Speed. It is money '+
@@ -1329,6 +1356,17 @@ function renderMoney(){
     'universities or organisations that have since closed or been acquired. The largest are at '+
     'the bottom of this page.');
   $("moneyNotes").innerHTML=notes.map(n=>'<p>'+n+'</p>').join("");
+
+  /* who has no grant from any of these funders, among the kinds of organisation they fund */
+  const got=new Set(PG.map(g=>g[2])), pool=list.filter(o=>!notGrantee(o));
+  const none=pool.filter(o=>!got.has(o.id));
+  $("unfundedBox").hidden=fsel!=null||!none.length;
+  $("unfunded").innerHTML=RING_ORDER.map(k=>{
+    const r=none.filter(o=>o.cat===k);
+    return r.length?'<h4 class="fgroup">'+layerName(k)+', '+r.length+' of '+
+      pool.filter(o=>o.cat===k).length+'</h4><div class="uf">'+r.map(o=>'<button class="tile" '+
+      'data-id="'+o.id+'">'+logoHTML(o)+'<span>'+esc(o.name)+'</span></button>').join("")+'</div>':"";
+  }).join("");
 
   /* grants by year, stacked by ring, with off-map money hatched */
   const years=G.map(g=>g[0]).filter(y=>y>=2000);
@@ -1479,7 +1517,8 @@ $("fundToggle").onclick=e=>{
   e.currentTarget.setAttribute("aria-pressed",String(on));
   $("discs").style.display=on?"":"none"; $("fundKey").hidden=!on;
 };
-if(!FUNDING||!Object.keys(FUND).length){$("fundToggle").hidden=true; $("moneyTab").hidden=true}
+if(!FUNDING||!Object.keys(FUND).length){$("fundToggle").hidden=true; $("moneyTab").hidden=true;
+  state.view="atlas"}
 /* funder picker in the funding view, and "show its grants" links in the drawer */
 state.funder="";
 FSRC.forEach((s,i)=>{if(isGov(i)) return; const o=document.createElement("option"); o.value=i;
@@ -1493,12 +1532,15 @@ if(GG.length){
   $("fundSel").appendChild(og);
 }
 $("fundSel").onchange=e=>{state.funder=e.target.value; render()};
+state.big=false; state.buy=false;
+["big","buy"].forEach(k=>{$(k+"Toggle").onclick=e=>{state[k]=!state[k];
+  e.currentTarget.setAttribute("aria-pressed",String(state[k])); render()}});
 document.addEventListener("click",e=>{
   const a=e.target.closest&&e.target.closest(".showfunder"); if(!a) return;
   e.preventDefault(); closeDrawer(); state.funder=a.getAttribute("data-src");
   $("fundSel").value=state.funder; setView("money"); scrollTo(0,0);
 });
 
-themeLabel(); buildAtlas(); wireAtlas(); renderKey(); render();
+themeLabel(); buildAtlas(); wireAtlas(); renderKey(); setView(state.view);
 </script>
 </html>

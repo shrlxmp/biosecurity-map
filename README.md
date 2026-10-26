@@ -1,8 +1,9 @@
-# The Biosecurity Defence Chain
+# Who Funds Biosecurity
 
-An interactive map of the biosecurity field: **every organisation in the
-[biosecurity.world](https://biosecurity.world/) dataset, arranged as the layers of defence a
-pandemic threat has to get through.**
+**Who funds the biosecurity field, and who goes without.** Grants from philanthropic funders
+and government awards, matched to every organisation in the
+[biosecurity.world](https://biosecurity.world/) dataset and laid out as the layers of defence a
+pandemic threat has to get through.
 
 **→ [View the map](https://shrlxmp.github.io/biosecurity-map/)**
 
@@ -29,17 +30,20 @@ more organisations on other rings work on detection topics such as pathogen surv
 page shows both numbers and works them out from the data on every build, so the counts and
 the claims stay true after each refresh.
 
-There are five views:
+There are five views. The page opens on the first:
 
+- **Where the money goes.** Biosecurity grants from seven philanthropic funders and four
+  government sources, set against the map: each ring's share of the organisations next to its
+  share of the funding, grants by year, the largest recipients, organisations with no grant
+  found, and funded organisations the map does not list. Gavi and CEPI are left out by default,
+  because a few vaccine grants to them (62% of the philanthropic money matched to the map)
+  would outweigh everything else; a toggle adds them back. The same grants appear in each
+  organisation's detail panel and, with *Show funding*, as discs on the map.
 - **The map.** The rings, with every organisation as a clickable logo.
 - **Chain view.** The same four groups as columns of names, easier to read down.
 - **Where the gaps are.** Organisations per topic, plus the full grid of topics against types
   of work, where empty cells show combinations nobody covers.
 - **How topics connect.** Which topics are worked on by the same organisations.
-- **Where the money goes.** Biosecurity grants from seven philanthropic funders, set against the map: each
-  ring's share of the organisations next to its share of the funding, grants by year, the
-  largest recipients, and funded organisations the map does not list. The same grants appear
-  in each organisation's detail panel and, with *Show funding*, as discs on the map.
 
 ## Data
 
@@ -141,9 +145,14 @@ US federal awards cover contracts, grants and cooperative agreements across fede
   the consortium. Much of Operation Warp Speed went this way, including Novavax's main
   COVID-19 award.
 
-Amounts are total obligations. About three quarters of the US federal money is purchases
-(COVID-19 vaccine doses and treatment courses), so the page says so rather than treating it as
-research funding. The fetch takes a few minutes: it pages through each organisation's US
+Amounts are total obligations. Contracts that buy finished products (COVID-19 vaccine doses,
+treatment courses, stockpiled drugs) are marked as purchases: a contract counts as one when
+its description says it buys ("doses", "procurement", "donation") or names only a product,
+with no research words. That is 16 contracts and $44B, 93% of the US federal money. The page
+leaves purchases out by default and has a toggle to add them back, because they pay for
+products rather than biosecurity work. The rule only reads descriptions, so a contract that
+mixes development and supply counts as research when that's how it's described, as Moderna's
+$1.75B "development of mRNA vaccine to licensure" contract is. The fetch takes a few minutes: it pages through each organisation's US
 awards and downloads the CORDIS project files (about 90MB).
 
 Known gaps: Johns Hopkins CHS, the Pandemic Center and Georgetown CGHSS have no NIH grants

@@ -7,6 +7,7 @@
   {
    "amount": 999996,
    "id": "ASST_NON_HDTRA12610002_097",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The proposal leverages a novel polymeric/protein nanoparticles (pnp) platform that will be used to deliver an episomal dna, which consists of an episomal construct with a tetracycline inducer-promoter (tre). synthesis of pnps that target th (Defense Threat Reduction Agency, grant)",
    "year": 2026
@@ -14,6 +15,7 @@
   {
    "amount": 505790,
    "id": "ASST_NON_R21DA066888_075",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Protein target identification of nitazenes and their metabolites using structural and chemoproteomics - project summary nitazenes are benzimidazole opioids that display similar or higher potency than other ultrapotent synthetic (ups) opioid (National Institutes of Health, grant)",
    "year": 2026
@@ -21,6 +23,7 @@
   {
    "amount": 2556520,
    "id": "CONT_AWD_70RSAT26FR0000002_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "New ffrdc nbacc 2026 insurance (Office of Procurement Operations, contract)",
    "year": 2026
@@ -28,6 +31,7 @@
   {
    "amount": 2000000,
    "id": "CONT_AWD_70RSAT26FR0000017_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Nbacc ii extension work for others (wfo) task order for the equipment acquisition and demonstration project planning for generative unconstrained intelligent drug engineering (guide), phase ii. (Office of Procurement Operations, contract)",
    "year": 2026
@@ -35,6 +39,7 @@
   {
    "amount": 10669611,
    "id": "CONT_AWD_70RSAT26FR0000026_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Nbacc ii procurement, construction, and improvement (pc&i) task order (Office of Procurement Operations, contract)",
    "year": 2026
@@ -42,6 +47,7 @@
   {
    "amount": 206471,
    "id": "CONT_AWD_75A50126F61005_7505_75A50122D00007_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Chem-2208: storage and maintenance of chemical surety agents (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2026
@@ -49,6 +55,7 @@
   {
    "amount": 6768004,
    "id": "CONT_AWD_75A50126F61010_7505_75A50122D00017_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Rtor bio-amt-2311: advanced development and validation of assays to assess filovirus infection in nonhuman primates (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2026
@@ -56,6 +63,7 @@
   {
    "amount": 542605,
    "id": "CONT_AWD_75A50326F63004_7505_75A50121A00001_7505",
+   "purchase": false,
    "recipient": "Pfizer",
    "title": "Sterile water for injection, 20ml (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2026
@@ -63,6 +71,7 @@
   {
    "amount": 14450000,
    "id": "CONT_AWD_HDTRA126C0004_9700_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Services supporting international partners to reduce biological threats, including: implementing biological safety and security practices, exploring and mitigating biological risks, and improving understanding of endemic biological pathogen (Defense Threat Reduction Agency, contract)",
    "year": 2026
@@ -70,6 +79,7 @@
   {
    "amount": 261186,
    "id": "ASST_NON_K99HL181185_075",
+   "purchase": false,
    "recipient": "Broad Institute @ MIT, Harvard",
    "title": "Investigating histone acetylation modulator function in alveolar regeneration and disease pathogenesis - project summary influenza and covid-19 remain significant global health concerns, with viral infections in the lungs often leading to a (National Institutes of Health, grant)",
    "year": 2025
@@ -77,6 +87,7 @@
   {
    "amount": 2131900,
    "id": "CONT_AWD_70RSAT25FR0000009_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Section 2(d) - the purpose of this bilaterally executed task order is to procure annual insurance coverage for the national biodefense analysis and countermeasures center (nbacc) in the amount of $2,431,900.06. (Office of Procurement Operations, contract)",
    "year": 2025
@@ -84,6 +95,7 @@
   {
    "amount": 796975,
    "id": "CONT_AWD_70RSAT25FR0000014_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Section 2(d) - to award and fully fund the national biodefense analysis and countermeasures center (nbacc) analytic task (at) for sterilized lab waste disposal and site services for 2025 (the nbacc ii extension). (Office of Procurement Operations, contract)",
    "year": 2025
@@ -91,6 +103,7 @@
   {
    "amount": 3472854,
    "id": "CONT_AWD_70RSAT25FR0000019_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "To award and fully fund the nbacc analytic tasks for facility subcontracted support and necessary upgrades, modifications, and repairs for 2025 (the nbacc ii extension). (Office of Procurement Operations, contract)",
    "year": 2025
@@ -98,6 +111,7 @@
   {
    "amount": 100000,
    "id": "CONT_AWD_70RSAT25FR0000024_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "To award and fully fund nbacc ii extension work for others (wfo) task order joint program executive office (jpeo) generative unconstrained intelligent drug engineering (guide) against id/iq clin 8205. (Office of Procurement Operations, contract)",
    "year": 2025
@@ -105,6 +119,7 @@
   {
    "amount": 3487374,
    "id": "CONT_AWD_75A50125F61007_7505_75A50122D00017_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Bio-amt-2305: refinement of ferret models for improved influenza vaccines. (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2025
@@ -112,6 +127,7 @@
   {
    "amount": 10099843,
    "id": "CONT_AWD_75A50125F61008_7505_75A50122D00017_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The objective of this task order is to establish and manage a hosted data coordination center (dcc) for usg-funded, standardized, nonclinical data addressing (cbrn), pandemic influenza, and other eid threats. further, this task order provid (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2025
@@ -119,6 +135,7 @@
   {
    "amount": 1391049,
    "id": "CONT_AWD_75A50125F61009_7505_75A50122D00017_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The objection of this task order is to evaluate inbios? aad plus device (lateral flow test) ability to detect lf and ltx in capillary and venous blood from nonhuman primates after an inhalation challenge with bacillus anthracis (ames) and e (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2025
@@ -126,6 +143,7 @@
   {
    "amount": 1167977,
    "id": "CONT_AWD_75A50325F63003_7505_75A50121A00001_7505",
+   "purchase": false,
    "recipient": "Pfizer",
    "title": "Sterile water for injection 20ml (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2025
@@ -133,6 +151,7 @@
   {
    "amount": 1250576,
    "id": "CONT_AWD_75N93025F00001_7529_75N93024D00005_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Pcmid task order b03 - evaluation of antiviral drug candidates against mpox in nhps (National Institutes of Health, contract)",
    "year": 2025
@@ -140,6 +159,7 @@
   {
    "amount": 1928173,
    "id": "CONT_AWD_70RSAT24FR0000007_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "This is a task order for nbacc insurance. (Office of Procurement Operations, contract)",
    "year": 2024
@@ -147,6 +167,7 @@
   {
    "amount": 6417700,
    "id": "CONT_AWD_70RSAT24FR0000110_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "This new task order is to utilize inflation reduction act funds for nbacc energy recovery system phase ii. (Office of Procurement Operations, contract)",
    "year": 2024
@@ -154,6 +175,7 @@
   {
    "amount": 156033983,
    "id": "CONT_AWD_75A50124C00057_7505_-NONE-_-NONE-",
+   "purchase": true,
    "recipient": "Merck",
    "title": "Ervebo procurement (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2024
@@ -161,6 +183,7 @@
   {
    "amount": 11705345,
    "id": "CONT_AWD_75A50124F61005_7505_75A50122D00017_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Correlate of protection (cop) studies to support development of the cad3-ebo-s (sudan virus) candidate vaccine. (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2024
@@ -168,6 +191,7 @@
   {
    "amount": 1028149,
    "id": "CONT_AWD_75A50124F61006_7505_75A50122D00017_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Battelle idiq (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2024
@@ -175,6 +199,7 @@
   {
    "amount": 2151230,
    "id": "CONT_AWD_75A50324F80014_7505_36F79724D0130_3600",
+   "purchase": true,
    "recipient": "Pfizer",
    "title": "The purpose of this delivery order is to procure pharmaceuticals to replenish expired product. (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2024
@@ -182,6 +207,7 @@
   {
    "amount": 171754,
    "id": "ASST_NON_R03AI176165_075",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Cell-free synthesis of influenza virus-like particles (vlps) as prototyping platform for vaccine development and variant characterization - summary the absence of prophylactic and low-cost influenza vaccines along with slow production rate  (National Institutes of Health, grant)",
    "year": 2023
@@ -189,6 +215,7 @@
   {
    "amount": 2399727,
    "id": "CONT_AWD_70RSAT23FR0000023_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of this task order is to procure annual insurance coverage for the national biodefense analysis and countermeasures center (nbacc). (Office of Procurement Operations, contract)",
    "year": 2023
@@ -196,6 +223,7 @@
   {
    "amount": 853074,
    "id": "CONT_AWD_70RSAT23FR0000027_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Division: office of mission and capability support program: mcs project: intranasal/intratracheal and inhalational routes of exposure vendor: battelle national biodefense institute program manager: kelly johnston cor: lewis brown 301-619-14 (Office of Procurement Operations, contract)",
    "year": 2023
@@ -203,6 +231,7 @@
   {
    "amount": 330571,
    "id": "CONT_AWD_70RSAT23FR0000029_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Division: office of mission and capability support program: mcs project: probabilistic analysis of national threats, hazards and risks (panthr) vendor: national biodefense analysis and countermeasures center (nbacc) program manager: kelly j (Office of Procurement Operations, contract)",
    "year": 2023
@@ -210,6 +239,7 @@
   {
    "amount": 366586,
    "id": "CONT_AWD_70RSAT23FR0000034_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "This is the addition of an analytic task to the nbacc contract hshqdc-15-c-00064 to initiate work for a priority task from dhs s&t to be executed per the attached statement of work. (Office of Procurement Operations, contract)",
    "year": 2023
@@ -217,6 +247,7 @@
   {
    "amount": 10552230,
    "id": "CONT_AWD_70RSAT23FR0000133_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Nbacc epdm roof and acquire several key services and pieces of laboratory equipment that have been identified as supporting operational efficiency and reliability, replacement or upgrade, and mission needs. (Office of Procurement Operations, contract)",
    "year": 2023
@@ -224,6 +255,7 @@
   {
    "amount": 155532,
    "id": "CONT_AWD_75A50123F61001_7505_75A50122D00017_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Idiq contract management support activities (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2023
@@ -231,6 +263,7 @@
   {
    "amount": 8384176,
    "id": "CONT_AWD_75A50123F61002_7505_75A50122D00007_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Repurposing of a ferric iron-containing heme b complex (panhematin) and a sulfane sulfur-linked dithiocarbamate (disulfiram) as potential mcms against knockdown agents (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2023
@@ -238,6 +271,7 @@
   {
    "amount": 6279015,
    "id": "CONT_AWD_75A50123F61002_7505_75A50122D00017_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Testing services to support translational development of next-generation botulism therapeutic products (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2023
@@ -245,6 +279,7 @@
   {
    "amount": 6170402,
    "id": "CONT_AWD_75A50123F61003_7505_75A50122D00017_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Battelle memorial institute - base - (bio) - idiq for barda biological animal model and mcm development (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2023
@@ -252,6 +287,7 @@
   {
    "amount": 7336273,
    "id": "CONT_AWD_75A50123F61004_7505_75A50122D00017_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Bio-amt-2303: glp natural history studies in nhp models of filovirus infection (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2023
@@ -259,6 +295,7 @@
   {
    "amount": 735306,
    "id": "CONT_AWD_75A50323C00006_7505_-NONE-_-NONE-",
+   "purchase": true,
    "recipient": "Pfizer",
    "title": "To procure pharmaceutical products - dopamine hcl solution, for injection, 400mg (40mg/ml) in a 10ml vial, methylprednisolone sodium succinate for injection,125mg, 2ml powder/diluent 2 chamber vial, and voriconazole 200mg 30 tablet bottle v (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2023
@@ -266,6 +303,7 @@
   {
    "amount": 586224,
    "id": "CONT_AWD_75A50323F63002_7505_75A50121A00001_7505",
+   "purchase": false,
    "recipient": "Pfizer",
    "title": "Sterile water (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2023
@@ -273,6 +311,7 @@
   {
    "amount": 103298,
    "id": "CONT_AWD_75D30123F18183_7523_V797D40269_3600",
+   "purchase": true,
    "recipient": "Pfizer",
    "title": "Covid-19 (comirnaty) vaccine purchase (Centers for Disease Control and Prevention, contract)",
    "year": 2023
@@ -280,6 +319,7 @@
   {
    "amount": 111907,
    "id": "CONT_AWD_75D30124F18352_7523_V797D40269_3600",
+   "purchase": true,
    "recipient": "Pfizer",
    "title": "Covid-19 (comirnaty) vaccine purchase (Centers for Disease Control and Prevention, contract)",
    "year": 2023
@@ -287,6 +327,7 @@
   {
    "amount": 1173692,
    "id": "CONT_AWD_75F40123C00060_7524_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "This is a cost reimbursement contract to acquire services for development of a parenteral challenge model of systemic botulinum neurotoxin intoxication in rabbits to support the advancement of candidate therapeutic medical countermeasures. (Food and Drug Administration, contract)",
    "year": 2023
@@ -294,6 +335,7 @@
   {
    "amount": 2499355,
    "id": "ASST_NON_SAQMIP22CA0274_019",
+   "purchase": false,
    "recipient": "Gryphon Scientific @ Deloitte",
    "title": "To facilitate safe and secure detection of high consequence pathogen outbreaks and limit their proliferation through capacity development. (Department of State, grant)",
    "year": 2022
@@ -301,6 +343,7 @@
   {
    "amount": 2465233,
    "id": "CONT_AWD_70RSAT22FR0000007_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of this requisition is to commit $1,750,338.84 for dhs s&t to award a new contract for the fy22 national biodefense analysis and countermeasures center (nbacc) insurance project. (Office of Procurement Operations, contract)",
    "year": 2022
@@ -308,6 +351,7 @@
   {
    "amount": 1995920,
    "id": "CONT_AWD_70RSAT22FR0000012_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Wfo: nbacc/nbfac will assist the fbi and cdc in development, testing, and validation of new laboratory methods to quickly detect and characterize hazardous pathogens and agents of interest for the laboratory response network. (Office of Procurement Operations, contract)",
    "year": 2022
@@ -315,6 +359,7 @@
   {
    "amount": 1078626,
    "id": "CONT_AWD_70RSAT22FR0000057_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Task order for nbacc regarding specialized systems, and to purchase replacement equipment, and to allocate manpower for necessary repairs (Office of Procurement Operations, contract)",
    "year": 2022
@@ -322,6 +367,7 @@
   {
    "amount": 382732,
    "id": "CONT_AWD_70RSAT22FR0000071_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "New wfo for support for the assessment of the median lethal dose (ld50) of nipah virus via the intranasal/ intratracheal and inhalational routes of exposure pre-execution activities and assay development. (Office of Procurement Operations, contract)",
    "year": 2022
@@ -329,6 +375,7 @@
   {
    "amount": 434117,
    "id": "CONT_AWD_70RSAT22FR0000076_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "*******opo approved waiver no. 9 ********* to initiate a new task order- nipah virus analytic task (Office of Procurement Operations, contract)",
    "year": 2022
@@ -336,6 +383,7 @@
   {
    "amount": 709149,
    "id": "CONT_AWD_70RSAT22FR0000078_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of this requisition is to commit $709,149.00 for dhs s&t to award a new wfo task order for evaluating stability of rna viruses on biowatch filters. (Office of Procurement Operations, contract)",
    "year": 2022
@@ -343,6 +391,7 @@
   {
    "amount": 448926,
    "id": "CONT_AWD_70RSAT23FR0000008_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of cost plus fixed fee (cpff) task order analytical task order (at 59) program year seven (py7) is for physical access control system (pacs) updates. this upgrade will ensure the national biodefense analysis and countermeasures  (Office of Procurement Operations, contract)",
    "year": 2022
@@ -350,6 +399,7 @@
   {
    "amount": 565550,
    "id": "CONT_AWD_75A50122C00048_7505_-NONE-_-NONE-",
+   "purchase": true,
    "recipient": "Pfizer",
    "title": "Covid-19 vaccines (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2022
@@ -357,6 +407,7 @@
   {
    "amount": 65867804,
    "id": "CONT_AWD_75A50122C00081_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Vir Biotechnology",
    "title": "Vir biotechnology - ota for pre-exposure prophylactic monoclonal antibodies for the prevention of influenza illness and medical countermeasures for other emerging pathogens of pandemic potential (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2022
@@ -364,6 +415,7 @@
   {
    "amount": 715690,
    "id": "CONT_AWD_75A50322F63001_7505_75A50121A00001_7505",
+   "purchase": false,
    "recipient": "Pfizer",
    "title": "Sterile water (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2022
@@ -371,6 +423,7 @@
   {
    "amount": 656189,
    "id": "CONT_AWD_75N93022F00003_7529_75N93018D00013_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Creation of a marburgvirus international standard (National Institutes of Health, contract)",
    "year": 2022
@@ -378,6 +431,7 @@
   {
    "amount": 3833162,
    "id": "CONT_AWD_75N93022F00004_7529_75N93018D00013_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Development of assays and reagents for monkeypox vaccines (National Institutes of Health, contract)",
    "year": 2022
@@ -385,6 +439,7 @@
   {
    "amount": 40000,
    "id": "CONT_AWD_75N93022P00984_7529_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Gryphon Scientific @ Deloitte",
    "title": "Dataset deliverables on the evaluation of publications and media on covid-19 and impacts on government policies (National Institutes of Health, contract)",
    "year": 2022
@@ -392,6 +447,7 @@
   {
    "amount": 657850,
    "id": "CONT_AWD_75N93023F00001_7529_75N93018D00013_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Creation of a sudan ebolavirus international standard (National Institutes of Health, contract)",
    "year": 2022
@@ -399,6 +455,7 @@
   {
    "amount": 74933,
    "id": "CONT_AWD_FA864923P0190_9700_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Aclid",
    "title": "A biosecurity platform for the identification of natural and engineered biological threats (Department of the Air Force, contract)",
    "year": 2022
@@ -406,6 +463,7 @@
   {
    "amount": 4038717532,
    "id": "CONT_AWD_W58P0522C0016_9700_-NONE-_-NONE-",
+   "purchase": true,
    "recipient": "Pfizer",
    "title": "Covid-19 adult mdv vaccine (Department of the Army, contract)",
    "year": 2022
@@ -413,6 +471,7 @@
   {
    "amount": 1788399999,
    "id": "CONT_AWD_W58P0522C0017_9700_-NONE-_-NONE-",
+   "purchase": true,
    "recipient": "Moderna",
    "title": "Covid-19 mrna vaccines (Department of the Army, contract)",
    "year": 2022
@@ -420,6 +479,7 @@
   {
    "amount": 218443,
    "id": "ASST_NON_K01AI163498_075",
+   "purchase": false,
    "recipient": "Broad Institute @ MIT, Harvard",
    "title": "Computational methods for designing optimal genomics-guided viral diagnostics - project summary/abstract viral genome sequencing is growing exponentially and cutting-edge molecular technologies, guided by genomic data, show great promise in (National Institutes of Health, grant)",
    "year": 2021
@@ -427,6 +487,7 @@
   {
    "amount": 2245998,
    "id": "ASST_NON_R01AI167048_075",
+   "purchase": false,
    "recipient": "Los Alamos National Laboratory (LANL)",
    "title": "Us-uk collab: modelling reassortment at the cellular, clinical, and phylogenetic level in emerging bunyaviruses - genome segmentation has important implications for viral gene expression control and rna assembly into nascent virions. it als (National Institutes of Health, grant)",
    "year": 2021
@@ -434,6 +495,7 @@
   {
    "amount": 429243,
    "id": "ASST_NON_R21AI162662_075",
+   "purchase": false,
    "recipient": "Broad Institute @ MIT, Harvard",
    "title": "A general, virus-free platform to rapidly map sars-cov-2 drug resistance - project summary development or repurposing of drugs for sars-cov-2 that causes covid-19 is an active area of research, but not much effort is being spent on developi (National Institutes of Health, grant)",
    "year": 2021
@@ -441,6 +503,7 @@
   {
    "amount": 1605461,
    "id": "CONT_AWD_70RSAT21FR0000007_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of this task order (at 41) is to fund nbacc insurance for january 31, 2021 through january 31, 2022. (Office of Procurement Operations, contract)",
    "year": 2021
@@ -448,6 +511,7 @@
   {
    "amount": 77144,
    "id": "CONT_AWD_70RSAT21FR0000009_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "National biodefense analysis and countermeasures center (nbacc) analytical task (at) 0043 against idiq clin 4006 for support for avaya phone support. (Office of Procurement Operations, contract)",
    "year": 2021
@@ -455,6 +519,7 @@
   {
    "amount": 262367,
    "id": "CONT_AWD_70RSAT21FR0000010_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "National biodefense analysis and countermeasures center (nbacc) work for others (wfo) py5-06 against idiq clin 3005 for characterization of bacillus anthracis sterne expressing a reporter gene. the purpose of this task order is to provide a (Office of Procurement Operations, contract)",
    "year": 2021
@@ -462,6 +527,7 @@
   {
    "amount": 95050,
    "id": "CONT_AWD_70RSAT21FR0000011_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "National biodefense analysis and countermeasures center (nbacc) analytical task (at) 0044 against idiq clin 4006 for support for dover bsl-4 suits refresh. (Office of Procurement Operations, contract)",
    "year": 2021
@@ -469,6 +535,7 @@
   {
    "amount": 1299408,
    "id": "CONT_AWD_70RSAT21FR0000021_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "National biodefense analysis and countermeasures center (nbacc) work for others (wfo) py5-07 against idiq clin 3005 for support for assessment of sars-cov-2 and covid-19 countermeasures. (Office of Procurement Operations, contract)",
    "year": 2021
@@ -476,6 +543,7 @@
   {
    "amount": 581456,
    "id": "CONT_AWD_70RSAT21FR0000041_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of this task order is to add $581,456.41to contract hshqdc-15-c-00064 to support additional facilities and operational costs associated with upgrading the security requirements in specific laboratory areas of the nbacc. (Office of Procurement Operations, contract)",
    "year": 2021
@@ -483,6 +551,7 @@
   {
    "amount": 999789,
    "id": "CONT_AWD_70RSAT21FR0000079_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Subcontract specialty support required for nbacc regarding specialized systems. purchase replacement equipment and allocate manpower for necessary repairs. (Office of Procurement Operations, contract)",
    "year": 2021
@@ -490,6 +559,7 @@
   {
    "amount": 799843,
    "id": "CONT_AWD_70RSAT21FR0000093_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Operation of the nbacc facility maintenance function for the ability to perform continuous repairs and maintenance and make upgrades or modifications to the facility as required by the mission. (Office of Procurement Operations, contract)",
    "year": 2021
@@ -497,6 +567,7 @@
   {
    "amount": 2498979,
    "id": "CONT_AWD_70RSAT21FR0000099_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "A new at is needed in order to fully fund the nbacc equipment refresh phase iii. (Office of Procurement Operations, contract)",
    "year": 2021
@@ -504,6 +575,7 @@
   {
    "amount": 1000000,
    "id": "CONT_AWD_70RSAT21FR0000132_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "This is the addition of a work for others (classified) to the nbacc contract hshqdc-15-c-00064 to initiate work under clin 3005 of contract hshqdc-15-c-00064 with iarpa. waiver submitted for approval. this is for a new task order for iarpa  (Office of Procurement Operations, contract)",
    "year": 2021
@@ -511,6 +583,7 @@
   {
    "amount": 102299549,
    "id": "CONT_AWD_75A50121C00009_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Merck",
    "title": "Addressing the covid-19 pandemic: urgent priorities (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2021
@@ -518,6 +591,7 @@
   {
    "amount": 2388224,
    "id": "CONT_AWD_75A50121C00011_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "This is a contract between the department of health and human services / the assistant secretary for preparedness and response (hhs/aspr) and battelle memorial institute for battelle support to recovery, staging, redeployment and disposal o (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2021
@@ -525,6 +599,7 @@
   {
    "amount": 107508,
    "id": "CONT_AWD_75A50121F33001_7505_75A50121A00001_7505",
+   "purchase": false,
    "recipient": "Pfizer",
    "title": "Sterile water 20ml injections (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2021
@@ -532,6 +607,7 @@
   {
    "amount": 1189836,
    "id": "CONT_AWD_75A50121F33002_7505_75A50121A00001_7505",
+   "purchase": false,
    "recipient": "Pfizer",
    "title": "Sterile water 20ml injections (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2021
@@ -539,6 +615,7 @@
   {
    "amount": 730673,
    "id": "CONT_AWD_75A50121F33013_7505_HHSO100201700011I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Rtor-bio-amt-1023 statistical analyses and send files for nonhuman primate studies (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2021
@@ -546,6 +623,7 @@
   {
    "amount": 7430997,
    "id": "CONT_AWD_75A50121F33014_7505_HHSO100201700011I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Rtor-bio-amt-1022: studies in nhp models of filovirus infection: assay optimization and qualification (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2021
@@ -553,6 +631,7 @@
   {
    "amount": 1377046,
    "id": "CONT_AWD_75A50121F33015_7505_HHSO100201700011I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Battelle memorial institute (amt) - idiq for biological nonclinical services (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2021
@@ -560,6 +639,7 @@
   {
    "amount": 481836,
    "id": "CONT_AWD_75A50121F80016_7505_V797D40269_3600",
+   "purchase": true,
    "recipient": "Pfizer",
    "title": "Life-savings pharmaceuticals to backfill cache kits (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2021
@@ -567,6 +647,7 @@
   {
    "amount": 3713964,
    "id": "CONT_AWD_75A50121P00027_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Battelle animal models (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2021
@@ -574,6 +655,7 @@
   {
    "amount": 3977119,
    "id": "CONT_AWD_75A50121P00058_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Assessing correlates of protection in rhesus macaques administered various vaccine candidates designed to protect against sars-cov-2 infection (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2021
@@ -581,6 +663,7 @@
   {
    "amount": 15763600,
    "id": "CONT_AWD_75D30121C10501_7523_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Broad Institute @ MIT, Harvard",
    "title": "Sars-cov-2 genomic sequencing (Centers for Disease Control and Prevention, contract)",
    "year": 2021
@@ -588,6 +671,7 @@
   {
    "amount": 5573254,
    "id": "CONT_AWD_FA807521F0044_9700_FA807518D0016_9700",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Iac mac pool 3 20-2119 chemical countermeasures research program product development support services for medical countermeasures against chemical threats for national institutes of health/national institute of allergy and infectious diseas (Defense Contract Management Agency, contract)",
    "year": 2021
@@ -595,6 +679,7 @@
   {
    "amount": 4150835100,
    "id": "CONT_AWD_W58P0521C0002_9700_-NONE-_-NONE-",
+   "purchase": true,
    "recipient": "Pfizer",
    "title": "Covid-19 vaccines for international donation (Agency for International Development, contract)",
    "year": 2021
@@ -602,6 +687,7 @@
   {
    "amount": 12549999848,
    "id": "CONT_AWD_W58P0522C0001_9700_-NONE-_-NONE-",
+   "purchase": true,
    "recipient": "Pfizer",
    "title": "Award of 10m treatment courses of oral protease inhibitor pf-07321332 (Department of the Army, contract)",
    "year": 2021
@@ -609,6 +695,7 @@
   {
    "amount": 2205000834,
    "id": "CONT_AWD_W911QY21C0031_9700_-NONE-_-NONE-",
+   "purchase": true,
    "recipient": "Merck",
    "title": "Covid-19 oral antiviral mk-4482 (molnupiravir) (Department of the Army, contract)",
    "year": 2021
@@ -616,6 +703,7 @@
   {
    "amount": 440000,
    "id": "ASST_NON_R21AI157835_075",
+   "purchase": false,
    "recipient": "Broad Institute @ MIT, Harvard",
    "title": "Crispr screens for sars-cov-2 host factors (National Institutes of Health, grant)",
    "year": 2020
@@ -623,6 +711,7 @@
   {
    "amount": 1701000,
    "id": "CONT_AWD_70RSAT20FR0000028_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Address critical information gaps regarding the environmental stability of sars-cov-2 (Office of Procurement Operations, contract)",
    "year": 2020
@@ -630,6 +719,7 @@
   {
    "amount": 2000000,
    "id": "CONT_AWD_70RSAT20FR0000044_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "To provide authorization and funding for aerosol and environmental sampling to support understanding of covid-19 transmission (Office of Procurement Operations, contract)",
    "year": 2020
@@ -637,6 +727,7 @@
   {
    "amount": 706175,
    "id": "CONT_AWD_70RSAT20FR0000064_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of this analytical task 0035 (at 0035) is for upgrades, repairs and modification to the nbacc facility maintenance function relies on the ability to perform continuous repairs and maintenance, and make upgrades or modifications  (Office of Procurement Operations, contract)",
    "year": 2020
@@ -644,6 +735,7 @@
   {
    "amount": 349169,
    "id": "CONT_AWD_70RSAT20FR0000118_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of this requisition is to award a new task order for national biodefense analysis and countermeasures center for security command center video wall replacement. (Office of Procurement Operations, contract)",
    "year": 2020
@@ -651,6 +743,7 @@
   {
    "amount": 932284,
    "id": "CONT_AWD_70RSAT20FR0000120_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Task order at 38 for establishment of hazard assessment capabilities for nontraditional biological agents (Office of Procurement Operations, contract)",
    "year": 2020
@@ -658,6 +751,7 @@
   {
    "amount": 849881,
    "id": "CONT_AWD_70RSAT20FR0000163_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The development of informatic tools to support the governments ongoing response to covid-19 (Office of Procurement Operations, contract)",
    "year": 2020
@@ -665,6 +759,7 @@
   {
    "amount": 695029,
    "id": "CONT_AWD_70RSAT20FR0000168_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "National biodefense analysis and countermeasures center (nbacc) work for others (wfo) py5-05 against indefinite delivery/indefinite quantity (idiq) clin 3005 for the virulence of aerosolized sars-cov-2 virus. (Office of Procurement Operations, contract)",
    "year": 2020
@@ -672,6 +767,7 @@
   {
    "amount": 120329,
    "id": "CONT_AWD_70RSAT21FR0000013_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of this requisition is to commit $120,329.18 for dhs s&t to award a new task order for national biodefense analysis and countermeasures center (nbacc) for sterilized lab waste disposal 2021. (Office of Procurement Operations, contract)",
    "year": 2020
@@ -679,6 +775,7 @@
   {
    "amount": 1754345480,
    "id": "CONT_AWD_75A50120C00034_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Moderna",
    "title": "Development of mrna vaccine to licensure for the prevention of covid-19. clin 0001 - pre-award cost, clin 0002 - development of mrna vaccine to bla and clin 0003 - domestic manufacturing scale-out (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2020
@@ -686,6 +783,7 @@
   {
    "amount": 15720281,
    "id": "CONT_AWD_75A50120C00143_7505_-NONE-_-NONE-",
+   "purchase": true,
    "recipient": "Pfizer",
    "title": "Pfizer pharmaceuticals propofol and fentanyl (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2020
@@ -693,6 +791,7 @@
   {
    "amount": 22038588,
    "id": "CONT_AWD_75A50120C00194_7505_-NONE-_-NONE-",
+   "purchase": true,
    "recipient": "Pfizer",
    "title": "Traunche 2 pharmaceuticals (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2020
@@ -700,6 +799,7 @@
   {
    "amount": 9646173,
    "id": "CONT_AWD_75A50120F33012_7505_HHSO100201700011I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Development of animal models for evaluation of medical countermeasures for sars-cov-2 (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2020
@@ -707,6 +807,7 @@
   {
    "amount": 10899900,
    "id": "CONT_AWD_75A50120P00097_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Broad Institute @ MIT, Harvard",
    "title": "Serology and virus neutralization testing (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2020
@@ -714,6 +815,7 @@
   {
    "amount": 1138660,
    "id": "CONT_AWD_75A50121P00002_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Purchase order for the establishment of high throughput sars-cov-2 neutralizing antibody immunoassay capability and testing of human serum samples (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2020
@@ -721,6 +823,7 @@
   {
    "amount": 200000,
    "id": "CONT_AWD_75D30120F08478_7523_GS07F0395U_4730",
+   "purchase": false,
    "recipient": "Gryphon Scientific @ Deloitte",
    "title": "Rapid review of occupationally related covid-19 literature (Centers for Disease Control and Prevention, contract)",
    "year": 2020
@@ -728,6 +831,7 @@
   {
    "amount": 258945,
    "id": "CONT_AWD_75D30120F09164_7523_75D30120A07633_7523",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "\"the persistence of aerosolized sars-cov-2 on the surfaces of ffrs\" (Centers for Disease Control and Prevention, contract)",
    "year": 2020
@@ -735,6 +839,7 @@
   {
    "amount": 240000,
    "id": "CONT_AWD_75D30120P07871_7523_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Covid-19 ffrs (Centers for Disease Control and Prevention, contract)",
    "year": 2020
@@ -742,6 +847,7 @@
   {
    "amount": 398810,
    "id": "CONT_AWD_75D30121F10051_7523_GS10F0464X_4732",
+   "purchase": false,
    "recipient": "Gryphon Scientific @ Deloitte",
    "title": "Rapid review of occupationally related covid-19 literature (Centers for Disease Control and Prevention, contract)",
    "year": 2020
@@ -749,6 +855,7 @@
   {
    "amount": 20800000,
    "id": "CONT_AWD_75N92020C00011_7529_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Mammoth Biosciences",
    "title": "Radx tech - mammoth biosciences detection of sars-cov-2 with the crispr-based detectr platform under radx tech (National Institutes of Health, contract)",
    "year": 2020
@@ -756,6 +863,7 @@
   {
    "amount": 8473265,
    "id": "CONT_AWD_75N93020F00001_7529_HHSN272201700012I_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Pcmid: development and use of a non-human primate model of sars-cov-2 infection (National Institutes of Health, contract)",
    "year": 2020
@@ -763,6 +871,7 @@
   {
    "amount": 12386821,
    "id": "CONT_AWD_75N93020F00002_7529_75N93018D00013_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Development of assays and reagents for coronavirus vaccines (National Institutes of Health, contract)",
    "year": 2020
@@ -770,6 +879,7 @@
   {
    "amount": 3494557,
    "id": "CONT_AWD_75N93020F00003_7529_75N93018D00013_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Immunogenicity and efficacy testing of medical countermeasures (vaccines and other biologics) against emerging infectious diseases including covid-19 (sars-c0v2) (National Institutes of Health, contract)",
    "year": 2020
@@ -777,6 +887,7 @@
   {
    "amount": 435768,
    "id": "CONT_AWD_75N93020F00004_7529_75N93018D00013_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Clinical and nhp sample testing for sars-cov-2 vaccine and other biological product candidates (National Institutes of Health, contract)",
    "year": 2020
@@ -784,6 +895,7 @@
   {
    "amount": 6398512,
    "id": "CONT_AWD_75N93020F00006_7529_75N93018D00013_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Clinical sample testing for sars-cov-2 vaccine candidates (National Institutes of Health, contract)",
    "year": 2020
@@ -791,6 +903,7 @@
   {
    "amount": 305404,
    "id": "CONT_AWD_75N93021F00001_7529_75N93018D00013_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Clinical sample evaluation for anthrax vaccines, av7909 and thermostable av7909, vteu trial 17-0093 (National Institutes of Health, contract)",
    "year": 2020
@@ -798,6 +911,7 @@
   {
    "amount": 11110134066,
    "id": "CONT_AWD_W15QKN21C0012_9700_-NONE-_-NONE-",
+   "purchase": true,
    "recipient": "Pfizer",
    "title": "Covid-19 vaccine production (Department of the Army, contract)",
    "year": 2020
@@ -805,6 +919,7 @@
   {
    "amount": 8204906278,
    "id": "CONT_AWD_W911QY20C0100_9700_-NONE-_-NONE-",
+   "purchase": true,
    "recipient": "Moderna",
    "title": "100m sars-cov-2 mrna-1273 vaccine doses (Department of the Army, contract)",
    "year": 2020
@@ -812,6 +927,7 @@
   {
    "amount": 6002284,
    "id": "ASST_NON_R01HG010647_075",
+   "purchase": false,
    "recipient": "Broad Institute @ MIT, Harvard",
    "title": "Covid19 slide-seq (National Institutes of Health, grant)",
    "year": 2019
@@ -819,6 +935,7 @@
   {
    "amount": 1405009,
    "id": "CONT_AWD_70RSAT19FR0000015_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Procure fy19 insurance for nbacc (Office of Procurement Operations, contract)",
    "year": 2019
@@ -826,6 +943,7 @@
   {
    "amount": 995240,
    "id": "CONT_AWD_70RSAT19FR0000094_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of this requisition is to commit $995,240.15 of additional funding to the analytic task under clin 1106 to the nbacc contract hshqdc-15-c-00064. (Office of Procurement Operations, contract)",
    "year": 2019
@@ -833,6 +951,7 @@
   {
    "amount": 354337,
    "id": "CONT_AWD_70RSAT19FR0000124_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "In order to complete necessary additional work a clin 2006 was established on under the national biodefense analysis and countermeasure center (nbacc) contract hshqdc-15-c-00064 to complete various analytic tasks per dhs. this new effort is (Office of Procurement Operations, contract)",
    "year": 2019
@@ -840,6 +959,7 @@
   {
    "amount": 6797039,
    "id": "CONT_AWD_75A50119F33009_7505_HHSO100201700011I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Idiq for biological nonclinical services (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2019
@@ -847,6 +967,7 @@
   {
    "amount": 2755176,
    "id": "CONT_AWD_75A50119F33010_7505_HHSO100201700011I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Idiq for biological nonclinical services (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2019
@@ -854,6 +975,7 @@
   {
    "amount": 1501766,
    "id": "CONT_AWD_75A50119F33011_7505_HHSO100201700011I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Idiq for biological nonclinical services (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2019
@@ -861,6 +983,7 @@
   {
    "amount": 11516755,
    "id": "CONT_AWD_75N93019F00131_7529_75N93018D00013_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "1800013i battelle memorial institute; immunogenicity and efficacy testing of medical countermeasures (vaccines and other biologics) against bsl-4 pathogens in nhps; to 2 base award; biod can 8470038; $616,957 (National Institutes of Health, contract)",
    "year": 2019
@@ -868,6 +991,7 @@
   {
    "amount": 1477748,
    "id": "CONT_AWD_75N93020F00001_7529_75N93018D00013_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Evaluate the immunological responses of human samples collected from phase i and phase ii clinical trials of seasonal and pandemic influenza vaccine with and without adjuvant. clinical trial samples shall be evaluated using qualified, hemag (National Institutes of Health, contract)",
    "year": 2019
@@ -875,6 +999,7 @@
   {
    "amount": 1421977,
    "id": "CONT_AWD_70RSAT18FR0000015_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf description: the purpose of dhs task order 70rsat18fr0000015 is to provide funding to bnbi for the payment of the nbacc liability insurance for fiscal year (fy) 2018. (Office of Procurement Operations, contract)",
    "year": 2018
@@ -882,6 +1007,7 @@
   {
    "amount": 1896912,
    "id": "CONT_AWD_70RSAT18FR0000016_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf the purpose of dhs task order 70rsat18fr0000016 is to provide funding to bnbi for the performance of nbacc program year 2 continuous upgrades/repairs/modifications program (Office of Procurement Operations, contract)",
    "year": 2018
@@ -889,6 +1015,7 @@
   {
    "amount": 510153,
    "id": "CONT_AWD_70RSAT18FR0000047_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of dhs task order 70rsat18fr0000047 is to provide battelle national biodefense institute (bnbi) with funding for the performance of analytic task 21 entitled \"nbacc security management system (nsms) servers lifecycle replacement (Office of Procurement Operations, contract)",
    "year": 2018
@@ -896,6 +1023,7 @@
   {
    "amount": 667597,
    "id": "CONT_AWD_70RSAT18FR0000056_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of department of homeland security task order 70rsat18fr0000056 is to provide battelle national biodefense institute (bnbi) with funding for the performance of facility subcontracted support and necessary repairs for the nbacc f (Office of Procurement Operations, contract)",
    "year": 2018
@@ -903,6 +1031,7 @@
   {
    "amount": 208412,
    "id": "CONT_AWD_70RSAT18FR0000067_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of department of homeland security task order 70rsat18fr0000067 is to provide $217,404.53 in funding to fund phase v of the nbacc security hardware enhancement and upgrade project. (Office of Procurement Operations, contract)",
    "year": 2018
@@ -910,6 +1039,7 @@
   {
    "amount": 386695,
    "id": "CONT_AWD_70RSAT18FR0000070_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of department of homeland security task order 70rsat18fr0000070 is to provide $205,822.38 in funding to fund the nbacc sterilized lab waste disposal project. nbacc sterilized lab waste disposal (Office of Procurement Operations, contract)",
    "year": 2018
@@ -917,6 +1047,7 @@
   {
    "amount": 105164,
    "id": "CONT_AWD_70RSAT18FR0000071_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of dhs task order 70rsat18fr0000071 is to provide funding to battelle national biodefense institute for the nbacc key control management system upgrade project. (Office of Procurement Operations, contract)",
    "year": 2018
@@ -924,6 +1055,7 @@
   {
    "amount": 438487,
    "id": "CONT_AWD_70RSAT18FR0000075_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of department of homeland security task order 70rsat18fr0000075 is to provide $443,553.23 in funding to fund the nbacc security management system (nsms) upgrade. (Office of Procurement Operations, contract)",
    "year": 2018
@@ -931,6 +1063,7 @@
   {
    "amount": 2454590,
    "id": "CONT_AWD_70RSAT18FR0000136_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Dhs task order 70rsat18fr0000136 provides $2,454,590.49 in funding to complete necessary work for nbacc to provide technical support to the national institute of allergies and infectious diseases (niaid). this task order is a cost-plus-fixe (Office of Procurement Operations, contract)",
    "year": 2018
@@ -938,6 +1071,7 @@
   {
    "amount": 148094,
    "id": "CONT_AWD_75A50118F33001_7505_HHSO100201700010I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2018
@@ -945,6 +1079,7 @@
   {
    "amount": 2821635,
    "id": "CONT_AWD_75A50118F33003_7505_HHSO100201500004I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2018
@@ -952,6 +1087,7 @@
   {
    "amount": 2306148,
    "id": "CONT_AWD_75A50118F33007_7505_HHSO100201700011I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf aspr-18-04663 -- funding to battelle memorial institute to support an efficacy study of mab therapeutic against ebov lethal challenge in rhesus macaques rtor bio-amt-1016 clin 0001 (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2018
@@ -959,6 +1095,7 @@
   {
    "amount": 2304162,
    "id": "CONT_AWD_75F40118C10172_7524_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Broad Institute @ MIT, Harvard",
    "title": "Igf::ot::igf - performance of project entitled, \"comprehensive spatio-temporal map of gene expression during lethal ebola virus disease\" (Food and Drug Administration, contract)",
    "year": 2018
@@ -966,6 +1103,7 @@
   {
    "amount": 906320,
    "id": "CONT_AWD_75N93018F00027_7529_HHSN272201200003I_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "The purpose of this task order is to design, conduct, and assess immunogenicity and efficacy of a plague vaccine candidate formulated with il-2 alum-cytuvax or other novel adjuvant in mice. (National Institutes of Health, contract)",
    "year": 2018
@@ -973,6 +1111,7 @@
   {
    "amount": 42883184,
    "id": "CONT_AWD_FA807518F1414_9700_FA807514D0003_9700",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Department of homeland security science and technology chemical biological defense division biological threat characterization program (Defense Contract Management Agency, contract)",
    "year": 2018
@@ -980,6 +1119,7 @@
   {
    "amount": 173673,
    "id": "ASST_NON_F32GM122261_075",
+   "purchase": false,
    "recipient": "Broad Institute @ MIT, Harvard",
    "title": "Reprogramming botulinum neurotoxin proteases through continuousevolution as a strategy for developing selective intracellular therapies (National Institutes of Health, grant)",
    "year": 2017
@@ -987,6 +1127,7 @@
   {
    "amount": 618685,
    "id": "CONT_AWD_HHSN27200023_7529_HHSN272201200003I_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf the purpose of this study is to perform statistical meta-analysis nhp control data to investigate the impact of exposing experimental animals to filovirus including but not limited to the zaire ebolavirus kikwit strain (ebov) a (National Institutes of Health, contract)",
    "year": 2017
@@ -994,6 +1135,7 @@
   {
    "amount": 236307634,
    "id": "CONT_AWD_HHSO100201700012C_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Merck",
    "title": "Igf::ot::igf (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2017
@@ -1001,6 +1143,7 @@
   {
    "amount": 2402612,
    "id": "CONT_AWD_HHSO10033001T_7505_HHSO100201700011I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2017
@@ -1008,6 +1151,7 @@
   {
    "amount": 2422677,
    "id": "CONT_AWD_HHSO10033002T_7505_HHSO100201700011I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf for other functions (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2017
@@ -1015,6 +1159,7 @@
   {
    "amount": 1542196,
    "id": "CONT_AWD_HHSO10033004T_7505_HHSO100201700011I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf aspr-17-04824 -- task order to battelle under rtor-bio-amt-1008 for the development of a passive transfer challenge model for the evaluation of zika vaccines (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2017
@@ -1022,6 +1167,7 @@
   {
    "amount": 2232155,
    "id": "CONT_AWD_HHSO10033005T_7505_HHSO100201700011I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf - task order award to battelle memorial for the characterization of the disease couse in rhesus macaques infected with sudan ebolavirus disease. (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2017
@@ -1029,6 +1175,7 @@
   {
    "amount": 2223646,
    "id": "CONT_AWD_HHSO10033006T_7505_HHSO100201700011I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf - task order award to battelle memorial for the characterization of the disease couse in rhesus macaques infected with marburg ebolavirus disease. (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2017
@@ -1036,6 +1183,7 @@
   {
    "amount": 1402639,
    "id": "CONT_AWD_HSHQDC17J00045_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf the purpose of dhs task order hshqdc-17-j-00045 is to provide $1,413,951 in funding to battelle national biodefense institute (bnbi) for the payment of liability insurance costs for the national biological analysis countermeasu (Office of Procurement Operations, contract)",
    "year": 2017
@@ -1043,6 +1191,7 @@
   {
    "amount": 381852,
    "id": "CONT_AWD_HSHQDC17J00124_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf the purpose of department of homeland security task order hshqdc-17-j-00124 is to provide $421,488.28 in funding to battelle national biodefense institute (bnbi) for the nbacc safety equipment refresh program. (Office of Procurement Operations, contract)",
    "year": 2017
@@ -1050,6 +1199,7 @@
   {
    "amount": 335980,
    "id": "CONT_AWD_HSHQDC17J00224_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf the purpose of department of homeland security task order hshqdc-17-j-00224 is to provide funding to battelle national biodefense institute for the development of a nbacc closure plan. (Office of Procurement Operations, contract)",
    "year": 2017
@@ -1057,6 +1207,7 @@
   {
    "amount": 654558,
    "id": "CONT_AWD_HSHQDC17J00227_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf description: the purpose of department of homeland security task order hshqdc-17-j-00227 is to provide funding for the performance of enhancements to the piv in containment systems at the nbacc facility. (Office of Procurement Operations, contract)",
    "year": 2017
@@ -1064,6 +1215,7 @@
   {
    "amount": 564011,
    "id": "CONT_AWD_HSHQDC17J00264_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf the purpose of dhs task order hshqdc-17-j-00264 is to provide battelle national biodefense institute (bnbi) with $502,711.10 in funding for the performance of the bsl-4 video management system upgrade work as described in the t (Office of Procurement Operations, contract)",
    "year": 2017
@@ -1071,6 +1223,7 @@
   {
    "amount": 326064,
    "id": "CONT_AWD_HSHQDC17J00483_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf description: the purpose of task order hshqdc-17-j-00483 is to provide funding to battelle national biodefense institute for a work-for-others (wfo) project entitled \"assessment of hazard posed by aerosolized toxins.\" (Office of Procurement Operations, contract)",
    "year": 2017
@@ -1078,6 +1231,7 @@
   {
    "amount": 5312214,
    "id": "CONT_AWD_0011_9700_FA807514D0003_9700",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf ht 16-1246 joint product manager (jpm) medical countermeasure systems (mcs) diagnostics (dx) diagnostics, field analytics, and sequencing support (Department of the Air Force, contract)",
    "year": 2016
@@ -1085,6 +1239,7 @@
   {
    "amount": 4626893,
    "id": "CONT_AWD_HHSN27200018_7529_HHSN272201200003I_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf evaluation of filovirus vaccines in a general use prophylaxis (gup) immunogenicity and filovirus challenge studies (National Institutes of Health, contract)",
    "year": 2016
@@ -1092,6 +1247,7 @@
   {
    "amount": 404499,
    "id": "CONT_AWD_HHSO100201600010C_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Roche",
    "title": "Cobas zika testing for puerto rico blood supply igf::ot::igf (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2016
@@ -1099,6 +1255,7 @@
   {
    "amount": 72965186,
    "id": "CONT_AWD_HHSO100201600029C_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Moderna",
    "title": "Moderna therapeutics, inc:advance the development of an mrna vaccine for the prevention of zika virus:: igf::ot::igf (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2016
@@ -1106,6 +1263,7 @@
   {
    "amount": 65103309,
    "id": "CONT_AWD_HHSO100201600031C_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Merck",
    "title": "Bps - advance the development of v920, a vaccine against ebola virus using a recombinant vesicular stomatitis virus vector. igf::ot::igf (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2016
@@ -1113,6 +1271,7 @@
   {
    "amount": 2458478,
    "id": "CONT_AWD_HHSO10033001T_7505_HHSO100201500004I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2016
@@ -1120,6 +1279,7 @@
   {
    "amount": 1807493,
    "id": "CONT_AWD_HHSO10033002T_7505_HHSO100201500004I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2016
@@ -1127,6 +1287,7 @@
   {
    "amount": 657151,
    "id": "CONT_AWD_HHSO10033011T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2016
@@ -1134,6 +1295,7 @@
   {
    "amount": 639561,
    "id": "CONT_AWD_HSHQDC16CB0022_7001_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Gryphon Scientific @ Deloitte",
    "title": "Igf::cl,ct::igf research and development services for the department of homeland security, science and technology directorate, chemical and biological defense division to create an architecture to understand and anticipate the threat from s (Office of Procurement Operations, contract)",
    "year": 2016
@@ -1141,6 +1303,7 @@
   {
    "amount": 131876,
    "id": "CONT_AWD_HSHQDC16J00161_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf the purpose of dhs task order hshqdc-16-j-00161 is to provide funding to battelle national biodefense institute for the completion of the assessment of powder dissemination technologies work that originally commenced under dhs  (Office of Procurement Operations, contract)",
    "year": 2016
@@ -1148,6 +1311,7 @@
   {
    "amount": 1179590,
    "id": "CONT_AWD_HSHQDC16J00164_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf the purpose of dhs task order hshqdc-16-j-00164 is to provide battelle national biodefense institute with funding for the completion of the assessment of virulence of burkholderia pseudomallei as a function of aerosol particle  (Office of Procurement Operations, contract)",
    "year": 2016
@@ -1155,6 +1319,7 @@
   {
    "amount": 427143,
    "id": "CONT_AWD_HSHQDC16J00165_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf the purpose of dhs task order hshqdc-16-j-00165 is to provide funding to battelle national biodefense institute for the completion of the dual rna-seq transcriptional analysis of burkholderia pseudomallei infected nonhuman prim (Office of Procurement Operations, contract)",
    "year": 2016
@@ -1162,6 +1327,7 @@
   {
    "amount": 445631,
    "id": "CONT_AWD_HSHQDC16J00166_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf the purpose of dhs task order hshqdc-16-j-00166 is to provide funding to battelle national biodefense institute for completion of nbacc security upgrades phase iii work that originally commenced under dhs contract hshqdc-07-c-0 (Office of Procurement Operations, contract)",
    "year": 2016
@@ -1169,6 +1335,7 @@
   {
    "amount": 560669,
    "id": "CONT_AWD_HSHQDC16J00221_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf description: the purpose of dhs task order hshqdc-16-j-00221 is to provide funding for the nbacc workstation refurbishment project (reference: analytic task 0009). (Office of Procurement Operations, contract)",
    "year": 2016
@@ -1176,6 +1343,7 @@
   {
    "amount": 393437,
    "id": "CONT_AWD_HSHQDC16J00337_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf the purpose of this task order is to provide funding for identifying the mechanism of ebola virus environmental stability in drying human blood to be used on dhs effort by nbtcc. (Office of Procurement Operations, contract)",
    "year": 2016
@@ -1183,6 +1351,7 @@
   {
    "amount": 2307013,
    "id": "CONT_AWD_HSHQDC16J00349_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf the purpose of task order hshqdc-16-j-00349 is to provide funding to battelle national biodefense institute for performance of the nbacc energy savings initiative program. (Office of Procurement Operations, contract)",
    "year": 2016
@@ -1190,6 +1359,7 @@
   {
    "amount": 1250603,
    "id": "CONT_AWD_HSHQDC16J00350_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf the purpose of dhs task order hshqdc-16-j-00350 is to provide funding to bnbi for the phase iv upgrade of the nbacc facility. (Office of Procurement Operations, contract)",
    "year": 2016
@@ -1197,6 +1367,7 @@
   {
    "amount": 1363550,
    "id": "CONT_AWD_HSHQDC16J00396_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf description: the purpose of this task order is to provide funding for the execution of characterization work to support data collection analysis for the dhs btra program on a dhs priority effort being conducted by the national  (Office of Procurement Operations, contract)",
    "year": 2016
@@ -1204,6 +1375,7 @@
   {
    "amount": 241129,
    "id": "CONT_AWD_HSHQDC16J00416_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf description: dhs task order hshqdc-16-j-00416 provides funding to bnbi for the nbacc global threat reduction activities. (Office of Procurement Operations, contract)",
    "year": 2016
@@ -1211,6 +1383,7 @@
   {
    "amount": 271645,
    "id": "CONT_AWD_HSHQDC16J00423_7001_HSHQDC15C00064_7001",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf description: the purpose of task order hshqdc-16-j-00423 is to provide battelle national biodefense institute with funding to perform the signature transferred from agar and liquid culture of barcoded bacteria work. (Office of Procurement Operations, contract)",
    "year": 2016
@@ -1218,6 +1391,7 @@
   {
    "amount": 12232204,
    "id": "CONT_AWD_0004_9700_FA807514D0003_9700",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf initial award hd 15-1098, joint product manager medical countermeasure systems, joint vaccine acquisitions program, advanced filovirus vaccine development and advancement of contributing platforms for continued medical counterm (Defense Contract Management Agency, contract)",
    "year": 2015
@@ -1225,6 +1399,7 @@
   {
    "amount": 50998777,
    "id": "CONT_AWD_0005_9700_FA807514D0003_9700",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf initial award ht 15-1087, cross commodity advanced threats research, development, test,&evaluation,&strategic initiatives joint program chemical and biological defense (Defense Contract Management Agency, contract)",
    "year": 2015
@@ -1232,6 +1407,7 @@
   {
    "amount": 2424744,
    "id": "CONT_AWD_0006_9700_FA807514D0003_9700",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ct::igf initial award of hd 15-1099; ebola diagnostics, field analytics, and sequencing support for joint product manager medical countermeasure systems (Defense Contract Management Agency, contract)",
    "year": 2015
@@ -1239,6 +1415,7 @@
   {
    "amount": 7274594,
    "id": "CONT_AWD_HHSN27200014_7529_HHSN272201200003I_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf evaluation of filovirus vaccines in a general use prophylaxis (gup) immunogenicity and ebolavirus challenge studies to identify potential correlates of protection (task area 3) (National Institutes of Health, contract)",
    "year": 2015
@@ -1246,6 +1423,7 @@
   {
    "amount": 5638781,
    "id": "CONT_AWD_HHSN27200015_7529_HHSN272201200003I_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf1200003i battelle memorial institute; to x15obra--1: evaluation of ebolavirus and otherfilovirus vaccines in a novel ferret model;ebola can 8019776; $2,492,268 (National Institutes of Health, contract)",
    "year": 2015
@@ -1253,6 +1431,7 @@
   {
    "amount": 68359693,
    "id": "CONT_AWD_HHSO100201500029C_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Pfizer",
    "title": "Igf::ot::igf (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2015
@@ -1260,6 +1439,7 @@
   {
    "amount": 638722,
    "id": "CONT_AWD_HHSO10033009T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf for other functions (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2015
@@ -1267,6 +1447,7 @@
   {
    "amount": 288361,
    "id": "CONT_AWD_W911SR15C0017_9700_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf the objective of this contract is to refine development, fielding and sustainment requirements of a biological and select agent and toxin (bsat) database for dod bsat installations. this bsat database will maintain a qualitativ (Defense Contract Management Agency, contract)",
    "year": 2015
@@ -1274,6 +1455,7 @@
   {
    "amount": 500000,
    "id": "ASST_NON_AIDOAAG1500001_072",
+   "purchase": false,
    "recipient": "Broad Institute @ MIT, Harvard",
    "title": "Partnership to enhance genomic surveillance in the ebola epidemic (Agency for International Development, grant)",
    "year": 2014
@@ -1281,6 +1463,7 @@
   {
    "amount": 77918518,
    "id": "CONT_AWD_HHSO100201500002C_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Merck",
    "title": "Igf::ot::igf for other functions (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2014
@@ -1288,6 +1471,7 @@
   {
    "amount": 2398171,
    "id": "CONT_AWD_HHSO100201550000A_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Gryphon Scientific @ Deloitte",
    "title": "Igf::ot::igf national critical infrastructure protection program for the healthcare and public health sector. (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2014
@@ -1295,6 +1479,7 @@
   {
    "amount": 1314224,
    "id": "CONT_AWD_HHSO10033008T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf aspr-14-08733 -- task order award to battelle memorial institute under bio 0016 to determine anthrax toxin levels in nhps (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2014
@@ -1302,6 +1487,7 @@
   {
    "amount": 3057948,
    "id": "CONT_AWD_HHSO10033015T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf for other functions (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2014
@@ -1309,6 +1495,7 @@
   {
    "amount": 1516522,
    "id": "CONT_AWD_HHSN27200002_7529_HHSN272201200003I_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf the purpose of this task order is to evaluate ava in a general use prophylaxis (gup) four weeks aerosol anthrax challenge in cynomologous macques (National Institutes of Health, contract)",
    "year": 2013
@@ -1316,6 +1503,7 @@
   {
    "amount": 7083010,
    "id": "CONT_AWD_HHSN27200003_7529_HHSN272201200003I_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf the purpose of this task order is to evaluate the immunological responses of human samples collected from multiple phase 1 and phase 2 clinical trials of h5n1 and other pandemic influenza vaccine with and without adjuvant being (National Institutes of Health, contract)",
    "year": 2013
@@ -1323,6 +1511,7 @@
   {
    "amount": 10852110,
    "id": "CONT_AWD_HHSN27200008_7529_HHSN272201200003I_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf efficacy testing of filovirus vaccines in non-human primates (National Institutes of Health, contract)",
    "year": 2013
@@ -1330,6 +1519,7 @@
   {
    "amount": 1074258,
    "id": "CONT_AWD_HHSN27200010_7529_HHSN272201000003I_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf to issue task b02 entitled, \"comparison of several anti-protective antigen (pa) antitoxins in rabbits to assess their relative efficacy when administered as a monotherapy or with an antimicrobial against inhalational anthrax\" (National Institutes of Health, contract)",
    "year": 2013
@@ -1337,6 +1527,7 @@
   {
    "amount": 1974394,
    "id": "CONT_AWD_HHSO10033010T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf battelle memorial will develope and characterize an intranasal mousepox model (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2013
@@ -1344,6 +1535,7 @@
   {
    "amount": 814359,
    "id": "CONT_AWD_HHSO10033012T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf for other functions (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2013
@@ -1351,6 +1543,7 @@
   {
    "amount": 1369003,
    "id": "CONT_AWD_HHSO10033013T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf for other functions (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2013
@@ -1358,6 +1551,7 @@
   {
    "amount": 3538556,
    "id": "CONT_AWD_HHSO10033014T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf for other functions (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2013
@@ -1365,6 +1559,7 @@
   {
    "amount": 1260471,
    "id": "CONT_AWD_HDTRA112C0077_9700_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Battelle contract to study nematode decontamination of anthrax spores. fully funded base period. (Defense Threat Reduction Agency, contract)",
    "year": 2012
@@ -1372,6 +1567,7 @@
   {
    "amount": 2801198,
    "id": "CONT_AWD_HHSO10033001T_7505_HHSO100201100010I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Task order-development qualification of an h-ars animal model using the mini-pig to pnnl (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2012
@@ -1379,6 +1575,7 @@
   {
    "amount": 405367,
    "id": "CONT_AWD_HHSO10033003T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "R&d- medical: biomedical (advanced development) (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2012
@@ -1386,6 +1583,7 @@
   {
    "amount": 1206888,
    "id": "CONT_AWD_HHSO10033004T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Igf::ot::igf burkholderia mallei - rtor-bio-0006 (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2012
@@ -1393,6 +1591,7 @@
   {
    "amount": 2283698,
    "id": "CONT_AWD_HHSO10033005T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Task order to battelle memorial institute under rtor rpx-bio-009 hhso100201100005i (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2012
@@ -1400,6 +1599,7 @@
   {
    "amount": 1997627,
    "id": "CONT_AWD_HHSO10033006T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "R&d- medical: biomedical (advanced development) (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2012
@@ -1407,6 +1607,7 @@
   {
    "amount": 4107140,
    "id": "CONT_AWD_HHSO10033007T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "This task order is issued battelle memorial to develop a nonhuman primate model for inhaled b. pseudomallei infection (bio-0007). (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2012
@@ -1414,6 +1615,7 @@
   {
    "amount": 189324,
    "id": "CONT_AWD_HHSN27200004_7529_HHSN272201000003I_7529",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Tas::75 0885::tas fulfilling fda guidance on plague antibiotic treatment models-1000003i battelle - amoid - task c07 - $310,298 (National Institutes of Health, contract)",
    "year": 2011
@@ -1421,6 +1623,7 @@
   {
    "amount": 121393966,
    "id": "CONT_AWD_HHSO100201100012C_7505_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Novavax",
    "title": "Biomedical (advanced) (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2011
@@ -1428,6 +1631,7 @@
   {
    "amount": 2040426,
    "id": "CONT_AWD_HHSO10033001T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Animal model task order funding to batelle memorial institute - 1992002 (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2011
@@ -1435,6 +1639,7 @@
   {
    "amount": 2035112,
    "id": "CONT_AWD_HHSO10033002T_7505_HHSO100201100005I_7505",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Battelle ava dosing study through animal model task order - 1992002 (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2011
@@ -1442,6 +1647,7 @@
   {
    "amount": 6231277,
    "id": "CONT_AWD_HSHQDC12C00005_7001_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Gryphon Scientific @ Deloitte",
    "title": "Description: department of homeland security contract hshqdc-12-c-00005 is to provide funding for the \"using dhs risk assessments to inform resource decision making\" effort for the dhs chemical and biological defense division. this is a cos (Office of Procurement Operations, contract)",
    "year": 2011
@@ -1449,6 +1655,7 @@
   {
    "amount": 1391521,
    "id": "CONT_AWD_HDTRA110C0025_9700_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Gryphon Scientific @ Deloitte",
    "title": "Modeling medical countermeasures vs. chemical, biological, and radiological (cbr) agents (Defense Threat Reduction Agency, contract)",
    "year": 2010
@@ -1456,6 +1663,7 @@
   {
    "amount": 539152,
    "id": "CONT_AWD_HSHQDC09J00034_7001_GS07F0395U_4730",
+   "purchase": false,
    "recipient": "Gryphon Scientific @ Deloitte",
    "title": "Division: chemical & biological ppa: chemical & biological thrust: biological program: system studies and decision tools project: system studies performer: tbd appropriation year: fy08 (8x funds) budget authority: no-year r&d funds project  (Office of Procurement Operations, contract)",
    "year": 2008
@@ -1463,6 +1671,7 @@
   {
    "amount": 1907989,
    "id": "CONT_AWD_HSHQDC06F00228_7001_GS23F8167H_4730",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Pandemic planning (Office of Procurement Operations, contract)",
    "year": 2006
@@ -1470,6 +1679,7 @@
   {
    "amount": 328638019,
    "id": "CONT_AWD_HSHQDC07C00020_7001_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Nbacc ffrdc- award processed through usamraa (Department of the Army, contract)",
    "year": 2006
@@ -1477,6 +1687,7 @@
   {
    "amount": 1046046,
    "id": "CONT_AWD_HHSD200200302698C_7523_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Anthrax animal study (Centers for Disease Control and Prevention, contract)",
    "year": 2003
@@ -1484,6 +1695,7 @@
   {
    "amount": 21967557,
    "id": "CONT_AWD_HHSD200200010065C_7523_-NONE-_-NONE-",
+   "purchase": false,
    "recipient": "Battelle",
    "title": "Anthrax vaccine res. program (Centers for Disease Control and Prevention, contract)",
    "year": 2000
@@ -1491,7 +1703,7 @@
  ],
  "key": "us_federal",
  "kind": "government",
- "rule": "Contracts, grants and cooperative agreements from the departments of Health and Human Services (including NIH and CDC), Defense and Homeland Security, USAID and State, whose description names pandemic or biodefense work (pandemics, COVID-19, biological threats, anthrax, smallpox, medical countermeasures, or named products such as Paxlovid), leaving out routine diseases. Every award from HHS's preparedness office (ASPR, which runs BARDA) counts, except its chemical, radiological and nuclear work. Only for a hand-checked list of organisations on the map: university-based centres are left out because their awards go to the university. Awards made through contracting consortia (much of Operation Warp Speed, including Novavax's main COVID-19 award) are listed under the consortium and so are missing. Amounts are total obligations, including purchases such as vaccine doses.",
+ "rule": "Contracts, grants and cooperative agreements from the departments of Health and Human Services (including NIH and CDC), Defense and Homeland Security, USAID and State, whose description names pandemic or biodefense work (pandemics, COVID-19, biological threats, anthrax, smallpox, medical countermeasures, or named products such as Paxlovid), leaving out routine diseases. Every award from HHS's preparedness office (ASPR, which runs BARDA) counts, except its chemical, radiological and nuclear work. Only for a hand-checked list of organisations on the map: university-based centres are left out because their awards go to the university. Awards made through contracting consortia (much of Operation Warp Speed, including Novavax's main COVID-19 award) are listed under the consortium and so are missing. Amounts are total obligations. Contracts that buy finished products, such as vaccine doses or treatment courses, are marked as purchases and shown apart from research and other awards.",
  "scope": "on_map_only",
  "source_url": "https://www.usaspending.gov/"
 }

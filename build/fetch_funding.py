@@ -403,6 +403,22 @@ US_BIO = re.compile(
     r"sotrovimab|bamlanivimab|casirivimab|regen-cov|evusheld|tixagevimab|ervebo|jynneos|"
     r"acam2000|tpoxx|tecovirimat|brincidofovir|biothrax|cyfendus|anthrasil|raxibacumab|"
     r"obiltoxaximab", re.I)
+# a contract that buys finished products rather than paying for research or services:
+# it says so ("doses", "procurement"), or it names only a product, with no research words
+US_BUY = re.compile(r"doses|treatment courses|procure|purchase|stockpil|donation|production", re.I)
+US_PRODUCT = re.compile(r"vaccines?\b|antiviral|pharmaceuticals|propofol|fentanyl", re.I)
+US_RESEARCH = re.compile(r"develop|research|\bres\.|program|stud(y|ies)|test|trial|model|assay|"
+                         r"evaluat|assess|design|characteri|sequenc|surveil|support|advance|"
+                         r"services|construction|insurance|equipment", re.I)
+
+
+def us_purchase(title):
+    if not title.endswith(" contract)"):
+        return False
+    desc = title.rsplit(" (", 1)[0]
+    return bool(US_BUY.search(desc) or US_PRODUCT.search(desc)) and not US_RESEARCH.search(desc)
+
+
 # sent to the API so it only returns likely awards; the local rule above decides
 US_KEYWORDS = ["pandemic", "covid", "covid-19", "sars-cov-2", "coronavirus", "biodefense",
                "anthrax", "smallpox", "ebola", "countermeasure", "biological", "barda",
@@ -477,6 +493,8 @@ def us_federal():
                                      "amount": round(amount)})
     require(checked >= 100, "only %d awards came back; is the API down?" % checked)
     require(keep, "no awards passed the rule")
+    for g in keep:
+        g["purchase"] = us_purchase(g["title"])
     keep.sort(key=lambda g: (-g["year"], str(g["id"])))
     return {
         "funder": "US federal government",
@@ -492,8 +510,9 @@ def us_federal():
                  "of organisations on the map: university-based centres are left out because their "
                  "awards go to the university. Awards made through contracting consortia (much of "
                  "Operation Warp Speed, including Novavax's main COVID-19 award) are listed under "
-                 "the consortium and so are missing. Amounts are total obligations, including "
-                 "purchases such as vaccine doses."),
+                 "the consortium and so are missing. Amounts are total obligations. Contracts that "
+                 "buy finished products, such as vaccine doses or treatment courses, are marked as "
+                 "purchases and shown apart from research and other awards."),
         "scope": "on_map_only",
         "source_url": "https://www.usaspending.gov/",
         "exported_at": None,
