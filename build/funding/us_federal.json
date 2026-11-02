@@ -13,14 +13,6 @@
    "year": 2026
   },
   {
-   "amount": 505790,
-   "id": "ASST_NON_R21DA066888_075",
-   "purchase": false,
-   "recipient": "Battelle",
-   "title": "Protein target identification of nitazenes and their metabolites using structural and chemoproteomics - project summary nitazenes are benzimidazole opioids that display similar or higher potency than other ultrapotent synthetic (ups) opioid (National Institutes of Health, grant)",
-   "year": 2026
-  },
-  {
    "amount": 2556520,
    "id": "CONT_AWD_70RSAT26FR0000002_7001_HSHQDC15C00064_7001",
    "purchase": false,
@@ -75,14 +67,6 @@
    "recipient": "Battelle",
    "title": "Services supporting international partners to reduce biological threats, including: implementing biological safety and security practices, exploring and mitigating biological risks, and improving understanding of endemic biological pathogen (Defense Threat Reduction Agency, contract)",
    "year": 2026
-  },
-  {
-   "amount": 261186,
-   "id": "ASST_NON_K99HL181185_075",
-   "purchase": false,
-   "recipient": "Broad Institute @ MIT, Harvard",
-   "title": "Investigating histone acetylation modulator function in alveolar regeneration and disease pathogenesis - project summary influenza and covid-19 remain significant global health concerns, with viral infections in the lungs often leading to a (National Institutes of Health, grant)",
-   "year": 2025
   },
   {
    "amount": 2131900,
@@ -203,14 +187,6 @@
    "recipient": "Pfizer",
    "title": "The purpose of this delivery order is to procure pharmaceuticals to replenish expired product. (Office of Assistant Secretary for Preparedness and Response, contract)",
    "year": 2024
-  },
-  {
-   "amount": 171754,
-   "id": "ASST_NON_R03AI176165_075",
-   "purchase": false,
-   "recipient": "Battelle",
-   "title": "Cell-free synthesis of influenza virus-like particles (vlps) as prototyping platform for vaccine development and variant characterization - summary the absence of prophylactic and low-cost influenza vaccines along with slow production rate  (National Institutes of Health, grant)",
-   "year": 2023
   },
   {
    "amount": 2399727,
@@ -482,14 +458,6 @@
    "purchase": false,
    "recipient": "Broad Institute @ MIT, Harvard",
    "title": "Computational methods for designing optimal genomics-guided viral diagnostics - project summary/abstract viral genome sequencing is growing exponentially and cutting-edge molecular technologies, guided by genomic data, show great promise in (National Institutes of Health, grant)",
-   "year": 2021
-  },
-  {
-   "amount": 2245998,
-   "id": "ASST_NON_R01AI167048_075",
-   "purchase": false,
-   "recipient": "Los Alamos National Laboratory (LANL)",
-   "title": "Us-uk collab: modelling reassortment at the cellular, clinical, and phylogenetic level in emerging bunyaviruses - genome segmentation has important implications for viral gene expression control and rna assembly into nascent virions. it als (National Institutes of Health, grant)",
    "year": 2021
   },
   {
@@ -923,14 +891,6 @@
    "recipient": "Moderna",
    "title": "100m sars-cov-2 mrna-1273 vaccine doses (Department of the Army, contract)",
    "year": 2020
-  },
-  {
-   "amount": 6002284,
-   "id": "ASST_NON_R01HG010647_075",
-   "purchase": false,
-   "recipient": "Broad Institute @ MIT, Harvard",
-   "title": "Covid19 slide-seq (National Institutes of Health, grant)",
-   "year": 2019
   },
   {
    "amount": 1405009,
